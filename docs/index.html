@@ -45,6 +45,8 @@
 <script>
   const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
   const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
+  // Mapas publicados são incorporados aqui para que esta página possa abrir sem mapas-publicos.json.
+  const MAPAS_PUBLICOS = {};
   const estado = [-8.35, -37.95], zoomEstado = 7;
   const map = L.map("map", { center: estado, zoom: zoomEstado, minZoom: 6, maxZoom: 19, zoomControl: false, zoomSnap: .1, zoomDelta: .5, attributionControl: true });
   L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "Imagens © Esri, Maxar" }).addTo(map);
@@ -89,11 +91,7 @@
     }));
   }
   async function carregarMapasSalvos() {
-    let mapas = {};
-    try {
-      const resposta = await fetch("mapas-publicos.json", { cache: "no-store" });
-      if (resposta.ok) mapas = await resposta.json();
-    } catch {}
+    let mapas = MAPAS_PUBLICOS;
     if (!Object.keys(mapas).length) { try { mapas = JSON.parse(localStorage.getItem("pe-mapas-v1")) || {}; } catch {} }
     const listaMapas = Object.values(mapas).sort((a, b) => (b.savedAt || 0) - (a.savedAt || 0));
     if (!listaMapas.length) return;
