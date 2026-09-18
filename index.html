@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Municípios de Pernambuco — Satélite</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  header {
+    grid-column: 1 / -1;
+    padding: 12px 18px;
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  header h1 { font-size: 16px; margin: 0 auto 0 0; font-weight: 600; align-self: center; }
+  .autosave { font-size: 12px; color: #4ade80; align-self: center; white-space: nowrap; }
+  label { font-size: 12px; color: #94a3b8; display: block; margin-bottom: 3px; }
+  select, input, textarea {
+    font: inherit;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #e2e8f0;
+  }
+  input#mun { min-width: 240px; }
+  input#zoom { width: 78px; }
+  textarea#rua { min-width: 320px; height: 58px; resize: vertical; }
+  button {
+    font: inherit;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #475569;
+    background: #334155;
+    color: #e2e8f0;
+    cursor: pointer;
+  }
+  button:hover { background: #475569; }
+  button.primary { background: #2563eb; border-color: #2563eb; }
+  button.primary:hover { background: #1d4ed8; }
+
+  aside {
+    background: #1e293b;
+    border-right: 1px solid #334155;
+    overflow-y: auto;
+    padding: 12px;
+  }
+  aside h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin: 4px 0 10px; }
+  .saved {
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    background: #0f172a;
+  }
+  .saved:hover { border-color: #64748b; }
+  .saved.active { border-color: #2563eb; background: #172554; }
+  .saved .nome { font-weight: 600; }
+  .saved .meta { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .saved .acoes { margin-top: 8px; display: flex; gap: 6px; }
+  .saved .acoes button { padding: 4px 8px; font-size: 12px; }
+  .empty { color: #64748b; font-size: 13px; }
+  .resumo-obras { border: 1px solid #334155; border-radius: 10px; padding: 9px; background: #0f172a; margin-bottom: 18px; }
+  .resumo-total { font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+  .resumo-linha { display: flex; align-items: center; gap: 7px; padding: 3px 0; color: #cbd5e1; font-size: 12px; }
+  .resumo-linha .resumo-cor { width: 9px; height: 9px; border-radius: 999px; flex: none; }
+  .resumo-linha strong { margin-left: auto; color: #f8fafc; }
+
+  #map { background: #020617; }
+  #exportToolbar {
+    position: absolute; z-index: 1000; top: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px;
+    background: rgba(15,23,42,.94); border: 1px solid #475569; color: #e2e8f0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.35); font-size: 13px;
+  }
+  #exportToolbar[hidden] { display: none; }
+  #exportToolbar button { padding: 6px 10px; font-size: 12px; }
+  #exportToolbar .export-zoom { display: flex; align-items: center; gap: 4px; color: #cbd5e1; white-space: nowrap; }
+  #exportToolbar .export-zoom input { width: 58px; padding: 5px; font-size: 12px; }
+  #exportToolbar .export-zoom button { min-width: 27px; padding: 5px 7px; }
+  .leaflet-container { font: inherit; }
+  #status {
+    position: absolute; z-index: 500; left: 330px; bottom: 10px;
+    background: rgba(15,23,42,.9); padding: 6px 12px; border-radius: 8px;
+    font-size: 13px; color: #cbd5e1; max-width: 60vw;
+  }
+  .info-box { padding: 4px 2px; font-size: 13px; line-height: 1.5; color: #e2e8f0; }
+
+  dialog {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #475569;
+    border-radius: 12px; padding: 20px; max-width: 460px; width: 92vw;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.55); }
+  dialog h3 { margin: 0 0 6px; font-size: 16px; }
+  dialog p.sub { margin: 0 0 14px; font-size: 13px; color: #94a3b8; }
+  fieldset { border: 1px solid #334155; border-radius: 8px; margin: 0 0 12px; padding: 8px 12px; }
+  fieldset legend { font-weight: 600; padding: 0 4px; }
+  fieldset label { display: flex; gap: 8px; align-items: baseline; color: #e2e8f0; font-size: 14px; margin: 4px 0; cursor: pointer; }
+  fieldset label .b { color: #94a3b8; font-size: 12px; }
+  .dlg-acoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+
+  .rua-item {
+    border: 1px solid #334155; border-radius: 8px;
+    padding: 7px 9px; margin-bottom: 6px; background: #0f172a; font-size: 13px;
+  }
+  .rua-item .cab { display: flex; align-items: center; gap: 8px; }
+  .rua-item .exp {
+    flex: none; width: 18px; padding: 0; font-size: 11px; background: #334155;
+    border-color: #334155; color: #cbd5e1;
+  }
+  .rua-item .exp:hover { background: #475569; }
+  .rua-item .txt { flex: 1; min-width: 0; cursor: pointer; }
+  .rua-item .txt .b { display: block; color: #94a3b8; font-size: 11px; }
+  .rua-item.sel { border-color: #22d3ee; background: #164e63; }
+  .rua-item.sel .txt { font-weight: 600; }
+  .status-obra { display: flex; align-items: center; gap: 7px; margin-top: 7px; font-size: 11px; color: #94a3b8; }
+  .status-obra select { flex: 1; padding: 4px 7px; font-size: 12px; }
+  .status-cor { width: 10px; height: 10px; border-radius: 999px; flex: none; }
+  .rua-item .rm {
+    flex: none; padding: 2px 8px; font-size: 13px; line-height: 1;
+    background: #7f1d1d; border-color: #7f1d1d;
+  }
+  .rua-item .rm:hover { background: #991b1b; }
+  .trechos { margin: 7px 0 2px; padding-left: 4px; border-top: 1px solid #1e293b; padding-top: 6px; }
+  .trechos .acoes-t { display: flex; gap: 6px; margin-bottom: 5px; }
+  .trechos .acoes-t button { padding: 2px 7px; font-size: 11px; background: #1e293b; border-color: #334155; color: #cbd5e1; }
+  .trechos label {
+    display: flex; gap: 7px; align-items: baseline;
+    font-size: 12px; color: #cbd5e1; margin: 3px 0; cursor: pointer;
+  }
+  .trechos label .km { color: #94a3b8; }
+  .trechos label .ir { margin-left: auto; color: #38bdf8; cursor: pointer; font-size: 11px; }
+  .leaflet-container.desenhando { cursor: crosshair; }
+  #dlgDesenho input { width: 100%; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Municípios de Pernambuco — imagem de satélite</h1>
+  <div>
+    <label for="mun">Município</label>
+    <input list="munList" id="mun" placeholder="Digite ou selecione…" autocomplete="off">
+    <datalist id="munList"></datalist>
+  </div>
+  <div>
+    <label for="zoom">Zoom</label>
+    <input id="zoom" type="number" min="1" max="19" step="0.1" value="7" title="Digite o nível de zoom desejado">
+  </div>
+  <div>
+    <label for="rua">Rua(s)</label>
+    <textarea id="rua" placeholder="Uma rua por linha ou separada por ponto e vírgula" autocomplete="off"></textarea>
+  </div>
+  <button id="btnAddRua" type="button">Adicionar rua(s)</button>
+  <button id="btnManual" type="button">Adicionar via GeoJSON</button>
+  <button id="btnDesenhar" type="button">Desenhar rua</button>
+  <button id="btnExport" type="button">Exportar imagem</button>
+  <button id="btnExportSimples" type="button">Exportar mapa simples</button>
+  <button id="btnExportTodas" type="button">Exportar todas</button>
+  <button id="btnExportarColecao" type="button">Atualizar mapas da visualização</button>
+  <button id="btnVisualizacao" type="button" class="primary">Abrir visualização</button>
+  <span id="autosave" class="autosave">As alterações são salvas automaticamente</span>
+</header>
+
+<aside>
+  <h2>Resumo das obras</h2>
+  <div id="resumoObras" class="resumo-obras"></div>
+  <h2>Ruas no mapa</h2>
+  <div id="listaRuas"></div>
+  <h2 style="margin-top:18px">Mapas salvos</h2>
+  <div id="lista"></div>
+</aside>
+
+<div id="map">
+  <div id="exportToolbar" hidden>
+    <span>Ajuste o mapa e confirme a exportação.</span>
+    <label class="export-zoom" for="exportZoom">Zoom
+      <button id="btnZoomMenos" type="button" title="Reduzir zoom em 0,1">−</button>
+      <input id="exportZoom" type="number" min="1" max="19" step="0.1" value="7">
+      <button id="btnZoomMais" type="button" title="Aumentar zoom em 0,1">+</button>
+    </label>
+    <button id="btnConfirmarExport" type="button" class="primary">Gerar imagem agora</button>
+    <button id="btnCancelarExport" type="button">Cancelar</button>
+  </div>
+</div>
+<div id="status">Carregando lista de municípios…</div>
+
+<dialog id="dlg">
+  <h3>Qual rua adicionar?</h3>
+  <p class="sub">Foram encontradas ruas com o mesmo nome em bairros diferentes. Marque as que devem entrar no mapa.</p>
+  <form id="dlgForm" method="dialog">
+    <div id="dlgCorpo"></div>
+    <div class="dlg-acoes">
+      <button value="cancelar" type="submit">Cancelar</button>
+      <button value="ok" type="submit" class="primary">Adicionar selecionadas</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgManual">
+  <h3>Adicionar via GeoJSON</h3>
+  <p class="sub">Para ruas que não estão no OpenStreetMap. Cole um <code>FeatureCollection</code>, <code>Feature</code> ou geometria <code>LineString</code>/<code>MultiLineString</code>. O nome vem de <code>properties.name</code> e o bairro de <code>properties.bairro</code>. Coordenadas em <code>[longitude, latitude]</code>.</p>
+  <form method="dialog">
+    <label for="mNome">Nome padrão (usado só quando a feature não tem <code>properties.name</code>)</label>
+    <input id="mNome" placeholder="Opcional" style="width:100%;margin-bottom:10px">
+    <label for="mCoords">GeoJSON</label>
+    <textarea id="mCoords" style="width:100%;height:180px;font-family:ui-monospace,monospace;font-size:12px"
+      placeholder='{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "properties": { "name": "Avenida Renato de Castro Leitão", "bairro": "Jardim Atlântico" },
+      "geometry": { "type": "LineString",
+        "coordinates": [ [-34.84364, -7.97274], [-34.84358, -7.97405] ] } }
+  ]
+}'></textarea>
+    <p class="sub" id="mErro" style="color:#f87171;min-height:16px;margin:6px 0 0"></p>
+    <div class="dlg-acoes">
+      <button value="cancelar" type="submit">Cancelar</button>
+      <button value="ok" type="submit" class="primary">Adicionar ao mapa</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgDesenho">
+  <h3>Nome da rua desenhada</h3>
+  <p class="sub">Dê um nome à linha que você traçou. Ela entra na lista como as demais ruas.</p>
+  <form method="dialog">
+    <label for="dNome">Nome</label>
+    <input id="dNome" placeholder="Ex.: Avenida Renato de Castro Leitão">
+    <label for="dBairro">Bairro (opcional)</label>
+    <input id="dBairro" placeholder="Ex.: Jardim Atlântico">
+    <p class="sub" id="dErro" style="color:#f87171;min-height:16px;margin:0 0 4px"></p>
+    <div class="dlg-acoes">
+      <button value="cancelar" type="submit">Descartar</button>
+      <button value="ok" type="submit" class="primary">Adicionar ao mapa</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
+const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
+const OVERPASS_MIRRORS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+];
+const STORE_KEY = "pe-mapas-v1";
+const ATIVO_KEY = "pe-mapa-ativo-v1";
+
+const statusEl = document.getElementById("status");
+const input = document.getElementById("mun");
+const datalist = document.getElementById("munList");
+const listaEl = document.getElementById("lista");
+
+const ESRI = {
+  imagery: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  refs: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+  streets: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+};
+
+const map = L.map("map", {
+  center: [-8.4, -37.9], zoom: 7, minZoom: 1, maxZoom: 19,
+  zoomSnap: 0.1, zoomDelta: 0.25, wheelPxPerZoomLevel: 40
+});
+
+const camadaSatelite = L.layerGroup([
+  L.tileLayer(ESRI.imagery, { maxZoom: 19, attribution: "Tiles © Esri — Maxar, Earthstar Geographics" }),
+  L.tileLayer(ESRI.refs, { maxZoom: 19 })
+]);
+const camadaRuas = L.tileLayer(ESRI.streets, { maxZoom: 19, attribution: "Tiles © Esri — HERE, Garmin, OpenStreetMap contributors" });
+
+let baseAtual = "sat"; // "sat" | "ruas"
+camadaSatelite.addTo(map);
+L.control.layers(
+  { "Satélite": camadaSatelite, "Mapa de ruas": camadaRuas },
+  {}, { position: "topright", collapsed: false }
+).addTo(map);
+map.on("baselayerchange", e => {
+  baseAtual = e.name === "Mapa de ruas" ? "ruas" : "sat";
+  agendarSalvar();
+});
+function aplicarBase(b) {
+  baseAtual = b === "ruas" ? "ruas" : "sat";
+  const on = baseAtual === "ruas" ? camadaRuas : camadaSatelite;
+  const off = baseAtual === "ruas" ? camadaSatelite : camadaRuas;
+  if (map.hasLayer(off)) map.removeLayer(off);
+  if (!map.hasLayer(on)) on.addTo(map);
+}
+
+let municipios = [];
+let boundaryLayer = null;
+let ruasLayer = null;
+let atual = null;              // { id, nome, microrregiao, boundaryGeo, bounds }
+let ruasAdicionadas = [];      // [{ label, ways: [{ name, coords: [[lat,lng],...] }] }]
+let ruaSel = null;             // item de ruasAdicionadas destacado em outra cor (null = nenhum)
+let restaurando = false;       // suprime auto-save durante a restauração de um mapa salvo
+let salvarTimer = null;
+const listaRuasEl = document.getElementById("listaRuas");
+const resumoObrasEl = document.getElementById("resumoObras");
+document.getElementById("btnVisualizacao").addEventListener("click", () => {
+  persistir();
+  window.open("visualizacao.html", "_blank", "noopener");
+});
+document.getElementById("btnExportarColecao").addEventListener("click", () => {
+  persistir();
+  const dados = JSON.stringify(lerMapas(), null, 2);
+  const arquivo = new Blob([dados], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(arquivo);
+  link.download = "mapas-publicos.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+  setStatus("Coleção exportada. Publique o arquivo mapas-publicos.json junto da visualização.");
+});
+
+const STATUS_OBRA = {
+  "Em licitação": "#eab308",          // amarelo
+  "Aguardando contrato": "#f97316",   // laranja
+  "A iniciar": "#ec4899",             // rosa
+  "Em execução": "#3b82f6",           // azul
+  "Concluída": "#22c55e"              // verde
+};
+const COR_SEM_STATUS = "#94a3b8";
+function statusDaRua(item) {
+  return Object.hasOwn(STATUS_OBRA, item.status) ? item.status : "";
+}
+function corDaRua(item) {
+  return STATUS_OBRA[statusDaRua(item)] || COR_SEM_STATUS;
+}
+
+/* ---------- armazenamento ---------- */
+function lerMapas() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+  catch { return {}; }
+}
+function lsGet(k) { try { return localStorage.getItem(k); } catch { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+function lsDel(k) { try { localStorage.removeItem(k); } catch {} }
+function gravarMapas(obj) {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(obj));
+    return true;
+  } catch (e) {
+    // provável estouro de cota: tenta de novo sem as geometrias em cache
+    const enxuto = {};
+    for (const k in obj) {
+      const { boundaryGeo, ...resto } = obj[k];
+      enxuto[k] = resto;
+    }
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(enxuto)); return true; }
+    catch { return false; }
+  }
+}
+
+function persistir() {
+  if (!atual) return;
+  const mapas = lerMapas();
+  const c = map.getCenter();
+  mapas[atual.id] = {
+    id: atual.id,
+    nome: atual.nome,
+    microrregiao: atual.microrregiao || null,
+    itens: ruasAdicionadas,
+    boundaryGeo: atual.boundaryGeo || null,
+    view: { lat: c.lat, lng: c.lng, zoom: map.getZoom() },
+    base: baseAtual,
+    savedAt: Date.now()
+  };
+  const ok = gravarMapas(mapas);
+  lsSet(ATIVO_KEY, String(atual.id));
+  renderLista();
+  const ind = document.getElementById("autosave");
+  ind.textContent = ok
+    ? `Salvo automaticamente · ${new Date().toLocaleTimeString("pt-BR")}`
+    : "Salvo (sem espaço para o cache de limites)";
+}
+
+// grava depois de uma pequena pausa, agrupando alterações seguidas (ex.: arrastar o mapa)
+function agendarSalvar() {
+  if (!atual || restaurando) return;
+  clearTimeout(salvarTimer);
+  salvarTimer = setTimeout(persistir, 500);
+}
+
+function excluirMapa(id, ev) {
+  ev.stopPropagation();
+  const mapas = lerMapas();
+  const nome = mapas[id] ? mapas[id].nome : "";
+  delete mapas[id];
+  gravarMapas(mapas);
+  if (lsGet(ATIVO_KEY) === id) lsDel(ATIVO_KEY);
+  renderLista();
+  setStatus(`Mapa de ${nome} excluído.`);
+}
+
+function renderLista() {
+  const mapas = lerMapas();
+  const ids = Object.keys(mapas).sort((a, b) => mapas[b].savedAt - mapas[a].savedAt);
+  const ativoId = atual ? String(atual.id) : lsGet(ATIVO_KEY);
+  if (!ids.length) {
+    listaEl.innerHTML = '<div class="empty">Nenhum mapa salvo ainda. Selecione um município para começar — as alterações são salvas sozinhas.</div>';
+    return;
+  }
+  listaEl.innerHTML = "";
+  for (const id of ids) {
+    const m = mapas[id];
+    const div = document.createElement("div");
+    div.className = "saved" + (String(id) === String(ativoId) ? " active" : "");
+    const n = (m.itens || []).length;
+    div.innerHTML =
+      `<div class="nome">${m.nome}</div>` +
+      `<div class="meta">${n} rua(s) · salvo em ${new Date(m.savedAt).toLocaleString("pt-BR")}</div>` +
+      `<div class="acoes"><button data-abrir>Abrir</button><button data-excluir>Excluir</button></div>`;
+    div.addEventListener("click", () => abrirMapaSalvo(id));
+    div.querySelector("[data-excluir]").addEventListener("click", ev => excluirMapa(id, ev));
+    listaEl.appendChild(div);
+  }
+}
+
+/* ---------- desenho / lista de ruas ---------- */
+// reordena os trechos de uma rua encadeando os contíguos/próximos numa sequência contínua
+function ordenarTrechos(item) {
+  const ws = item.ways;
+  if (!ws || ws.length < 2) return;
+  const resto = ws.slice();
+  const ordem = [resto.shift()];
+  let inicio = ordem[0].coords[0];
+  let fim = ordem[0].coords[ordem[0].coords.length - 1];
+  while (resto.length) {
+    let melhor = null;
+    resto.forEach((w, i) => {
+      const a = w.coords[0], b = w.coords[w.coords.length - 1];
+      const opcoes = [
+        { d: haversine(fim, a), pos: "fim", inv: false },
+        { d: haversine(fim, b), pos: "fim", inv: true },
+        { d: haversine(inicio, b), pos: "inicio", inv: false },
+        { d: haversine(inicio, a), pos: "inicio", inv: true }
+      ];
+      for (const o of opcoes) if (!melhor || o.d < melhor.d) melhor = { ...o, i };
+    });
+    const w = resto.splice(melhor.i, 1)[0];
+    if (melhor.inv) w.coords.reverse();
+    if (melhor.pos === "fim") { ordem.push(w); fim = w.coords[w.coords.length - 1]; }
+    else { ordem.unshift(w); inicio = w.coords[0]; }
+  }
+  item.ways = ordem;
+}
+
+function ordenarRuas() {
+  ruasAdicionadas.forEach(ordenarTrechos);
+  ruasAdicionadas.sort((a, b) =>
+    (a.nome || a.label).localeCompare(b.nome || b.label, "pt", { sensitivity: "base" }) ||
+    (a.bairro || "").localeCompare(b.bairro || "", "pt", { sensitivity: "base" }));
+}
+
+function limparRuas() {
+  if (ruasLayer) { map.removeLayer(ruasLayer); ruasLayer = null; }
+  ruasAdicionadas = [];
+  ruaSel = null;
+  renderListaRuas();
+}
+
+function comprimento(coords) {
+  let m = 0;
+  for (let i = 1; i < coords.length; i++) m += haversine(coords[i - 1], coords[i]);
+  return m;
+}
+function fmtDist(m) {
+  return m >= 1000 ? (m / 1000).toFixed(2).replace(".", ",") + " km" : Math.round(m) + " m";
+}
+const trechoAtivo = w => w.on !== false;
+
+function redesenharRuas(ajustarView) {
+  if (ruasLayer) { map.removeLayer(ruasLayer); ruasLayer = null; }
+  ruasLayer = L.featureGroup().addTo(map);
+  let tem = false;
+  const selLayer = L.featureGroup();
+  for (const item of ruasAdicionadas) {
+    const sel = item === ruaSel;
+    if (ruaSel && !sel) continue; // com uma rua selecionada, mostra só ela
+    for (const w of item.ways) {
+      if (!w.coords || w.coords.length < 2 || !trechoAtivo(w)) continue;
+      const linha = L.polyline(w.coords, {
+        color: sel ? "#22d3ee" : corDaRua(item),
+        weight: sel ? 7 : 5,
+        opacity: 0.95
+      }).bindTooltip(item.label, { sticky: true });
+      linha.addTo(ruasLayer);
+      if (sel) selLayer.addLayer(linha);
+      tem = true;
+    }
+  }
+  if (ajustarView && tem) {
+    map.invalidateSize();
+    map.fitBounds(ruasLayer.getBounds(), { padding: [40, 40], maxZoom: 17 });
+  } else if (ruaSel && selLayer.getLayers().length) {
+    // aproxima ao máximo para a rua ocupar toda a área do mapa
+    map.invalidateSize();
+    map.fitBounds(selLayer.getBounds(), { padding: [6, 6], maxZoom: 19 });
+  }
+  renderListaRuas();
+}
+
+function selecionarRuaLista(item) {
+  ruaSel = ruaSel === item ? null : item;
+  redesenharRuas(false);
+  if (ruaSel) setStatus(`Rua destacada: ${ruaSel.nome || ruaSel.label}.`);
+}
+
+const trechosAbertos = new WeakSet();
+
+function alterarTrecho(w, on) {
+  w.on = on;
+  redesenharRuas(false);
+  agendarSalvar();
+}
+
+function irParaTrecho(w) {
+  map.invalidateSize();
+  map.fitBounds(L.latLngBounds(w.coords), { padding: [30, 30], maxZoom: 18 });
+}
+
+function renderTrechos(item) {
+  const box = document.createElement("div");
+  box.className = "trechos";
+  const acoes = document.createElement("div");
+  acoes.className = "acoes-t";
+  acoes.innerHTML = `<button data-all>Todos</button><button data-none>Nenhum</button>`;
+  acoes.querySelector("[data-all]").addEventListener("click", () => {
+    item.ways.forEach(w => w.on = true); redesenharRuas(false); agendarSalvar();
+  });
+  acoes.querySelector("[data-none]").addEventListener("click", () => {
+    item.ways.forEach(w => w.on = false); redesenharRuas(false); agendarSalvar();
+  });
+  box.appendChild(acoes);
+  item.ways.forEach((w, i) => {
+    const lab = document.createElement("label");
+    lab.innerHTML =
+      `<input type="checkbox" ${trechoAtivo(w) ? "checked" : ""}>` +
+      `<span>Trecho ${i + 1} <span class="km">${fmtDist(comprimento(w.coords))}</span></span>` +
+      `<span class="ir">ir ao trecho</span>`;
+    lab.querySelector("input").addEventListener("change", e => alterarTrecho(w, e.target.checked));
+    lab.querySelector(".ir").addEventListener("click", e => { e.preventDefault(); irParaTrecho(w); });
+    box.appendChild(lab);
+  });
+  return box;
+}
+
+function renderListaRuas() {
+  renderResumoObras();
+  if (!ruasAdicionadas.length) {
+    listaRuasEl.innerHTML = '<div class="empty">Nenhuma rua adicionada. Digite um nome e clique em “Adicionar rua”.</div>';
+    return;
+  }
+  listaRuasEl.innerHTML = "";
+  for (const item of ruasAdicionadas) {
+    const total = item.ways.length;
+    const ativos = item.ways.filter(trechoAtivo).length;
+    const aberto = trechosAbertos.has(item);
+    const div = document.createElement("div");
+    div.className = "rua-item" + (item === ruaSel ? " sel" : "");
+
+    const cab = document.createElement("div");
+    cab.className = "cab";
+    cab.innerHTML =
+      `<button class="exp" title="Trechos">${aberto ? "▾" : "▸"}</button>` +
+      `<span class="txt" title="Clique para destacar no mapa">${item.nome || item.label}` +
+      (item.bairro ? `<span class="b">${item.bairro}</span>` : "") +
+      `<span class="b">${ativos === total ? total : ativos + "/" + total} trecho(s)</span></span>` +
+      `<button class="rm" title="Remover">✕</button>`;
+    cab.querySelector(".exp").addEventListener("click", () => {
+      aberto ? trechosAbertos.delete(item) : trechosAbertos.add(item);
+      renderListaRuas();
+    });
+    cab.querySelector(".txt").addEventListener("click", () => selecionarRuaLista(item));
+    cab.querySelector(".rm").addEventListener("click", () => removerRua(item));
+    div.appendChild(cab);
+
+    const status = document.createElement("label");
+    status.className = "status-obra";
+    status.textContent = "Status da obra";
+    const ponto = document.createElement("span");
+    ponto.className = "status-cor";
+    ponto.style.background = corDaRua(item);
+    const select = document.createElement("select");
+    select.innerHTML = '<option value="">Sem status</option>' +
+      Object.keys(STATUS_OBRA).map(s => `<option value="${s}">${s}</option>`).join("");
+    select.value = statusDaRua(item);
+    select.addEventListener("change", () => {
+      item.status = select.value;
+      redesenharRuas(false);
+      agendarSalvar();
+      setStatus(`Status de “${item.nome || item.label}”: ${select.value || "sem status"}.`);
+    });
+    status.append(ponto, select);
+    div.appendChild(status);
+
+    if (aberto) div.appendChild(renderTrechos(item));
+    listaRuasEl.appendChild(div);
+  }
+}
+
+function renderResumoObras() {
+  const contagens = Object.fromEntries(Object.keys(STATUS_OBRA).map(s => [s, 0]));
+  let semStatus = 0;
+  for (const item of ruasAdicionadas) {
+    const status = statusDaRua(item);
+    if (status) contagens[status]++;
+    else semStatus++;
+  }
+
+  resumoObrasEl.innerHTML = "";
+  const total = document.createElement("div");
+  total.className = "resumo-total";
+  total.textContent = `Total: ${ruasAdicionadas.length} rua(s)`;
+  resumoObrasEl.appendChild(total);
+
+  const linhas = [...Object.keys(STATUS_OBRA), "Sem status"];
+  for (const status of linhas) {
+    const linha = document.createElement("div");
+    linha.className = "resumo-linha";
+    const cor = document.createElement("span");
+    cor.className = "resumo-cor";
+    cor.style.background = status === "Sem status" ? COR_SEM_STATUS : STATUS_OBRA[status];
+    const nome = document.createElement("span");
+    nome.textContent = status;
+    const qtd = document.createElement("strong");
+    qtd.textContent = String(status === "Sem status" ? semStatus : contagens[status]);
+    linha.append(cor, nome, qtd);
+    resumoObrasEl.appendChild(linha);
+  }
+}
+
+function removerRua(item) {
+  const i = ruasAdicionadas.indexOf(item);
+  if (i < 0) return;
+  ruasAdicionadas.splice(i, 1);
+  if (ruaSel === item) ruaSel = null;
+  redesenharRuas(false);
+  agendarSalvar();
+  setStatus(`Rua removida do mapa: ${item.nome || item.label}.`);
+}
+
+async function carregarLimite(m) {
+  // usa cache do mapa salvo, se houver
+  const salvo = lerMapas()[m.id];
+  if (salvo && salvo.boundaryGeo) return salvo.boundaryGeo;
+  const r = await fetch(MALHA(m.id));
+  return await r.json();
+}
+
+async function selecionarMunicipio(m, opcoes = {}) {
+  if (desenho) cancelarDesenho();
+  setStatus(`Carregando limites de ${m.nome}…`);
+  try {
+    const geo = await carregarLimite(m);
+    if (boundaryLayer) map.removeLayer(boundaryLayer);
+    boundaryLayer = L.geoJSON(geo, { style: { color: "#a855f7", weight: 3, fill: false } }).addTo(map);
+    atual = {
+      id: m.id, nome: m.nome, microrregiao: m.microrregiao || null,
+      boundaryGeo: geo, bounds: boundaryLayer.getBounds()
+    };
+    limparRuas();
+    if (opcoes.base) aplicarBase(opcoes.base);
+    if (opcoes.view) {
+      map.setView([opcoes.view.lat, opcoes.view.lng], opcoes.view.zoom);
+    } else {
+      map.fitBounds(atual.bounds, { padding: [20, 20] });
+    }
+    setStatus(`Exibindo ${m.nome} (PE).`);
+    if (!restaurando) persistir();
+    renderLista();
+    return true;
+  } catch (e) {
+    setStatus(`Falha ao carregar os limites de ${m.nome}: ${e.message}`);
+    return false;
+  }
+}
+
+/* ---------- Overpass ---------- */
+function fetchComPrazo(url, ms, opts) {
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(), ms);
+  return fetch(url, { ...opts, signal: ac.signal }).finally(() => clearTimeout(t));
+}
+
+async function overpass(query) {
+  let erro;
+  for (const url of OVERPASS_MIRRORS) {
+    try {
+      // Um espelho lento não deve bloquear a alternativa de busca por muito tempo.
+      const r = await fetchComPrazo(url + "?data=" + encodeURIComponent(query), 20000);
+      if (r.ok) return await r.json();
+      erro = "HTTP " + r.status;
+    } catch (e) { erro = e.name === "AbortError" ? "tempo esgotado" : e.message; }
+  }
+  throw new Error(erro || "indisponível");
+}
+
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+function haversine(a, b) {
+  const R = 6371000, toRad = x => x * Math.PI / 180;
+  const dLat = toRad(b[0] - a[0]), dLon = toRad(b[1] - a[1]);
+  const s = Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(a[0])) * Math.cos(toRad(b[0])) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+
+// agrupa trechos que se tocam/estão próximos (mesma rua contínua)
+function clusterizar(ways, limite = 150) {
+  const pai = ways.map((_, i) => i);
+  const find = i => (pai[i] === i ? i : (pai[i] = find(pai[i])));
+  const perto = (A, B) => {
+    for (const p of A) for (const q of B) if (haversine(p, q) <= limite) return true;
+    return false;
+  };
+  for (let i = 0; i < ways.length; i++)
+    for (let j = i + 1; j < ways.length; j++)
+      if (perto(ways[i].coords, ways[j].coords)) pai[find(i)] = find(j);
+  const grupos = new Map();
+  ways.forEach((w, i) => {
+    const k = find(i);
+    if (!grupos.has(k)) grupos.set(k, []);
+    grupos.get(k).push(w);
+  });
+  return [...grupos.values()].map(gws => {
+    const pts = gws.flatMap(w => w.coords);
+    const centro = [
+      pts.reduce((s, p) => s + p[0], 0) / pts.length,
+      pts.reduce((s, p) => s + p[1], 0) / pts.length
+    ];
+    return { ways: gws, centro };
+  });
+}
+
+async function bairroDe(centro) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&zoom=16&lat=${centro[0]}&lon=${centro[1]}`;
+    const r = await fetchComPrazo(url, 15000, { headers: { "Accept-Language": "pt-BR" } });
+    const a = (await r.json()).address || {};
+    return a.suburb || a.neighbourhood || a.quarter || a.city_district ||
+      a.residential || a.village || a.town || null;
+  } catch { return null; }
+}
+
+const dlg = document.getElementById("dlg");
+
+// mostra o diálogo com as ruas homônimas e resolve com os grupos escolhidos
+async function pedirEscolha(nome, clusters) {
+  while (modalAberto) await new Promise(r => setTimeout(r, 150)); // espera outro diálogo fechar
+  return new Promise(resolve => {
+    const corpo = document.getElementById("dlgCorpo");
+    corpo.innerHTML = "";
+    const fs = document.createElement("fieldset");
+    fs.innerHTML = `<legend>${nome}</legend>`;
+    clusters.forEach((c, ci) => {
+      const label = document.createElement("label");
+      const desc = c.bairro || `trecho em ${c.centro[0].toFixed(4)}, ${c.centro[1].toFixed(4)}`;
+      const variacao = c.nome !== nome ? ` <span class="b">(${c.nome})</span>` : "";
+      const fonte = c.fonte && c.fonte !== "OpenStreetMap" ? ` <span class="b">· ${c.fonte}</span>` : "";
+      label.innerHTML =
+        `<input type="checkbox" name="c" value="${ci}">` +
+        `<span>${desc}${variacao} <span class="b">· ${c.ways.length} trecho(s)</span>${fonte}</span>`;
+      fs.appendChild(label);
+    });
+    corpo.appendChild(fs);
+    const onClose = () => {
+      dlg.removeEventListener("close", onClose);
+      modalAberto = false;
+      if (dlg.returnValue !== "ok") { resolve([]); return; }
+      const marcados = [...dlg.querySelectorAll('input[name="c"]:checked')].map(i => Number(i.value));
+      resolve(marcados.map(ci => clusters[ci]));
+    };
+    dlg.addEventListener("close", onClose);
+    modalAberto = true;
+    dlg.showModal();
+  });
+}
+
+// converte cada letra num conjunto que aceita a versão acentuada; espaços viram flexíveis
+function regexAcento(s) {
+  const mapa = { a: "aáàâãä", e: "eéèêë", i: "iíìîï", o: "oóòôõö", u: "uúùûü", c: "cç", n: "nñ" };
+  return s.split("").map(ch => {
+    const low = ch.toLowerCase();
+    if (mapa[low]) return `[${mapa[low]}]`;
+    if (/[a-z0-9]/i.test(ch)) return ch;
+    if (ch === " ") return "[ .]+";
+    return "\\" + ch;
+  }).join("");
+}
+
+// centro médio de uma lista de trechos
+function centroDe(ways) {
+  const pts = ways.flatMap(w => w.coords);
+  return [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+}
+
+// busca no OpenStreetMap via Overpass (geometria de linha)
+async function buscarOverpass(nome) {
+  const b = atual.bounds;
+  const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`;
+  const rx = regexAcento(nome);
+  const q = `[out:json][timeout:60];(` +
+    `way["highway"]["name"~"${rx}",i](${bbox});` +
+    `way["highway"]["alt_name"~"${rx}",i](${bbox});` +
+    `way["highway"]["addr:street"~"${rx}",i](${bbox});` +
+    `);out geom;`;
+  const data = await overpass(q);
+  const porNome = new Map();
+  for (const el of data.elements || []) {
+    if (el.type !== "way" || !el.geometry) continue;
+    const n = el.tags.name || el.tags.alt_name || el.tags["addr:street"] || nome;
+    const w = { name: n, coords: el.geometry.map(g => [g.lat, g.lon]) };
+    if (!porNome.has(n)) porNome.set(n, []);
+    porNome.get(n).push(w);
+  }
+  const clusters = [];
+  for (const [n, ways] of porNome)
+    for (const c of clusterizar(ways)) clusters.push({ ...c, nome: n, fonte: "OpenStreetMap" });
+  return clusters;
+}
+
+// fallback: geocodificação do Nominatim (busca aproximada, cobre casos que o Overpass não acha)
+async function buscarNominatim(nome) {
+  const b = atual.bounds;
+  const p = new URLSearchParams({
+    street: nome, city: atual.nome, state: "Pernambuco", country: "Brazil",
+    format: "json", polygon_geojson: "1", limit: "15", addressdetails: "1"
+  });
+  const r = await fetchComPrazo("https://nominatim.openstreetmap.org/search?" + p, 20000, { headers: { "Accept-Language": "pt-BR" } });
+  const arr = await r.json().catch(() => []);
+  const clusters = [];
+  for (const x of arr) {
+    const la = +x.lat, lo = +x.lon;
+    if (la < b.getSouth() || la > b.getNorth() || lo < b.getWest() || lo > b.getEast()) continue;
+    const rot = (x.display_name || nome).split(",")[0].trim();
+    const bairro = (x.address || {}).suburb || (x.address || {}).neighbourhood || (x.address || {}).quarter || null;
+    const g = x.geojson;
+    let ways;
+    if (g && g.type === "LineString") ways = [{ name: rot, coords: g.coordinates.map(c => [c[1], c[0]]) }];
+    else if (g && g.type === "MultiLineString") ways = g.coordinates.map(l => ({ name: rot, coords: l.map(c => [c[1], c[0]]) }));
+    else { // só um ponto: desenha um pequeno "x" para marcar o local
+      const d = 0.0003;
+      ways = [
+        { name: rot, coords: [[la - d, lo - d], [la + d, lo + d]] },
+        { name: rot, coords: [[la - d, lo + d], [la + d, lo - d]] }
+      ];
+    }
+    clusters.push({
+      ways, centro: [la, lo], nome: rot, bairro,
+      fonte: g && g.type.includes("Line") ? "Nominatim" : "Nominatim (ponto aproximado)"
+    });
+  }
+  return clusters;
+}
+
+// serializa apenas a abertura de diálogos modais (só um pode ficar aberto por vez)
+let modalAberto = false;
+let filaDialogo = Promise.resolve();
+function comDialogo(fn) {
+  const r = filaDialogo.then(fn);
+  filaDialogo = r.then(() => {}, () => {});
+  return r;
+}
+
+let buscasPendentes = 0;
+function statusPendentes(msg) {
+  const resto = buscasPendentes > 0 ? ` (${buscasPendentes} busca[s] em andamento)` : "";
+  setStatus(msg + resto);
+}
+
+function nomesDeRuas(texto) {
+  return [...new Set(texto.split(/[\n;]+/).map(nome => nome.trim()).filter(Boolean))];
+}
+
+// Inicia uma busca por nome; várias buscas rodam em paralelo e só o modal de bairro é enfileirado.
+function adicionarRuas() {
+  if (!atual) { setStatus("Selecione um município primeiro."); return; }
+  const campo = document.getElementById("rua");
+  const nomes = nomesDeRuas(campo.value);
+  if (!nomes.length) { setStatus("Digite uma ou mais ruas."); return; }
+  campo.value = "";
+  nomes.forEach(adicionarRua);
+  if (nomes.length > 1) setStatus(`Buscando ${nomes.length} ruas em ${atual.nome}…`);
+}
+
+async function adicionarRua(nome) {
+  buscasPendentes++;
+  statusPendentes(`Buscando “${nome}” em ${atual.nome}…`);
+
+  try {
+    let clusters = [];
+    let erroOverpass = null;
+    try {
+      clusters = await buscarOverpass(nome);
+    } catch (e) {
+      erroOverpass = e;
+      statusPendentes(`Overpass indisponível para “${nome}” (${e.message}). Tentando o Nominatim…`);
+    }
+
+    if (!clusters.length) {
+      if (!erroOverpass) statusPendentes(`Overpass não achou “${nome}”. Tentando o Nominatim…`);
+      try {
+        clusters = await buscarNominatim(nome);
+      } catch (e) {
+        const motivo = e.name === "AbortError" ? "tempo esgotado" : e.message;
+        setStatus(`A busca de “${nome}” não pôde ser concluída: Overpass${erroOverpass ? ` (${erroOverpass.message})` : " sem resultado"} e Nominatim (${motivo}). Tente novamente em instantes.`);
+        return;
+      }
+    }
+
+    if (!clusters.length) {
+      const origem = erroOverpass ? "Nominatim também não encontrou" : "Overpass e Nominatim não encontraram";
+      setStatus(`${origem} “${nome}” em ${atual.nome}. ` +
+        `Pode não estar mapeada — cadastre em openstreetmap.org ou use “Desenhar rua”.`);
+      return;
+    }
+
+    let escolhidos;
+    if (clusters.length === 1) {
+      escolhidos = clusters;
+    } else {
+      statusPendentes(`“${nome}”: ${clusters.length} ruas homônimas encontradas. Identificando os bairros…`);
+      for (const c of clusters) {
+        if (!c.bairro) c.bairro = await bairroDe(c.centro);
+        await new Promise(r => setTimeout(r, 1100)); // política de uso do Nominatim
+      }
+      escolhidos = await comDialogo(() => pedirEscolha(nome, clusters));
+      if (!escolhidos.length) { setStatus(`“${nome}”: nenhuma opção selecionada.`); return; }
+    }
+
+    for (const c of escolhidos) {
+      ruasAdicionadas.push({
+        nome: c.nome,
+        bairro: c.bairro || null,
+        label: c.nome + (c.bairro ? ` — ${c.bairro}` : ""),
+        status: "",
+        ways: c.ways.map(w => ({ name: w.name, coords: w.coords, on: true }))
+      });
+    }
+    ordenarRuas();
+    const fontes = [...new Set(escolhidos.map(c => c.fonte).filter(Boolean))];
+    const via = fontes.length ? ` (via ${fontes.join(", ")})` : "";
+    // ajusta a visão só quando não há mais buscas pendentes, para o mapa não “pular”
+    redesenharRuas(buscasPendentes <= 1);
+    agendarSalvar();
+    const resto = buscasPendentes > 1 ? ` (${buscasPendentes - 1} busca[s] ainda em andamento)` : "";
+    setStatus(`“${escolhidos[0].nome}” adicionada${via}. Total no mapa: ${ruasAdicionadas.length}.${resto}`);
+  } finally {
+    buscasPendentes--;
+  }
+}
+
+/* ---------- adicionar rua manualmente por coordenadas ---------- */
+const dlgManual = document.getElementById("dlgManual");
+
+function pontoLatLng([lng, lat]) {
+  if (typeof lng !== "number" || typeof lat !== "number" ||
+      lat < -90 || lat > 90 || lng < -180 || lng > 180)
+    throw new Error(`ponto inválido [${lng}, ${lat}] — a ordem é [longitude, latitude]`);
+  return [lat, lng];
+}
+
+// converte um GeoJSON em itens de rua { nome, bairro, label, ways:[{name,coords,on}] }
+function parsearGeoJSON(texto, nomePadrao) {
+  const gj = JSON.parse(texto);
+  let feats;
+  if (gj.type === "FeatureCollection") feats = gj.features || [];
+  else if (gj.type === "Feature") feats = [gj];
+  else if (gj.type === "LineString" || gj.type === "MultiLineString")
+    feats = [{ type: "Feature", properties: {}, geometry: gj }];
+  else throw new Error("use FeatureCollection, Feature ou geometria LineString/MultiLineString");
+  if (!feats.length) throw new Error("nenhuma feature no GeoJSON");
+
+  const itens = [];
+  feats.forEach((f, idx) => {
+    const g = f.geometry;
+    if (!g) throw new Error(`feature ${idx + 1} sem geometria`);
+    let linhas;
+    if (g.type === "LineString") linhas = [g.coordinates];
+    else if (g.type === "MultiLineString") linhas = g.coordinates;
+    else throw new Error(`geometria "${g.type}" não suportada (use LineString ou MultiLineString)`);
+    const props = f.properties || {};
+    const nome = String(props.name || props.nome || nomePadrao || "").trim();
+    if (!nome) throw new Error(`feature ${idx + 1}: defina properties.name ou o nome padrão`);
+    const bairro = props.bairro ? String(props.bairro).trim() : null;
+    const ways = linhas.map(l => {
+      if (!Array.isArray(l) || l.length < 2) throw new Error(`"${nome}": cada linha precisa de ao menos 2 pontos`);
+      return { name: nome, on: true, coords: l.map(pontoLatLng) };
+    });
+    itens.push({ nome, bairro, label: nome + (bairro ? ` — ${bairro}` : ""), ways, cidade: props.cidade || null });
+  });
+  return itens;
+}
+
+function abrirManual() {
+  if (!atual) { setStatus("Selecione um município primeiro."); return; }
+  if (modalAberto) { setStatus("Feche o diálogo aberto antes de adicionar outra rua."); return; }
+  document.getElementById("mErro").textContent = "";
+  document.getElementById("mNome").value = document.getElementById("rua").value.trim();
+  modalAberto = true;
+  dlgManual.showModal();
+}
+dlgManual.addEventListener("close", () => { modalAberto = false; });
+
+dlgManual.querySelector("form").addEventListener("submit", ev => {
+  if (ev.submitter && ev.submitter.value !== "ok") return;
+  const erroEl = document.getElementById("mErro");
+  let itens;
+  try {
+    itens = parsearGeoJSON(
+      document.getElementById("mCoords").value.trim(),
+      document.getElementById("mNome").value.trim()
+    );
+  } catch (e) {
+    erroEl.textContent = "GeoJSON inválido: " + e.message;
+    ev.preventDefault();
+    return;
+  }
+  for (const it of itens) {
+    ruasAdicionadas.push({ nome: it.nome, bairro: it.bairro, label: it.label, status: "", ways: it.ways });
+  }
+  document.getElementById("rua").value = "";
+  document.getElementById("mCoords").value = "";
+  ordenarRuas();
+  redesenharRuas(true);
+  agendarSalvar();
+  const fora = itens.filter(it => it.cidade &&
+    it.cidade.localeCompare(atual.nome, "pt", { sensitivity: "base" }) !== 0);
+  const aviso = fora.length ? ` Atenção: ${fora.map(f => `"${f.nome}" indica cidade "${f.cidade}"`).join("; ")}.` : "";
+  setStatus(`${itens.length} rua(s) adicionada(s) via GeoJSON. Total no mapa: ${ruasAdicionadas.length}.${aviso}`);
+});
+
+/* ---------- desenhar uma rua no mapa ---------- */
+const dlgDesenho = document.getElementById("dlgDesenho");
+let desenho = null;          // { pts:[[lat,lng]], linha, vert } enquanto está desenhando
+let desenhoPendente = null;  // pontos aguardando nome no diálogo
+let cliqueTimer = null;
+let cliquePendente = null;    // latlng do último clique aguardando confirmação (evita ponto extra no duplo-clique)
+
+function botaoDesenho(txt, primario) {
+  const b = document.getElementById("btnDesenhar");
+  b.textContent = txt;
+  b.classList.toggle("primary", primario);
+}
+
+function iniciarDesenho() {
+  if (!atual) { setStatus("Selecione um município primeiro."); return; }
+  if (modalAberto) { setStatus("Feche o diálogo aberto antes de desenhar."); return; }
+  desenho = {
+    pts: [],
+    linha: L.polyline([], { color: "#a3e635", weight: 4, dashArray: "6 6" }).addTo(map),
+    vert: L.layerGroup().addTo(map)
+  };
+  map.doubleClickZoom.disable();
+  map.getContainer().classList.add("desenhando");
+  map.on("click", desenhoClique);
+  map.on("dblclick", concluirDesenho);
+  document.addEventListener("keydown", desenhoTecla);
+  botaoDesenho("Concluir desenho", true);
+  setStatus("Modo desenho: clique no mapa para adicionar pontos. Duplo-clique ou “Concluir” encerra. Esc cancela.");
+}
+
+function confirmarPontoPendente() {
+  if (!cliquePendente || !desenho) return;
+  const ll = cliquePendente;
+  cliquePendente = null;
+  desenho.pts.push([ll.lat, ll.lng]);
+  desenho.linha.setLatLngs(desenho.pts);
+  L.circleMarker(ll, { radius: 4, color: "#a3e635", fillColor: "#a3e635", fillOpacity: 1 }).addTo(desenho.vert);
+  setStatus(`Modo desenho: ${desenho.pts.length} ponto(s). Duplo-clique ou “Concluir” encerra. Esc cancela.`);
+}
+
+function desenhoClique(e) {
+  clearTimeout(cliqueTimer);
+  cliquePendente = e.latlng;
+  cliqueTimer = setTimeout(confirmarPontoPendente, 220);
+}
+
+function desenhoTecla(ev) { if (ev.key === "Escape") cancelarDesenho(); }
+
+function encerrarModoDesenho() {
+  clearTimeout(cliqueTimer);
+  map.off("click", desenhoClique);
+  map.off("dblclick", concluirDesenho);
+  document.removeEventListener("keydown", desenhoTecla);
+  map.doubleClickZoom.enable();
+  map.getContainer().classList.remove("desenhando");
+  botaoDesenho("Desenhar rua", false);
+}
+
+function cancelarDesenho() {
+  if (!desenho) return;
+  clearTimeout(cliqueTimer);
+  cliquePendente = null;
+  map.removeLayer(desenho.linha);
+  map.removeLayer(desenho.vert);
+  desenho = null;
+  encerrarModoDesenho();
+  setStatus("Desenho cancelado.");
+}
+
+function concluirDesenho() {
+  if (!desenho) return;
+  clearTimeout(cliqueTimer);
+  confirmarPontoPendente();
+  const pts = desenho.pts.slice();
+  map.removeLayer(desenho.linha);
+  map.removeLayer(desenho.vert);
+  desenho = null;
+  encerrarModoDesenho();
+  if (pts.length < 2) { setStatus("Desenho descartado — são necessários pelo menos 2 pontos."); return; }
+  desenhoPendente = pts;
+  document.getElementById("dNome").value = document.getElementById("rua").value.trim();
+  document.getElementById("dBairro").value = "";
+  document.getElementById("dErro").textContent = "";
+  modalAberto = true;
+  dlgDesenho.showModal();
+}
+
+document.getElementById("btnDesenhar").addEventListener("click", () => {
+  desenho ? concluirDesenho() : iniciarDesenho();
+});
+dlgDesenho.addEventListener("close", () => { modalAberto = false; });
+
+dlgDesenho.querySelector("form").addEventListener("submit", ev => {
+  if (ev.submitter && ev.submitter.value !== "ok") { desenhoPendente = null; return; }
+  const nome = document.getElementById("dNome").value.trim();
+  if (!nome) { document.getElementById("dErro").textContent = "Informe o nome da rua."; ev.preventDefault(); return; }
+  const bairro = document.getElementById("dBairro").value.trim() || null;
+  ruasAdicionadas.push({
+    nome, bairro, label: nome + (bairro ? ` — ${bairro}` : ""),
+    status: "",
+    ways: [{ name: nome, on: true, coords: desenhoPendente }]
+  });
+  desenhoPendente = null;
+  document.getElementById("rua").value = "";
+  ordenarRuas();
+  // Mantém o enquadramento atual: ao concluir um desenho, a pessoa continua no mesmo zoom.
+  redesenharRuas(false);
+  agendarSalvar();
+  setStatus(`“${nome}” desenhada e adicionada. Total no mapa: ${ruasAdicionadas.length}.`);
+});
+
+/* ---------- exportar imagem em alta resolução ---------- */
+const TILE = 256;
+const tileUrl = (tpl, z, x, y) => tpl.replace("{z}", z).replace("{x}", x).replace("{y}", y);
+
+function projetar(lat, lng, z) {
+  const s = Math.sin(lat * Math.PI / 180);
+  const n = Math.pow(2, z);
+  return [
+    (lng + 180) / 360 * n,
+    (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n
+  ];
+}
+
+// percorre todos os anéis de coordenadas [lng,lat] de um GeoJSON
+function aneisGeoJSON(geo) {
+  const feats = geo.type === "FeatureCollection" ? geo.features
+    : geo.type === "Feature" ? [geo] : [{ geometry: geo }];
+  const aneis = [];
+  for (const f of feats) {
+    const g = f.geometry; if (!g) continue;
+    if (g.type === "Polygon") g.coordinates.forEach(r => aneis.push(r));
+    else if (g.type === "MultiPolygon") g.coordinates.forEach(p => p.forEach(r => aneis.push(r)));
+    else if (g.type === "LineString") aneis.push(g.coordinates);
+    else if (g.type === "MultiLineString") g.coordinates.forEach(l => aneis.push(l));
+  }
+  return aneis;
+}
+
+function slugNome(s) {
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "").toLowerCase();
+}
+function baixarBlob(blob, nome) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+function encurtarTextoCanvas(ctx, texto, largura) {
+  if (ctx.measureText(texto).width <= largura) return texto;
+  let curto = texto;
+  while (curto.length && ctx.measureText(curto + "…").width > largura) curto = curto.slice(0, -1);
+  return curto + "…";
+}
+
+// Ponto de referência usado apenas para posicionar o quadro em um canto menos ocupado.
+function meioDaRua(ways, px) {
+  const maior = ways.reduce((a, w) => comprimento(w.coords) > comprimento(a.coords) ? w : a);
+  const i = Math.floor((maior.coords.length - 1) / 2);
+  const a = maior.coords[i], b = maior.coords[i + 1] || a;
+  return px((a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+}
+
+function desenharIdentificacaoExportacao(ctx, itens, px, largura, altura) {
+  if (!itens.length) return;
+  const grupos = [...Object.keys(STATUS_OBRA), "Sem status"].map(status => ({
+    status, itens: itens.filter(x => (statusDaRua(x.item) || "Sem status") === status)
+  })).filter(g => g.itens.length);
+  // Tamanho intermediário: legível, mas sem ocupar uma área excessiva da imagem exportada.
+  const fonte = 9.75, entrelinha = 13.5, margem = 9, larguraBase = Math.min(290, largura - margem * 2);
+  const linhas = [];
+  for (const grupo of grupos) {
+    linhas.push({ tipo: "titulo", texto: grupo.status, cor: grupo.status === "Sem status" ? COR_SEM_STATUS : STATUS_OBRA[grupo.status] });
+    for (const x of grupo.itens) linhas.push({ tipo: "rua", texto: `${x.numero}. ${x.item.label || x.item.nome}` });
+  }
+  const alturaBase = 42 + linhas.length * entrelinha + margem * 2;
+  const escala = Math.min(1, (altura - margem * 2) / alturaBase);
+  const boxW = larguraBase * escala, boxH = alturaBase * escala, pad = margem * escala;
+  const marcadores = itens.map(x => ({ ...x, ponto: meioDaRua(x.ways, px) }));
+  const segmentosDasRuas = itens.flatMap(x => x.ways.flatMap(w =>
+    w.coords.slice(1).map((p, i) => [px(w.coords[i][0], w.coords[i][1]), px(p[0], p[1])])
+  ));
+  const distanciaPontoSegmento = (p, a, b) => {
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const den = dx * dx + dy * dy;
+    const t = den ? Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / den)) : 0;
+    return Math.hypot(p[0] - (a[0] + t * dx), p[1] - (a[1] + t * dy));
+  };
+  const orientacao = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+  const segmentosSeCruzam = (a, b, c, d) => {
+    const abC = orientacao(a, b, c), abD = orientacao(a, b, d);
+    const cdA = orientacao(c, d, a), cdB = orientacao(c, d, b);
+    return ((abC > 0 && abD < 0) || (abC < 0 && abD > 0)) && ((cdA > 0 && cdB < 0) || (cdA < 0 && cdB > 0));
+  };
+  const distanciaSegmentos = (a, b, c, d) => {
+    if (segmentosSeCruzam(a, b, c, d)) return 0;
+    return Math.min(distanciaPontoSegmento(a, c, d), distanciaPontoSegmento(b, c, d), distanciaPontoSegmento(c, a, b), distanciaPontoSegmento(d, a, b));
+  };
+  const circuloLivre = (p, raio) => segmentosDasRuas.every(([a, b]) => distanciaPontoSegmento(p, a, b) > raio + 3);
+  const setaLivre = (a, b) => segmentosDasRuas.every(([c, d]) => distanciaSegmentos(a, b, c, d) > 4);
+  const pontoNoQuadro = (p, c, folga = 0) =>
+    p[0] >= c.x - folga && p[0] <= c.x + boxW + folga && p[1] >= c.y - folga && p[1] <= c.y + boxH + folga;
+  const trechoNoQuadro = ([a, b], c) => {
+    if (pontoNoQuadro(a, c, 5) || pontoNoQuadro(b, c, 5)) return true;
+    const x1 = c.x - 5, y1 = c.y - 5, x2 = c.x + boxW + 5, y2 = c.y + boxH + 5;
+    const bordas = [[[x1, y1], [x2, y1]], [[x2, y1], [x2, y2]], [[x2, y2], [x1, y2]], [[x1, y2], [x1, y1]]];
+    return bordas.some(([p, q]) => distanciaSegmentos(a, b, p, q) < 0.01);
+  };
+  const ocupacaoQuadro = c => segmentosDasRuas.reduce((total, trecho) => total + (trechoNoQuadro(trecho, c) ? 1 : 0), 0);
+  const candidatos = [];
+  // Varre a área inteira de exportação: o quadro não fica limitado aos quatro cantos.
+  const passoCaixa = 24;
+  for (let y = margem; y <= altura - boxH - margem; y += passoCaixa)
+    for (let x = margem; x <= largura - boxW - margem; x += passoCaixa)
+      candidatos.push({ x, y });
+  candidatos.push(
+    { x: margem, y: margem }, { x: largura - boxW - margem, y: margem },
+    { x: margem, y: altura - boxH - margem }, { x: largura - boxW - margem, y: altura - boxH - margem }
+  );
+  const candidatosLivres = candidatos.filter(c => ocupacaoQuadro(c) === 0);
+  // Se não houver um retângulo livre, omite o quadro: cobrir uma rua nunca é aceitável.
+  const caixa = candidatosLivres[0] || { x: -boxW - 1, y: -boxH - 1 };
+
+  // Cada chamada é aceita apenas se o número e toda a seta ficarem fora das vias.
+  const chamadasUsadas = [];
+  const dentroDoQuadro = ([x, y]) => x >= caixa.x - 4 && x <= caixa.x + boxW + 4 && y >= caixa.y - 4 && y <= caixa.y + boxH + 4;
+  const caminhoLivre = pontos => pontos.slice(1).every((p, i) => setaLivre(pontos[i], p));
+  for (const m of marcadores) {
+    const raio = 6;
+    let chamada = null;
+    const candidatosChamada = [];
+    for (const distancia of [46, 68, 94, 126, 164, 208])
+      for (let angulo = 0; angulo < Math.PI * 2; angulo += Math.PI / 12)
+        candidatosChamada.push([m.ponto[0] + Math.cos(angulo) * distancia, m.ponto[1] + Math.sin(angulo) * distancia]);
+    // Em aglomerados densos, amplia a busca para áreas livres de todo o enquadramento.
+    for (let y = 24; y < altura - 24; y += 42)
+      for (let x = 24; x < largura - 24; x += 42)
+        candidatosChamada.push([x, y]);
+
+    for (const [cx, cy] of candidatosChamada) {
+        const dentroDaImagem = cx >= raio + 3 && cx <= largura - raio - 3 && cy >= raio + 3 && cy <= altura - raio - 3;
+        if (!dentroDaImagem || dentroDoQuadro([cx, cy]) || !circuloLivre([cx, cy], raio)) continue;
+        const vx = m.ponto[0] - cx, vy = m.ponto[1] - cy;
+        const tamanho = Math.hypot(vx, vy) || 1;
+        // A seta para antes do trecho, deixando um vão de segurança de 7 px.
+        const ponta = [m.ponto[0] - vx / tamanho * 7, m.ponto[1] - vy / tamanho * 7];
+        const inicio = [cx + vx / tamanho * raio, cy + vy / tamanho * raio];
+        const distanteDasOutrasChamadas = chamadasUsadas.every(x => Math.hypot(cx - x[0], cy - x[1]) > raio * 2 + 5);
+        if (!distanteDasOutrasChamadas) continue;
+        const meio = [(inicio[0] + ponta[0]) / 2, (inicio[1] + ponta[1]) / 2];
+        const normal = [-(ponta[1] - inicio[1]) / tamanho, (ponta[0] - inicio[0]) / tamanho];
+        let controle = null;
+        let caminho = null;
+        // Curvas de Bézier: o arqueamento permite contornar vias próximas sem cruzá-las.
+        for (const desvio of [20, -20, 36, -36, 56, -56, 80, -80, 110, -110, 146, -146, 188, -188]) {
+          const c = [meio[0] + normal[0] * desvio, meio[1] + normal[1] * desvio];
+          const amostra = Array.from({ length: 25 }, (_, i) => {
+            const t = i / 24, u = 1 - t;
+            return [u * u * inicio[0] + 2 * u * t * c[0] + t * t * ponta[0], u * u * inicio[1] + 2 * u * t * c[1] + t * t * ponta[1]];
+          });
+          if (c[0] >= 0 && c[0] <= largura && c[1] >= 0 && c[1] <= altura && caminhoLivre(amostra)) {
+            controle = c; caminho = amostra; break;
+          }
+        }
+        if (!caminho && caminhoLivre([inicio, ponta])) caminho = [inicio, ponta];
+        // Quando uma via bloqueia a linha reta, procura uma seta em cotovelo que a contorne.
+        if (!caminho) {
+          const desvios = [
+            [inicio[0], ponta[1]], [ponta[0], inicio[1]],
+            ...Array.from({ length: 10 }, (_, i) => [24 + i * (largura - 48) / 9, 24]),
+            ...Array.from({ length: 10 }, (_, i) => [24 + i * (largura - 48) / 9, altura - 24]),
+            ...Array.from({ length: 8 }, (_, i) => [24, 24 + i * (altura - 48) / 7]),
+            ...Array.from({ length: 8 }, (_, i) => [largura - 24, 24 + i * (altura - 48) / 7]),
+            // Rotas internas: úteis quando a rua está cercada por outras vias.
+            ...Array.from({ length: Math.ceil((largura - 48) / 56) * Math.ceil((altura - 48) / 56) }, (_, i) => {
+              const colunas = Math.ceil((largura - 48) / 56);
+              return [24 + (i % colunas) * 56, 24 + Math.floor(i / colunas) * 56];
+            })
+          ];
+          for (const desvio of desvios) {
+            const desvioDentroDaImagem = desvio[0] >= 3 && desvio[0] <= largura - 3 && desvio[1] >= 3 && desvio[1] <= altura - 3;
+            if (!desvioDentroDaImagem || dentroDoQuadro(desvio) || !circuloLivre(desvio, 2)) continue;
+            if (caminhoLivre([inicio, desvio, ponta])) { caminho = [inicio, desvio, ponta]; break; }
+          }
+        }
+        if (caminho) { chamada = { cx, cy, caminho, ponta, controle }; break; }
+    }
+    if (!chamada) continue; // a rua segue no quadro; nunca desenhar sobre uma via é prioritário
+    chamadasUsadas.push([chamada.cx, chamada.cy]);
+    const penultimo = chamada.caminho[chamada.caminho.length - 2];
+    const angulo = Math.atan2(chamada.ponta[1] - penultimo[1], chamada.ponta[0] - penultimo[0]);
+    ctx.beginPath(); ctx.moveTo(...chamada.caminho[0]);
+    if (chamada.controle) ctx.quadraticCurveTo(...chamada.controle, ...chamada.ponta);
+    else chamada.caminho.slice(1).forEach(p => ctx.lineTo(...p));
+    ctx.strokeStyle = "#000000"; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(...chamada.ponta);
+    ctx.lineTo(chamada.ponta[0] - 5 * Math.cos(angulo - Math.PI / 6), chamada.ponta[1] - 5 * Math.sin(angulo - Math.PI / 6));
+    ctx.lineTo(chamada.ponta[0] - 5 * Math.cos(angulo + Math.PI / 6), chamada.ponta[1] - 5 * Math.sin(angulo + Math.PI / 6));
+    ctx.closePath(); ctx.fillStyle = "#000000"; ctx.fill();
+    ctx.beginPath(); ctx.arc(chamada.cx, chamada.cy, raio, 0, Math.PI * 2);
+    ctx.fillStyle = "#0f172a"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = corDaRua(m.item); ctx.stroke();
+    ctx.fillStyle = "#f8fafc"; ctx.font = "bold 8px system-ui, sans-serif";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(String(m.numero), chamada.cx, chamada.cy + .5);
+  }
+
+  ctx.save();
+  ctx.translate(caixa.x, caixa.y); ctx.scale(escala, escala);
+  ctx.fillStyle = "rgba(15,23,42,.94)";
+  ctx.fillRect(0, 0, larguraBase, alturaBase);
+  ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1; ctx.strokeRect(.5, .5, larguraBase - 1, alturaBase - 1);
+  ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  ctx.font = "bold 10.5px system-ui, sans-serif"; ctx.fillStyle = "#f8fafc";
+  ctx.fillText("PAVIMENTAÇÕES SEDUH-CEHAB", margem, margem + 6);
+  ctx.font = "8px system-ui, sans-serif"; ctx.fillStyle = "#cbd5e1";
+  ctx.fillText(`${atual.nome.toUpperCase()} - Quadro das Vias para Obras`, margem, margem + 18);
+  let y = margem + 31;
+  for (const linha of linhas) {
+    if (linha.tipo === "titulo") {
+      ctx.fillStyle = linha.cor; ctx.font = "bold 9px system-ui, sans-serif";
+      ctx.fillText(linha.texto.toUpperCase(), margem, y);
+    } else {
+      ctx.fillStyle = "#f8fafc"; ctx.font = `${fonte}px system-ui, sans-serif`;
+      ctx.fillText(encurtarTextoCanvas(ctx, linha.texto, larguraBase - margem * 2), margem, y);
+    }
+    y += entrelinha;
+  }
+  ctx.restore();
+}
+
+// gera um PNG do enquadramento atual do mapa; retorna { blob, w, h }
+async function gerarPng(incluirIdentificacao = true) {
+  {
+    const b = map.getBounds();
+    // Os mosaicos XYZ só existem em níveis inteiros. Usar o mesmo nível carregado
+    // pelo Leaflet evita blocos "Map data not yet available" na imagem exportada.
+    let z = Math.min(19, Math.round(map.getZoom()));
+    let x0, x1, y0, y1, nwx, nwy;
+    while (true) {
+      [nwx, nwy] = projetar(b.getNorth(), b.getWest(), z);
+      const [sex, sey] = projetar(b.getSouth(), b.getEast(), z);
+      x0 = Math.floor(nwx); x1 = Math.floor(sex);
+      y0 = Math.floor(nwy); y1 = Math.floor(sey);
+      const nTiles = (x1 - x0 + 1) * (y1 - y0 + 1);
+      if (nTiles <= 300 || z <= map.getZoom()) break;
+      z--;
+    }
+    const nx = x1 - x0 + 1, ny = y1 - y0 + 1;
+    setStatus(`Gerando imagem (${nx * ny} blocos, zoom ${z})…`);
+
+    const big = document.createElement("canvas");
+    big.width = nx * TILE; big.height = ny * TILE;
+    const ctx = big.getContext("2d");
+    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, big.width, big.height);
+
+    const carregarTile = async (url, dx, dy) => {
+      try {
+        const r = await fetchComPrazo(url, 15000, { mode: "cors" });
+        if (!r.ok) return;
+        const bmp = await createImageBitmap(await r.blob());
+        ctx.drawImage(bmp, dx, dy);
+      } catch {}
+    };
+    const fundoTpl = baseAtual === "ruas" ? ESRI.streets : ESRI.imagery;
+    for (let tx = x0; tx <= x1; tx++)
+      for (let ty = y0; ty <= y1; ty++)
+        await carregarTile(tileUrl(fundoTpl, z, tx, ty), (tx - x0) * TILE, (ty - y0) * TILE);
+    if (baseAtual !== "ruas") // no satélite, sobrepõe os rótulos de lugares
+      for (let tx = x0; tx <= x1; tx++)
+        for (let ty = y0; ty <= y1; ty++)
+          await carregarTile(tileUrl(ESRI.refs, z, tx, ty), (tx - x0) * TILE, (ty - y0) * TILE);
+
+    // recorta exatamente na área visível
+    const [sex, sey] = projetar(b.getSouth(), b.getEast(), z);
+    const offX = (nwx - x0) * TILE, offY = (nwy - y0) * TILE;
+    const w = Math.round((sex - nwx) * TILE), h = Math.round((sey - nwy) * TILE);
+    const out = document.createElement("canvas");
+    out.width = w; out.height = h;
+    const octx = out.getContext("2d");
+    octx.drawImage(big, -offX, -offY);
+
+    const px = (lat, lng) => {
+      const [X, Y] = projetar(lat, lng, z);
+      return [(X - nwx) * TILE, (Y - nwy) * TILE];
+    };
+    const pontoDentroDaImagem = ([x, y]) => x >= 0 && x <= w && y >= 0 && y <= h;
+    const orientacao = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+    const cruzam = (a, b, c, d) => {
+      const abC = orientacao(a, b, c), abD = orientacao(a, b, d);
+      const cdA = orientacao(c, d, a), cdB = orientacao(c, d, b);
+      return ((abC > 0 && abD < 0) || (abC < 0 && abD > 0)) && ((cdA > 0 && cdB < 0) || (cdA < 0 && cdB > 0));
+    };
+    const trechoVisivel = coords => {
+      const bordas = [
+        [[0, 0], [w, 0]], [[w, 0], [w, h]], [[w, h], [0, h]], [[0, h], [0, 0]]
+      ];
+      const pontos = coords.map(([lat, lng]) => px(lat, lng));
+      return pontos.some(pontoDentroDaImagem) || pontos.slice(1).some((p, i) => bordas.some(([a, b]) => cruzam(pontos[i], p, a, b)));
+    };
+    const traco = (pontos, cor, largura) => {
+      octx.beginPath();
+      pontos.forEach(([lat, lng], i) => {
+        const [x, y] = px(lat, lng);
+        i ? octx.lineTo(x, y) : octx.moveTo(x, y);
+      });
+      octx.strokeStyle = cor; octx.lineWidth = largura;
+      octx.lineJoin = "round"; octx.lineCap = "round";
+      octx.stroke();
+    };
+
+    // contorno do município
+    if (atual.boundaryGeo) {
+      for (const anel of aneisGeoJSON(atual.boundaryGeo)) {
+        traco(anel.map(c => [c[1], c[0]]), "#a855f7", 3);
+      }
+    }
+    // Ruas: segue a mesma regra da tela; se há seleção, mostra apenas ela.
+    const itensExportados = [];
+    for (const item of ruasAdicionadas) {
+      const sel = item === ruaSel;
+      if (ruaSel && !sel) continue;
+      const waysAtivas = item.ways.filter(w => w.coords && w.coords.length >= 2 && trechoAtivo(w));
+      if (!waysAtivas.length) continue;
+      const waysVisiveis = waysAtivas.filter(w => trechoVisivel(w.coords));
+      if (!waysVisiveis.length) continue;
+      itensExportados.push({ item, ways: waysVisiveis, numero: itensExportados.length + 1 });
+      for (const way of waysAtivas)
+        // Largura reduzida em 20%: mantém o destaque sem cobrir as edificações próximas.
+        if (trechoAtivo(way)) traco(way.coords, sel ? "#22d3ee" : corDaRua(item), sel ? 7.2 : 5.6);
+    }
+    if (incluirIdentificacao) desenharIdentificacaoExportacao(octx, itensExportados, px, w, h);
+
+    const blob = await new Promise(res => out.toBlob(res, "image/png"));
+    if (!blob) throw new Error("o navegador não conseguiu gerar o PNG (canvas muito grande?)");
+    return { blob, w, h };
+  }
+}
+
+function nomeArquivoImagem(simples = false) {
+  return `mapa-${slugNome(atual.nome)}` +
+    (ruaSel ? `-${slugNome(ruaSel.nome || ruaSel.label)}` : "") +
+    (simples ? "-simples" : "") +
+    `-${Date.now()}.png`;
+}
+
+function aguardarRedimensionamento() {
+  return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+}
+
+async function exportarImagem(simples = false) {
+  if (!atual) { setStatus("Selecione um município primeiro."); return; }
+  const btn = document.getElementById(simples ? "btnExportSimples" : "btnExport");
+  const mapaEl = document.getElementById("map");
+  if (exportacaoEmPreparacao) return;
+  btn.disabled = true;
+  exportacaoSimples = simples;
+  try {
+    // A tela cheia pertence somente ao mapa, sem cabeçalho ou painel lateral.
+    if (!document.fullscreenElement && mapaEl.requestFullscreen) {
+      try {
+        await mapaEl.requestFullscreen();
+        map.invalidateSize({ pan: false });
+        await aguardarRedimensionamento();
+      } catch {
+        setStatus("A tela cheia não foi permitida pelo navegador; ajuste o enquadramento atual antes de confirmar.");
+      }
+    }
+    exportacaoEmPreparacao = true;
+    exportToolbar.hidden = false;
+    setStatus(simples
+      ? "Ajuste o mapa como desejar e clique em “Gerar imagem agora”. A imagem sairá sem quadro, números ou setas."
+      : "Ajuste o mapa como desejar e clique em “Gerar imagem agora”.");
+  } catch (e) {
+    setStatus("Não foi possível preparar a exportação: " + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+const exportToolbar = document.getElementById("exportToolbar");
+let exportacaoEmPreparacao = false;
+let exportacaoSimples = false;
+
+async function encerrarPreparacaoExportacao() {
+  exportacaoEmPreparacao = false;
+  exportacaoSimples = false;
+  exportToolbar.hidden = true;
+  if (document.fullscreenElement === map.getContainer()) {
+    try { await document.exitFullscreen(); } catch {}
+    map.invalidateSize({ pan: false });
+  }
+}
+
+async function confirmarExportacaoImagem() {
+  if (!exportacaoEmPreparacao) return;
+  const btn = document.getElementById("btnConfirmarExport");
+  btn.disabled = true;
+  try {
+    const simples = exportacaoSimples;
+    const { blob, w, h } = await gerarPng(!simples);
+    const nome = nomeArquivoImagem(simples);
+    baixarBlob(blob, nome);
+    setStatus(`Imagem exportada: ${nome} (${w}×${h} px).`);
+  } catch (e) {
+    setStatus("Falha ao exportar a imagem: " + e.message);
+  } finally {
+    btn.disabled = false;
+    await encerrarPreparacaoExportacao();
+  }
+}
+
+// exporta uma imagem por rua da lista, cada uma enquadrada só na sua rua, salvando à medida que fica pronta
+async function exportarTodas() {
+  if (!atual) { setStatus("Selecione um município primeiro."); return; }
+  if (!ruasAdicionadas.length) { setStatus("Nenhuma rua na lista para exportar."); return; }
+  const btn = document.getElementById("btnExportTodas");
+  btn.disabled = true;
+
+  // se o navegador permitir, pede uma pasta uma vez e grava cada PNG direto nela
+  let pasta = null;
+  if (window.showDirectoryPicker) {
+    try {
+      pasta = await window.showDirectoryPicker({ id: "mapas-pe", mode: "readwrite" });
+    } catch (e) {
+      if (e.name === "AbortError") { btn.disabled = false; setStatus("Exportação cancelada."); return; }
+      pasta = null; // sem suporte / negado → cai para download individual
+    }
+  }
+
+  const salvar = async (blob, nome) => {
+    if (pasta) {
+      const fh = await pasta.getFileHandle(nome, { create: true });
+      const ws = await fh.createWritable();
+      await ws.write(blob);
+      await ws.close();
+    } else {
+      baixarBlob(blob, nome);
+    }
+  };
+
+  const selAnterior = ruaSel;
+  let ok = 0, falhas = 0;
+  try {
+    const total = ruasAdicionadas.length;
+    for (let i = 0; i < total; i++) {
+      const item = ruasAdicionadas[i];
+      const linhas = item.ways.filter(trechoAtivo);
+      if (!linhas.length) { falhas++; continue; }
+      ruaSel = item;
+      const fg = L.featureGroup(linhas.map(w => L.polyline(w.coords)));
+      map.invalidateSize();
+      map.fitBounds(fg.getBounds(), { padding: [6, 6], maxZoom: 19, animate: false });
+      redesenharRuas(false);
+      setStatus(`Gerando ${i + 1}/${total}: ${item.nome}…`);
+      try {
+        const nome = `${String(i + 1).padStart(2, "0")}-mapa-${slugNome(atual.nome)}-${slugNome(item.nome || item.label)}.png`;
+        const { blob } = await gerarPng();
+        await salvar(blob, nome);
+        ok++;
+        setStatus(`Salvou ${ok}/${total}: ${item.nome}`);
+      } catch { falhas++; }
+      if (!pasta) await new Promise(r => setTimeout(r, 400)); // sem pasta: espaça os downloads
+    }
+  } finally {
+    ruaSel = selAnterior;
+    redesenharRuas(false);
+    btn.disabled = false;
+  }
+  const onde = pasta ? ` na pasta “${pasta.name}”` : "";
+  setStatus(`Exportação concluída: ${ok} imagem(ns)${onde}` + (falhas ? `, ${falhas} sem trechos ativos ou com falha` : "") + ".");
+}
+
+/* ---------- abrir mapa salvo ---------- */
+async function abrirMapaSalvo(id) {
+  const m = lerMapas()[id];
+  if (!m) return;
+  restaurando = true;
+  input.value = m.nome;
+  const munObj = municipios.find(x => String(x.id) === String(id)) ||
+    { id: m.id, nome: m.nome, microrregiao: m.microrregiao };
+  const ok = await selecionarMunicipio(munObj, { view: m.view, base: m.base });
+  if (ok) {
+    ruasAdicionadas = (m.itens || []).map(it => ({
+      nome: it.nome || it.label, bairro: it.bairro || null,
+      label: it.label || it.nome,
+      status: statusDaRua(it),
+      ways: (it.ways || []).map(w => ({ name: w.name, coords: w.coords, on: w.on !== false }))
+    }));
+    ordenarRuas();
+    redesenharRuas(false);
+    lsSet(ATIVO_KEY, String(id));
+    renderLista();
+    setStatus(`Mapa salvo de ${m.nome} restaurado (${ruasAdicionadas.length} rua[s]).`);
+  }
+  restaurando = false;
+}
+
+/* ---------- eventos ---------- */
+const inputZoom = document.getElementById("zoom");
+const inputZoomExport = document.getElementById("exportZoom");
+function atualizarCampoZoom() {
+  const valor = String(Math.round(map.getZoom() * 10) / 10);
+  inputZoom.value = valor;
+  inputZoomExport.value = valor;
+}
+function aplicarZoomDigitado(campo = inputZoom) {
+  const zoom = Number(campo.value);
+  if (!Number.isFinite(zoom)) { atualizarCampoZoom(); return; }
+  map.setZoom(Math.max(1, Math.min(19, zoom)));
+}
+inputZoom.addEventListener("change", () => aplicarZoomDigitado(inputZoom));
+inputZoom.addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); aplicarZoomDigitado(); inputZoom.blur(); }
+});
+inputZoomExport.addEventListener("change", () => aplicarZoomDigitado(inputZoomExport));
+inputZoomExport.addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); aplicarZoomDigitado(inputZoomExport); inputZoomExport.blur(); }
+});
+function ajustarZoomExportacao(delta) {
+  map.setZoom(Math.max(1, Math.min(19, Math.round((map.getZoom() + delta) * 10) / 10)));
+}
+document.getElementById("btnZoomMenos").addEventListener("click", () => ajustarZoomExportacao(-0.1));
+document.getElementById("btnZoomMais").addEventListener("click", () => ajustarZoomExportacao(0.1));
+map.on("zoomend", atualizarCampoZoom);
+input.addEventListener("change", () => {
+  const nome = input.value.trim().toLowerCase();
+  const m = municipios.find(x => x.nome.toLowerCase() === nome);
+  if (!m) { setStatus("Município não encontrado na lista."); return; }
+  selecionarMunicipio(m);
+});
+  document.getElementById("btnAddRua").addEventListener("click", adicionarRuas);
+document.getElementById("btnManual").addEventListener("click", abrirManual);
+document.getElementById("btnExport").addEventListener("click", () => exportarImagem(false));
+document.getElementById("btnExportSimples").addEventListener("click", () => exportarImagem(true));
+document.getElementById("btnConfirmarExport").addEventListener("click", confirmarExportacaoImagem);
+document.getElementById("btnCancelarExport").addEventListener("click", async () => {
+  await encerrarPreparacaoExportacao();
+  setStatus("Exportação cancelada.");
+});
+document.getElementById("btnExportTodas").addEventListener("click", exportarTodas);
+  document.getElementById("rua").addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); adicionarRuas(); }
+  });
+map.on("moveend zoomend", agendarSalvar);
+document.addEventListener("fullscreenchange", () => {
+  if (exportacaoEmPreparacao && document.fullscreenElement !== map.getContainer()) {
+    exportacaoEmPreparacao = false;
+    exportToolbar.hidden = true;
+    map.invalidateSize({ pan: false });
+    setStatus("Preparação da exportação cancelada.");
+  }
+});
+
+function setStatus(t) { statusEl.textContent = t; }
+
+/* ---------- inicialização ---------- */
+renderLista();
+renderListaRuas();
+fetch(IBGE)
+  .then(r => r.json())
+  .then(list => {
+    municipios = list;
+    for (const m of list) {
+      const opt = document.createElement("option");
+      opt.value = m.nome;
+      datalist.appendChild(opt);
+    }
+    setStatus(`${list.length} municípios carregados.`);
+    const ativo = lsGet(ATIVO_KEY);
+    if (ativo && lerMapas()[ativo]) abrirMapaSalvo(ativo);
+  })
+  .catch(() => setStatus("Falha ao carregar a lista do IBGE. Verifique a conexão."));
+</script>
+</body>
+</html>

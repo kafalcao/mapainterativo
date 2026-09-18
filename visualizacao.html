@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pernambuco — Visão de satélite</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body, #map { width: 100%; height: 100%; margin: 0; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #17231e; }
+  .leaflet-container { font: inherit; background: #17231e; }
+  #topbar { position: fixed; z-index: 1000; top: max(14px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); width: min(560px, calc(100vw - 28px)); display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 13px; background: rgba(255,255,255,.96); box-shadow: 0 4px 18px rgba(0,0,0,.25); color: #16241c; }
+  #brand { display: grid; line-height: 1.1; white-space: nowrap; }
+  #brand strong { font-size: 14px; font-weight: 700; }
+  #brand span { font-size: 11px; color: #526157; margin-top: 3px; }
+  #municipio, #salvos { flex: 1; min-width: 0; height: 41px; padding: 0 12px; border: 1px solid #b8c5bc; border-radius: 9px; background: #fff; color: #17231e; font: inherit; font-size: 15px; outline-color: #32754d; }
+  #salvos { max-width: 185px; }
+  #mapButtons { position: fixed; z-index: 1000; right: 16px; bottom: max(28px, env(safe-area-inset-bottom)); display: grid; gap: 8px; }
+  #mapButtons button { width: 48px; height: 48px; border: 0; border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 3px 12px rgba(0,0,0,.22); color: #173324; font: 600 28px/1 system-ui; cursor: pointer; }
+  #mapButtons button:last-child { font-size: 22px; }
+  #notice { position: fixed; z-index: 1000; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: calc(100vw - 110px); padding: 8px 12px; border-radius: 8px; background: rgba(18,30,23,.86); color: #fff; font-size: 13px; text-align: center; pointer-events: none; transition: opacity .25s; }
+  #notice[hidden] { opacity: 0; }
+  .leaflet-control-attribution { font-size: 10px !important; background: rgba(255,255,255,.72) !important; }
+  .dica-rua { padding: 2px 4px; font: 600 13px/1.35 system-ui, sans-serif; color: #17231e; }
+  @media (max-width: 600px) { #topbar { gap: 9px; padding: 9px; } #brand span { display: none; } #brand strong { font-size: 12px; } #municipio { font-size: 14px; } }
+  @media (max-width: 390px) { #brand { display: none; } #topbar { width: calc(100vw - 20px); } }
+</style>
+</head>
+<body>
+<div id="map" aria-label="Mapa interativo de Pernambuco"></div>
+<div id="topbar">
+  <div id="brand"><strong>Pernambuco</strong><span>Visão de satélite</span></div>
+  <input id="municipio" list="municipios" autocomplete="off" placeholder="Escolha um município" aria-label="Escolha um município">
+  <datalist id="municipios"></datalist>
+  <select id="salvos" aria-label="Mapas salvos" hidden><option value="">Mapas salvos</option></select>
+</div>
+<div id="mapButtons" aria-label="Controles do mapa">
+  <button id="mais" type="button" aria-label="Aumentar zoom">+</button>
+  <button id="menos" type="button" aria-label="Diminuir zoom">−</button>
+  <button id="inicio" type="button" aria-label="Ver Pernambuco inteiro">⌂</button>
+</div>
+<div id="notice" role="status">Carregando municípios…</div>
+<script>
+  const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
+  const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
+  const estado = [-8.35, -37.95], zoomEstado = 7;
+  const map = L.map("map", { center: estado, zoom: zoomEstado, minZoom: 6, maxZoom: 19, zoomControl: false, zoomSnap: .1, zoomDelta: .5, attributionControl: true });
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "Imagens © Esri, Maxar" }).addTo(map);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "" }).addTo(map);
+  const input = document.getElementById("municipio"), lista = document.getElementById("municipios"), aviso = document.getElementById("notice"), salvos = document.getElementById("salvos");
+  let municipios = [], limite = null, ruas = L.layerGroup().addTo(map), avisoTimer;
+  function avisar(texto) { aviso.textContent = texto; aviso.hidden = false; clearTimeout(avisoTimer); avisoTimer = setTimeout(() => aviso.hidden = true, 2800); }
+  function nomeNormalizado(valor) { return valor.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+  async function abrirMunicipio() {
+    const encontrado = municipios.find(m => nomeNormalizado(m.nome) === nomeNormalizado(input.value));
+    if (!encontrado) { if (input.value.trim()) avisar("Selecione um município da lista."); return; }
+    input.value = encontrado.nome;
+    avisar(`Abrindo ${encontrado.nome}…`);
+    try {
+      const resposta = await fetch(MALHA(encontrado.id));
+      if (!resposta.ok) throw new Error("Falha ao buscar o limite");
+      const geo = await resposta.json();
+      if (limite) map.removeLayer(limite);
+      limite = L.geoJSON(geo, { interactive: false, style: { color: "#f8fafc", weight: 2, fill: false, opacity: .9 } }).addTo(map);
+      map.fitBounds(limite.getBounds(), { padding: [42, 42], maxZoom: 13 });
+      avisar(encontrado.nome);
+    } catch { avisar("Não foi possível abrir este município agora."); }
+  }
+  function corDaObra(item) { return ({ "Em licitação": "#eab308", "Aguardando contrato": "#f97316", "A iniciar": "#ec4899", "Em execução": "#3b82f6", "Concluída": "#22c55e" })[item.status] || "#94a3b8"; }
+  function textoDaRua(item, way) {
+    const nome = item.label || item.nome || way.name || "Rua destacada";
+    const situacao = item.status ? `<br><span style="font-weight:400;color:#526157">${item.status}</span>` : "";
+    return `<span class="dica-rua">${nome}${situacao}</span>`;
+  }
+  function adicionarDica(linha, texto) {
+    linha.bindTooltip(texto, { sticky: true, direction: "top", opacity: .96, className: "dica-rua" });
+    let toque;
+    linha.on("touchstart", e => { toque = setTimeout(() => linha.openTooltip(e.latlng), 550); });
+    linha.on("touchmove touchend touchcancel", () => { clearTimeout(toque); });
+    linha.on("click", e => linha.openTooltip(e.latlng));
+  }
+  function desenharRuas(itens) {
+    ruas.clearLayers();
+    (itens || []).forEach(item => (item.ways || []).filter(w => w.on !== false).forEach(w => {
+      const linha = L.polyline(w.coords, { color: corDaObra(item), weight: 5, opacity: .9 }).addTo(ruas);
+      adicionarDica(linha, textoDaRua(item, w));
+    }));
+  }
+  async function carregarMapasSalvos() {
+    let mapas = {};
+    try {
+      const resposta = await fetch("mapas-publicos.json", { cache: "no-store" });
+      if (resposta.ok) mapas = await resposta.json();
+    } catch {}
+    if (!Object.keys(mapas).length) { try { mapas = JSON.parse(localStorage.getItem("pe-mapas-v1")) || {}; } catch {} }
+    const listaMapas = Object.values(mapas).sort((a, b) => (b.savedAt || 0) - (a.savedAt || 0));
+    if (!listaMapas.length) return;
+    salvos.hidden = false;
+    listaMapas.forEach(m => { const opcao = document.createElement("option"); opcao.value = m.id; opcao.textContent = m.nome; salvos.appendChild(opcao); });
+    salvos.addEventListener("change", () => {
+      const selecionado = mapas[salvos.value]; if (!selecionado) return;
+      input.value = selecionado.nome || "";
+      desenharRuas(selecionado.itens);
+      if (limite) map.removeLayer(limite);
+      limite = selecionado.boundaryGeo ? L.geoJSON(selecionado.boundaryGeo, { interactive: false, style: { color: "#f8fafc", weight: 2, fill: false, opacity: .9 } }).addTo(map) : null;
+      if (selecionado.view) map.setView([selecionado.view.lat, selecionado.view.lng], selecionado.view.zoom);
+      else if (limite) map.fitBounds(limite.getBounds(), { padding: [42, 42] });
+      avisar(selecionado.nome);
+    });
+  }
+  fetch(IBGE).then(r => r.json()).then(dados => {
+    municipios = dados;
+    lista.innerHTML = dados.map(m => `<option value="${m.nome}"></option>`).join("");
+    carregarMapasSalvos().then(() => avisar(salvos.hidden ? "Escolha um município e use o gesto de pinça para ampliar." : "Escolha um mapa salvo ou um município."));
+  }).catch(() => avisar("Não foi possível carregar os municípios."));
+  input.addEventListener("change", abrirMunicipio);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") abrirMunicipio(); });
+  document.getElementById("mais").onclick = () => map.zoomIn();
+  document.getElementById("menos").onclick = () => map.zoomOut();
+  document.getElementById("inicio").onclick = () => { if (limite) { map.removeLayer(limite); limite = null; } ruas.clearLayers(); input.value = ""; salvos.value = ""; map.setView(estado, zoomEstado); avisar("Pernambuco"); };
+</script>
+</body>
+</html>
