@@ -45,7 +45,7 @@
 <script>
   const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
   const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
-  // Mapas publicados são incorporados aqui para que esta página possa abrir sem mapas-publicos.json.
+  // Mantido para compatibilidade com versões anteriores; os dados publicados são carregados do JSON.
   
   const MAPAS_PUBLICOS = {
   "2606804": {
@@ -14315,7 +14315,12 @@
     }));
   }
   async function carregarMapasSalvos() {
-    let mapas = MAPAS_PUBLICOS;
+    let mapas = {};
+    try {
+      const resposta = await fetch("mapas-publicos.json", { cache: "no-store" });
+      if (!resposta.ok) throw new Error("Falha ao carregar os mapas publicados");
+      mapas = await resposta.json();
+    } catch {}
     if (!Object.keys(mapas).length) { try { mapas = JSON.parse(localStorage.getItem("pe-mapas-v1")) || {}; } catch {} }
     const listaMapas = Object.values(mapas).sort((a, b) => (b.savedAt || 0) - (a.savedAt || 0));
     if (!listaMapas.length) return;
