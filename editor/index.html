@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Municípios de Pernambuco — Satélite</title>
+<title>Municípios de Pernambuco — Mapa Interativo</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -29,7 +29,14 @@
     gap: 12px;
     align-items: flex-end;
   }
-  header h1 { font-size: 16px; margin: 0 auto 0 0; font-weight: 600; align-self: center; }
+  header h1 {
+    font-size: 21px;
+    line-height: 1.15;
+    margin: 0 auto 0 0;
+    font-weight: 700;
+    align-self: center;
+    text-transform: uppercase;
+  }
   .autosave { font-size: 12px; color: #4ade80; align-self: center; white-space: nowrap; }
   label { font-size: 12px; color: #94a3b8; display: block; margin-bottom: 3px; }
   select, input, textarea {
@@ -159,7 +166,7 @@
 </head>
 <body>
 <header>
-  <h1>Municípios de Pernambuco — imagem de satélite</h1>
+  <h1>Municípios de Pernambuco<br>Mapa Interativo</h1>
   <div>
     <label for="mun">Município</label>
     <input list="munList" id="mun" placeholder="Digite ou selecione…" autocomplete="off">
@@ -174,13 +181,14 @@
     <textarea id="rua" placeholder="Uma rua por linha ou separada por ponto e vírgula" autocomplete="off"></textarea>
   </div>
   <button id="btnAddRua" type="button">Adicionar rua(s)</button>
-  <button id="btnManual" type="button">Adicionar via GeoJSON</button>
   <button id="btnDesenhar" type="button">Desenhar rua</button>
-  <button id="btnExport" type="button">Exportar imagem</button>
-  <button id="btnExportSimples" type="button">Exportar mapa simples</button>
-  <button id="btnExportTodas" type="button">Exportar todas</button>
-  <button id="btnExportarColecao" type="button">Atualizar mapas da visualização</button>
-  <button id="btnVisualizacao" type="button" class="primary">Abrir visualização</button>
+  <button id="btnManual" type="button">Adicionar via GeoJSON</button>
+  <button id="btnExport" type="button">Gerar imagem</button>
+  <button id="btnExportSimples" type="button">Gerar imagem simples</button>
+  <button id="btnExportTodas" type="button">Gerar todas as imagens</button>
+  <button id="btnExportarColecao" type="button">Exportar Mapas Salvos</button>
+  <button id="btnImportarColecao" type="button">Importar Mapas Salvos</button>
+  <input id="arquivoImportacao" type="file" accept="application/json,.json" hidden>
   <span id="autosave" class="autosave">As alterações são salvas automaticamente</span>
 </header>
 
@@ -321,10 +329,6 @@ let restaurando = false;       // suprime auto-save durante a restauração de u
 let salvarTimer = null;
 const listaRuasEl = document.getElementById("listaRuas");
 const resumoObrasEl = document.getElementById("resumoObras");
-document.getElementById("btnVisualizacao").addEventListener("click", () => {
-  persistir();
-  window.open("visualizacao.html", "_blank", "noopener");
-});
 document.getElementById("btnExportarColecao").addEventListener("click", () => {
   persistir();
   const dados = JSON.stringify(lerMapas(), null, 2);
@@ -335,6 +339,45 @@ document.getElementById("btnExportarColecao").addEventListener("click", () => {
   link.click();
   URL.revokeObjectURL(link.href);
   setStatus("Coleção exportada. Publique o arquivo mapas-publicos.json junto da visualização.");
+});
+const arquivoImportacao = document.getElementById("arquivoImportacao");
+document.getElementById("btnImportarColecao").addEventListener("click", () => {
+  persistir();
+  arquivoImportacao.click();
+});
+arquivoImportacao.addEventListener("change", async () => {
+  const arquivo = arquivoImportacao.files[0];
+  if (!arquivo) return;
+  try {
+    const dados = JSON.parse(await arquivo.text());
+    if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+      throw new Error("formato inválido");
+    }
+
+    const importados = {};
+    for (const [chave, mapaSalvo] of Object.entries(dados)) {
+      if (!mapaSalvo || typeof mapaSalvo !== "object" || Array.isArray(mapaSalvo)) continue;
+      const id = String(mapaSalvo.id ?? chave).trim();
+      if (!id || typeof mapaSalvo.nome !== "string" || !mapaSalvo.nome.trim() || !Array.isArray(mapaSalvo.itens)) continue;
+      importados[id] = {
+        ...mapaSalvo,
+        id: mapaSalvo.id ?? id,
+        nome: mapaSalvo.nome.trim(),
+        savedAt: Number.isFinite(Number(mapaSalvo.savedAt)) ? Number(mapaSalvo.savedAt) : Date.now()
+      };
+    }
+
+    const quantidade = Object.keys(importados).length;
+    if (!quantidade) throw new Error("nenhum mapa válido");
+    const mapas = { ...lerMapas(), ...importados };
+    if (!gravarMapas(mapas)) throw new Error("não foi possível salvar no navegador");
+    renderLista();
+    setStatus(`${quantidade} mapa(s) importado(s) de “${arquivo.name}”.`);
+  } catch (erro) {
+    setStatus(`Não foi possível importar “${arquivo.name}”: ${erro.message}.`);
+  } finally {
+    arquivoImportacao.value = "";
+  }
 });
 
 const STATUS_OBRA = {
