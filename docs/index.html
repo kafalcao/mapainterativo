@@ -18,13 +18,31 @@
   #salvos, #buscaRua { flex: 1; min-width: 0; height: 41px; padding: 0 12px; border: 1px solid #b8c5bc; border-radius: 9px; background: #fff; color: #17231e; font: inherit; font-size: 15px; outline-color: #32754d; }
   #buscaRua:disabled { background: #edf1ee; color: #78837c; cursor: not-allowed; }
   #mapButtons { position: fixed; z-index: 1000; right: 16px; bottom: max(28px, env(safe-area-inset-bottom)); display: grid; gap: 8px; }
-  #mapButtons button { width: 48px; height: 48px; border: 0; border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 3px 12px rgba(0,0,0,.22); color: #173324; font: 600 28px/1 system-ui; cursor: pointer; }
+  #mapButtons button, #legendButton { width: 48px; height: 48px; border: 0; border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 3px 12px rgba(0,0,0,.22); color: #173324; font: 600 28px/1 system-ui; cursor: pointer; }
   #mapButtons button:last-child { font-size: 22px; }
+  #legendControl { position: fixed; z-index: 1000; left: 16px; bottom: max(28px, env(safe-area-inset-bottom)); }
+  #legendButton { display: grid; place-items: center; padding: 0; }
+  #legendIcon { width: 30px; height: 30px; border: 2px solid #fff; border-radius: 50%; background: conic-gradient(#eab308 0 20%, #f97316 20% 40%, #ec4899 40% 60%, #3b82f6 60% 80%, #22c55e 80% 100%); box-shadow: 0 0 0 1px rgba(23,35,30,.16); }
+  #legendPopup { position: absolute; left: 0; bottom: 58px; width: 240px; padding: 12px 14px; border-radius: 11px; background: rgba(255,255,255,.97); box-shadow: 0 3px 14px rgba(0,0,0,.24); color: #17231e; font-size: 13px; }
+  #legendPopup strong { display: block; margin-bottom: 9px; font-size: 14px; }
+  #legendPopup div { display: flex; align-items: center; gap: 9px; margin-top: 8px; white-space: nowrap; }
+  #legendPopup i { width: 26px; height: 5px; flex: 0 0 auto; border-radius: 5px; }
+  #legendPopup .licitacao { background: #eab308; }
+  #legendPopup .contrato { background: #f97316; }
+  #legendPopup .iniciar { background: #ec4899; }
+  #legendPopup .execucao { background: #3b82f6; }
+  #legendPopup .concluida { background: #22c55e; }
   #notice { position: fixed; z-index: 1000; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: calc(100vw - 110px); padding: 8px 12px; border-radius: 8px; background: rgba(18,30,23,.86); color: #fff; font-size: 13px; text-align: center; pointer-events: none; transition: opacity .25s; }
   #notice[hidden] { opacity: 0; }
   .leaflet-control-attribution { font-size: 10px !important; background: rgba(255,255,255,.72) !important; }
   .dica-rua { padding: 2px 4px; font: 600 13px/1.35 system-ui, sans-serif; color: #17231e; }
-  @media (max-width: 600px) { #topbar { gap: 9px; padding: 9px; } #brand span { display: none; } #brand strong { font-size: 12px; } }
+  @media (max-width: 600px) {
+    #topbar { gap: 9px; padding: 9px; }
+    #brand span { display: none; }
+    #brand strong { font-size: 12px; }
+    #legendControl { left: auto; right: 16px; bottom: calc(max(28px, env(safe-area-inset-bottom)) + 168px); }
+    #legendPopup { left: auto; right: 58px; bottom: 0; width: min(240px, calc(100vw - 90px)); }
+  }
   @media (max-width: 390px) { #brand { display: none; } #topbar { width: calc(100vw - 20px); } }
 </style>
 </head>
@@ -40,6 +58,17 @@
   <button id="mais" type="button" aria-label="Aumentar zoom">+</button>
   <button id="menos" type="button" aria-label="Diminuir zoom">−</button>
   <button id="inicio" type="button" aria-label="Ver Pernambuco inteiro">⌂</button>
+</div>
+<div id="legendControl">
+  <button id="legendButton" type="button" aria-label="Exibir legenda dos status" aria-controls="legendPopup" aria-expanded="false"><span id="legendIcon" aria-hidden="true"></span></button>
+  <div id="legendPopup" hidden>
+    <strong>Legenda</strong>
+    <div><i class="licitacao"></i>Em licitação</div>
+    <div><i class="contrato"></i>Aguardando contrato</div>
+    <div><i class="iniciar"></i>A iniciar</div>
+    <div><i class="execucao"></i>Em execução</div>
+    <div><i class="concluida"></i>Concluída</div>
+  </div>
 </div>
 <div id="notice" role="status">Carregando mapas salvos…</div>
 <script>
@@ -14355,6 +14384,14 @@
   carregarMapasSalvos().then(() => avisar(salvos.hidden ? "Nenhum mapa salvo disponível." : "Escolha um mapa salvo."));
   buscaRua.addEventListener("change", localizarRua);
   buscaRua.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); localizarRua(); } });
+  const legendButton = document.getElementById("legendButton"), legendPopup = document.getElementById("legendPopup");
+  let legendTimer;
+  legendButton.addEventListener("click", () => {
+    clearTimeout(legendTimer);
+    legendPopup.hidden = false;
+    legendButton.setAttribute("aria-expanded", "true");
+    legendTimer = setTimeout(() => { legendPopup.hidden = true; legendButton.setAttribute("aria-expanded", "false"); }, 3000);
+  });
   document.getElementById("mais").onclick = () => map.zoomIn();
   document.getElementById("menos").onclick = () => map.zoomOut();
   document.getElementById("inicio").onclick = () => { if (limite) { map.removeLayer(limite); limite = null; } restaurarDestaque(); ruas.clearLayers(); indiceRuas = []; nomesRuas.replaceChildren(); salvos.value = ""; buscaRua.value = ""; buscaRua.disabled = true; map.setView(estado, zoomEstado); avisar("Pernambuco"); };
