@@ -1,4 +1,897 @@
 {
+  "2601052": {
+    "id": 2601052,
+    "nome": "Araçoiaba",
+    "microrregiao": {
+      "id": 26016,
+      "nome": "Itamaracá",
+      "mesorregiao": {
+        "id": 2605,
+        "nome": "Metropolitana de Recife",
+        "UF": {
+          "id": 26,
+          "sigla": "PE",
+          "nome": "Pernambuco",
+          "regiao": {
+            "id": 2,
+            "sigla": "NE",
+            "nome": "Nordeste"
+          }
+        }
+      }
+    },
+    "itens": [
+      {
+        "nome": "SEDUH-CONV: Avenida Brasil",
+        "bairro": null,
+        "label": "SEDUH-CONV: Avenida Brasil",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Avenida Brasil",
+            "on": true,
+            "coords": [
+              [
+                -7.78475893978967,
+                -35.088616037203884
+              ],
+              [
+                -7.784843207533282,
+                -35.08829570574775
+              ],
+              [
+                -7.7849572168065375,
+                -35.08774513605751
+              ],
+              [
+                -7.785200106024402,
+                -35.086493841306954
+              ],
+              [
+                -7.78545290893835,
+                -35.08531762424145
+              ],
+              [
+                -7.785656142542942,
+                -35.0840963605649
+              ],
+              [
+                -7.785765194680387,
+                -35.08372597731874
+              ],
+              [
+                -7.7856957978689465,
+                -35.083180412807515
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Avenida Presidente Vargas",
+        "bairro": null,
+        "label": "SEDUH-CONV: Avenida Presidente Vargas",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Avenida Presidente Vargas",
+            "on": true,
+            "coords": [
+              [
+                -7.786755628109709,
+                -35.08507100623049
+              ],
+              [
+                -7.788269811167329,
+                -35.08501437909427
+              ],
+              [
+                -7.788984840153228,
+                -35.08498606552617
+              ],
+              [
+                -7.790975710758045,
+                -35.08487281125374
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Bom Jesus",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Bom Jesus",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Bom Jesus",
+            "on": true,
+            "coords": [
+              [
+                -7.786343495200104,
+                -35.08497565984727
+              ],
+              [
+                -7.785121307209084,
+                -35.08484213223623
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Duque de Caxias",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Duque de Caxias",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Duque de Caxias",
+            "on": true,
+            "coords": [
+              [
+                -7.788182099982809,
+                -35.08502928376633
+              ],
+              [
+                -7.78817285010621,
+                -35.08353488468231
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Manuel Gonçalves da Silva",
+        "bairro": "Cento",
+        "label": "SEDUH-CONV: Rua Manuel Gonçalves da Silva — Cento",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "Rua Manuel Gonçalves da Silva",
+            "coords": [
+              [
+                -7.7934173,
+                -35.0845458
+              ],
+              [
+                -7.794174,
+                -35.0855252
+              ],
+              [
+                -7.7944424,
+                -35.0858439
+              ],
+              [
+                -7.7948042,
+                -35.0861344
+              ],
+              [
+                -7.795181,
+                -35.0865147
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Paratinga",
+        "bairro": "Cento",
+        "label": "SEDUH-CONV: Rua Paratinga — Cento",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "Rua Paratinga",
+            "coords": [
+              [
+                -7.7939516,
+                -35.0858092
+              ],
+              [
+                -7.7931895,
+                -35.08486
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Primeiro de Abril",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Primeiro de Abril",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Primeiro de Abril",
+            "on": true,
+            "coords": [
+              [
+                -7.786727302351399,
+                -35.08416142789194
+              ],
+              [
+                -7.785656609868216,
+                -35.084041303595875
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua São José (Trecho 1)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua São José (Trecho 1)",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua São José (Trecho 1)",
+            "on": true,
+            "coords": [
+              [
+                -7.798653668035248,
+                -35.07861568955751
+              ],
+              [
+                -7.798078683235593,
+                -35.078020073256255
+              ],
+              [
+                -7.797746579586072,
+                -35.07710913067786
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua São José (Trecho 2)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua São José (Trecho 2)",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua São José (Trecho 2)",
+            "on": true,
+            "coords": [
+              [
+                -7.797885369203005,
+                -35.07755459160906
+              ],
+              [
+                -7.7974442163326465,
+                -35.07723926533191
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Trinta e Um de Março",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Trinta e Um de Março",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Trinta e Um de Março",
+            "on": true,
+            "coords": [
+              [
+                -7.788166323334399,
+                -35.08444003254789
+              ],
+              [
+                -7.786701686488373,
+                -35.08452630192221
+              ],
+              [
+                -7.786494195854477,
+                -35.08456943660938
+              ],
+              [
+                -7.785597102813688,
+                -35.084477005136876
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Travessa Bom Sucesso",
+        "bairro": "Quinze",
+        "label": "SEDUH-CONV: Travessa Bom Sucesso — Quinze",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "Travessa Bom Sucesso",
+            "coords": [
+              [
+                -7.796121,
+                -35.0969192
+              ],
+              [
+                -7.7954648,
+                -35.0966084
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Tv. Avenida Nova",
+        "bairro": null,
+        "label": "SEDUH-CONV: Tv. Avenida Nova",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Tv. Avenida Nova",
+            "on": true,
+            "coords": [
+              [
+                -7.791381772083442,
+                -35.09465881786404
+              ],
+              [
+                -7.791095028003464,
+                -35.09452805794419
+              ],
+              [
+                -7.790984030242352,
+                -35.094369278041505
+              ],
+              [
+                -7.79066028660449,
+                -35.094313238075856
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "boundaryGeo": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -35.14,
+                  -7.7923
+                ],
+                [
+                  -35.135,
+                  -7.7993
+                ],
+                [
+                  -35.1306,
+                  -7.804
+                ],
+                [
+                  -35.1272,
+                  -7.8088
+                ],
+                [
+                  -35.1254,
+                  -7.8106
+                ],
+                [
+                  -35.1215,
+                  -7.8116
+                ],
+                [
+                  -35.1197,
+                  -7.8126
+                ],
+                [
+                  -35.1185,
+                  -7.8148
+                ],
+                [
+                  -35.1162,
+                  -7.8173
+                ],
+                [
+                  -35.1122,
+                  -7.8199
+                ],
+                [
+                  -35.1075,
+                  -7.8237
+                ],
+                [
+                  -35.106,
+                  -7.8251
+                ],
+                [
+                  -35.1016,
+                  -7.8306
+                ],
+                [
+                  -35.1002,
+                  -7.8293
+                ],
+                [
+                  -35.1,
+                  -7.8281
+                ],
+                [
+                  -35.1017,
+                  -7.8253
+                ],
+                [
+                  -35.1026,
+                  -7.8231
+                ],
+                [
+                  -35.1025,
+                  -7.8212
+                ],
+                [
+                  -35.1019,
+                  -7.8158
+                ],
+                [
+                  -35.1001,
+                  -7.8085
+                ],
+                [
+                  -35.1005,
+                  -7.8068
+                ],
+                [
+                  -35.1017,
+                  -7.805
+                ],
+                [
+                  -35.1047,
+                  -7.8025
+                ],
+                [
+                  -35.1033,
+                  -7.802
+                ],
+                [
+                  -35.0993,
+                  -7.8047
+                ],
+                [
+                  -35.0938,
+                  -7.806
+                ],
+                [
+                  -35.0908,
+                  -7.8054
+                ],
+                [
+                  -35.0886,
+                  -7.8056
+                ],
+                [
+                  -35.0867,
+                  -7.8043
+                ],
+                [
+                  -35.0831,
+                  -7.8043
+                ],
+                [
+                  -35.0806,
+                  -7.8056
+                ],
+                [
+                  -35.0758,
+                  -7.8072
+                ],
+                [
+                  -35.0732,
+                  -7.8084
+                ],
+                [
+                  -35.0705,
+                  -7.8101
+                ],
+                [
+                  -35.0696,
+                  -7.8117
+                ],
+                [
+                  -35.0684,
+                  -7.8117
+                ],
+                [
+                  -35.0541,
+                  -7.88
+                ],
+                [
+                  -35.0528,
+                  -7.8795
+                ],
+                [
+                  -35.0524,
+                  -7.8778
+                ],
+                [
+                  -35.0463,
+                  -7.8756
+                ],
+                [
+                  -35.0451,
+                  -7.8748
+                ],
+                [
+                  -35.0403,
+                  -7.8734
+                ],
+                [
+                  -35.0377,
+                  -7.8712
+                ],
+                [
+                  -35.0363,
+                  -7.8678
+                ],
+                [
+                  -35.0369,
+                  -7.8654
+                ],
+                [
+                  -35.0365,
+                  -7.8581
+                ],
+                [
+                  -35.0372,
+                  -7.8557
+                ],
+                [
+                  -35.0367,
+                  -7.854
+                ],
+                [
+                  -35.0367,
+                  -7.8498
+                ],
+                [
+                  -35.0355,
+                  -7.8464
+                ],
+                [
+                  -35.0362,
+                  -7.8421
+                ],
+                [
+                  -35.0346,
+                  -7.8376
+                ],
+                [
+                  -35.0335,
+                  -7.8333
+                ],
+                [
+                  -35.0329,
+                  -7.8301
+                ],
+                [
+                  -35.0332,
+                  -7.827
+                ],
+                [
+                  -35.034,
+                  -7.8266
+                ],
+                [
+                  -35.0322,
+                  -7.8249
+                ],
+                [
+                  -35.0291,
+                  -7.8246
+                ],
+                [
+                  -35.0286,
+                  -7.8228
+                ],
+                [
+                  -35.0255,
+                  -7.822
+                ],
+                [
+                  -35.0257,
+                  -7.8205
+                ],
+                [
+                  -35.0241,
+                  -7.8192
+                ],
+                [
+                  -35.0239,
+                  -7.8184
+                ],
+                [
+                  -35.021,
+                  -7.8171
+                ],
+                [
+                  -35.0211,
+                  -7.8151
+                ],
+                [
+                  -35.0204,
+                  -7.8138
+                ],
+                [
+                  -35.0219,
+                  -7.8115
+                ],
+                [
+                  -35.0223,
+                  -7.8101
+                ],
+                [
+                  -35.0244,
+                  -7.8063
+                ],
+                [
+                  -35.0272,
+                  -7.8052
+                ],
+                [
+                  -35.0287,
+                  -7.8028
+                ],
+                [
+                  -35.0288,
+                  -7.7999
+                ],
+                [
+                  -35.0297,
+                  -7.7994
+                ],
+                [
+                  -35.0322,
+                  -7.7993
+                ],
+                [
+                  -35.0337,
+                  -7.7976
+                ],
+                [
+                  -35.0345,
+                  -7.7953
+                ],
+                [
+                  -35.0367,
+                  -7.7935
+                ],
+                [
+                  -35.0377,
+                  -7.7934
+                ],
+                [
+                  -35.039,
+                  -7.7945
+                ],
+                [
+                  -35.04,
+                  -7.7936
+                ],
+                [
+                  -35.0393,
+                  -7.7901
+                ],
+                [
+                  -35.04,
+                  -7.7882
+                ],
+                [
+                  -35.0397,
+                  -7.7864
+                ],
+                [
+                  -35.0383,
+                  -7.7823
+                ],
+                [
+                  -35.0382,
+                  -7.7807
+                ],
+                [
+                  -35.0398,
+                  -7.7778
+                ],
+                [
+                  -35.0407,
+                  -7.7753
+                ],
+                [
+                  -35.0385,
+                  -7.7699
+                ],
+                [
+                  -35.0392,
+                  -7.7674
+                ],
+                [
+                  -35.0417,
+                  -7.7657
+                ],
+                [
+                  -35.0442,
+                  -7.7632
+                ],
+                [
+                  -35.0449,
+                  -7.7603
+                ],
+                [
+                  -35.0512,
+                  -7.7532
+                ],
+                [
+                  -35.054,
+                  -7.7493
+                ],
+                [
+                  -35.0655,
+                  -7.7477
+                ],
+                [
+                  -35.0683,
+                  -7.7466
+                ],
+                [
+                  -35.073,
+                  -7.7454
+                ],
+                [
+                  -35.0754,
+                  -7.746
+                ],
+                [
+                  -35.0787,
+                  -7.7428
+                ],
+                [
+                  -35.0809,
+                  -7.7415
+                ],
+                [
+                  -35.0844,
+                  -7.7406
+                ],
+                [
+                  -35.0857,
+                  -7.7406
+                ],
+                [
+                  -35.0877,
+                  -7.742
+                ],
+                [
+                  -35.092,
+                  -7.7399
+                ],
+                [
+                  -35.0936,
+                  -7.7373
+                ],
+                [
+                  -35.0937,
+                  -7.7346
+                ],
+                [
+                  -35.0946,
+                  -7.7331
+                ],
+                [
+                  -35.0982,
+                  -7.7293
+                ],
+                [
+                  -35.0997,
+                  -7.7256
+                ],
+                [
+                  -35.0995,
+                  -7.7228
+                ],
+                [
+                  -35.1028,
+                  -7.7242
+                ],
+                [
+                  -35.1057,
+                  -7.7266
+                ],
+                [
+                  -35.1079,
+                  -7.7305
+                ],
+                [
+                  -35.1084,
+                  -7.7321
+                ],
+                [
+                  -35.1098,
+                  -7.7341
+                ],
+                [
+                  -35.1105,
+                  -7.7358
+                ],
+                [
+                  -35.1117,
+                  -7.741
+                ],
+                [
+                  -35.1104,
+                  -7.7439
+                ],
+                [
+                  -35.11,
+                  -7.7481
+                ],
+                [
+                  -35.1102,
+                  -7.7492
+                ],
+                [
+                  -35.1133,
+                  -7.7523
+                ],
+                [
+                  -35.1167,
+                  -7.7571
+                ],
+                [
+                  -35.1181,
+                  -7.7606
+                ],
+                [
+                  -35.1184,
+                  -7.7631
+                ],
+                [
+                  -35.1202,
+                  -7.7663
+                ],
+                [
+                  -35.1238,
+                  -7.7682
+                ],
+                [
+                  -35.1262,
+                  -7.77
+                ],
+                [
+                  -35.1359,
+                  -7.7872
+                ],
+                [
+                  -35.14,
+                  -7.7923
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "codarea": "2601052"
+          }
+        }
+      ]
+    },
+    "view": {
+      "lat": -7.788277450773265,
+      "lng": -35.087263989838895,
+      "zoom": 14.700000000000001
+    },
+    "base": "ruas",
+    "savedAt": 1790614740905
+  },
   "2603454": {
     "id": 2603454,
     "nome": "Camaragibe",
@@ -22,210 +915,52 @@
     },
     "itens": [
       {
-        "nome": "Rua Itaperuna",
+        "nome": "SEDUH-CONV: Rua Andrade Bezerra",
         "bairro": "Estação Nova",
-        "label": "Rua Itaperuna — Estação Nova",
-        "status": "",
+        "label": "SEDUH-CONV: Rua Andrade Bezerra — Estação Nova",
+        "status": "A iniciar",
         "ways": [
           {
-            "name": "Rua Itaperuna",
+            "name": "Rua Andrade Bezerra",
             "coords": [
               [
-                -8.0195104,
-                -34.998281
+                -8.0172525,
+                -34.9998799
               ],
               [
-                -8.0192896,
-                -34.9987882
+                -8.0173972,
+                -34.9999532
               ],
               [
-                -8.019025,
-                -34.9993668
+                -8.017793,
+                -35.0001669
               ],
               [
-                -8.0187143,
-                -34.9999362
+                -8.0181555,
+                -35.0003687
+              ],
+              [
+                -8.0185274,
+                -35.0005598
+              ],
+              [
+                -8.0186788,
+                -35.000647
+              ],
+              [
+                -8.0188262,
+                -35.0007623
+              ],
+              [
+                -8.0189497,
+                -35.0008562
+              ],
+              [
+                -8.0190873,
+                -35.0009565
               ]
             ],
             "on": true
-          }
-        ]
-      },
-      {
-        "nome": "Rua Miguel Pereira",
-        "bairro": "Estação Nova",
-        "label": "Rua Miguel Pereira — Estação Nova",
-        "status": "",
-        "ways": [
-          {
-            "name": "Rua Miguel Pereira",
-            "coords": [
-              [
-                -8.0179616,
-                -34.9988271
-              ],
-              [
-                -8.0183242,
-                -34.9990236
-              ],
-              [
-                -8.0185579,
-                -34.9991456
-              ],
-              [
-                -8.0187146,
-                -34.9992181
-              ],
-              [
-                -8.0188501,
-                -34.9992838
-              ],
-              [
-                -8.019025,
-                -34.9993668
-              ],
-              [
-                -8.0191736,
-                -34.9994383
-              ],
-              [
-                -8.019289,
-                -34.9994957
-              ],
-              [
-                -8.0195048,
-                -34.9995983
-              ],
-              [
-                -8.0196163,
-                -34.9996559
-              ],
-              [
-                -8.0197239,
-                -34.9997163
-              ],
-              [
-                -8.0197956,
-                -34.9997612
-              ],
-              [
-                -8.01985,
-                -34.9998068
-              ],
-              [
-                -8.0199065,
-                -34.9998558
-              ]
-            ],
-            "on": true
-          }
-        ]
-      },
-      {
-        "nome": "Rua Professor José Cândido Pessoa",
-        "bairro": "Estação Nova",
-        "label": "Rua Professor José Cândido Pessoa — Estação Nova",
-        "status": "",
-        "ways": [
-          {
-            "name": "Rua Professor José Cândido Pessoa",
-            "coords": [
-              [
-                -8.0176277,
-                -34.9993951
-              ],
-              [
-                -8.0178142,
-                -34.9994715
-              ],
-              [
-                -8.0180666,
-                -34.9995815
-              ],
-              [
-                -8.0182219,
-                -34.9996512
-              ],
-              [
-                -8.0183574,
-                -34.9997183
-              ],
-              [
-                -8.0184955,
-                -34.9997981
-              ],
-              [
-                -8.0186907,
-                -34.9999242
-              ],
-              [
-                -8.0187143,
-                -34.9999362
-              ],
-              [
-                -8.0188726,
-                -35.0000489
-              ],
-              [
-                -8.019026,
-                -35.0001387
-              ],
-              [
-                -8.0192066,
-                -35.0002534
-              ],
-              [
-                -8.0192697,
-                -35.0003023
-              ],
-              [
-                -8.0193195,
-                -35.0003486
-              ],
-              [
-                -8.0193587,
-                -35.0004083
-              ],
-              [
-                -8.0193906,
-                -35.0004673
-              ]
-            ],
-            "on": true
-          }
-        ]
-      },
-      {
-        "nome": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
-        "bairro": "",
-        "label": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
-        "status": "Concluída",
-        "ways": [
-          {
-            "name": "SEDUH-CON: Rua Elias Pereira (Rua Cinco)",
-            "on": true,
-            "coords": [
-              [
-                -8.006661877211803,
-                -34.97860729694367
-              ],
-              [
-                -8.006348595965502,
-                -34.978505373001106
-              ],
-              [
-                -8.006274258007306,
-                -34.97846245765687
-              ],
-              [
-                -8.005865398994601,
-                -34.97832834720612
-              ],
-              [
-                -8.005355652118352,
-                -34.97798770666123
-              ]
-            ]
           }
         ]
       },
@@ -233,7 +968,7 @@
         "nome": "SEDUH-CONV: Rua Belgrado",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Belgrado",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Belgrado",
@@ -271,7 +1006,7 @@
         "nome": "SEDUH-CONV: Rua Bruxelas",
         "bairro": "João Paulo II",
         "label": "SEDUH-CONV: Rua Bruxelas — João Paulo II",
-        "status": "Concluída",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "Rua Bruxelas",
@@ -347,7 +1082,7 @@
         "nome": "SEDUH-CONV: Rua Carlos Pena",
         "bairro": "Estação Nova",
         "label": "SEDUH-CONV: Rua Carlos Pena — Estação Nova",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "Rua Carlos Pena",
@@ -409,7 +1144,7 @@
         "nome": "SEDUH-CONV: Rua Casemiro de Abreu",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Casemiro de Abreu",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Casemiro de Abreu",
@@ -443,6 +1178,78 @@
               [
                 -8.0073973,
                 -34.9917984
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Coelho Neto",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Coelho Neto",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Coelho Neto",
+            "on": true,
+            "coords": [
+              [
+                -8.020548107729828,
+                -35.00011669952878
+              ],
+              [
+                -8.020780886820999,
+                -34.999722205026714
+              ],
+              [
+                -8.020886012818503,
+                -34.999441507015646
+              ],
+              [
+                -8.020991138788856,
+                -34.99916080900455
+              ],
+              [
+                -8.02122391762641,
+                -34.998751141637015
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua do Coqueiro",
+        "bairro": "Estação Nova",
+        "label": "SEDUH-CONV: Rua do Coqueiro — Estação Nova",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua do Coqueiro",
+            "coords": [
+              [
+                -8.0202657,
+                -34.9987949
+              ],
+              [
+                -8.020028,
+                -34.9990591
+              ],
+              [
+                -8.0199696,
+                -34.9990846
+              ],
+              [
+                -8.0199098,
+                -34.9990819
+              ],
+              [
+                -8.0192896,
+                -34.9987882
+              ],
+              [
+                -8.0186469,
+                -34.9984731
               ]
             ],
             "on": true
@@ -670,6 +1477,70 @@
         ]
       },
       {
+        "nome": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
+        "bairro": "",
+        "label": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CON: Rua Elias Pereira (Rua Cinco)",
+            "on": true,
+            "coords": [
+              [
+                -8.006661877211803,
+                -34.97860729694367
+              ],
+              [
+                -8.006348595965502,
+                -34.978505373001106
+              ],
+              [
+                -8.006274258007306,
+                -34.97846245765687
+              ],
+              [
+                -8.005865398994601,
+                -34.97832834720612
+              ],
+              [
+                -8.005355652118352,
+                -34.97798770666123
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Itaperuna",
+        "bairro": "Estação Nova",
+        "label": "SEDUH-CONV: Rua Itaperuna — Estação Nova",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Itaperuna",
+            "coords": [
+              [
+                -8.0195104,
+                -34.998281
+              ],
+              [
+                -8.0192896,
+                -34.9987882
+              ],
+              [
+                -8.019025,
+                -34.9993668
+              ],
+              [
+                -8.0187143,
+                -34.9999362
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "SEDUH-CONV: Rua Londrina",
         "bairro": "Jardim Primavera",
         "label": "SEDUH-CONV: Rua Londrina — Jardim Primavera",
@@ -695,7 +1566,7 @@
         "nome": "SEDUH-CONV: Rua Lucionise Moura de Melo",
         "bairro": "João Paulo II",
         "label": "SEDUH-CONV: Rua Lucionise Moura de Melo — João Paulo II",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "Rua Lucionise Moura de Melo",
@@ -768,10 +1639,80 @@
         ]
       },
       {
+        "nome": "SEDUH-CONV: Rua Miguel Pereira",
+        "bairro": "Estação Nova",
+        "label": "SEDUH-CONV: Rua Miguel Pereira — Estação Nova",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Miguel Pereira",
+            "coords": [
+              [
+                -8.0179616,
+                -34.9988271
+              ],
+              [
+                -8.0183242,
+                -34.9990236
+              ],
+              [
+                -8.0185579,
+                -34.9991456
+              ],
+              [
+                -8.0187146,
+                -34.9992181
+              ],
+              [
+                -8.0188501,
+                -34.9992838
+              ],
+              [
+                -8.019025,
+                -34.9993668
+              ],
+              [
+                -8.0191736,
+                -34.9994383
+              ],
+              [
+                -8.019289,
+                -34.9994957
+              ],
+              [
+                -8.0195048,
+                -34.9995983
+              ],
+              [
+                -8.0196163,
+                -34.9996559
+              ],
+              [
+                -8.0197239,
+                -34.9997163
+              ],
+              [
+                -8.0197956,
+                -34.9997612
+              ],
+              [
+                -8.01985,
+                -34.9998068
+              ],
+              [
+                -8.0199065,
+                -34.9998558
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "SEDUH-CONV: Rua Nelson Rodrigues",
         "bairro": "João Paulo II",
         "label": "SEDUH-CONV: Rua Nelson Rodrigues — João Paulo II",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "Rua Nelson Rodrigues",
@@ -793,7 +1734,7 @@
         "nome": "SEDUH-CONV: Rua Nova América",
         "bairro": "João Paulo II",
         "label": "SEDUH-CONV: Rua Nova América — João Paulo II",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "Rua Nova América",
@@ -923,7 +1864,7 @@
         "nome": "SEDUH-CONV: Rua Nova Londrina",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Nova Londrina",
-        "status": "",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Nova Londrina",
@@ -997,7 +1938,7 @@
         "nome": "SEDUH-CONV: Rua Nova Palmeira",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Nova Palmeira",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Nova Palmeira",
@@ -1024,6 +1965,80 @@
                 -35.004868805408485
               ]
             ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Professor José Cândido Pessoa",
+        "bairro": "Estação Nova",
+        "label": "SEDUH-CONV: Rua Professor José Cândido Pessoa — Estação Nova",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Professor José Cândido Pessoa",
+            "coords": [
+              [
+                -8.0176277,
+                -34.9993951
+              ],
+              [
+                -8.0178142,
+                -34.9994715
+              ],
+              [
+                -8.0180666,
+                -34.9995815
+              ],
+              [
+                -8.0182219,
+                -34.9996512
+              ],
+              [
+                -8.0183574,
+                -34.9997183
+              ],
+              [
+                -8.0184955,
+                -34.9997981
+              ],
+              [
+                -8.0186907,
+                -34.9999242
+              ],
+              [
+                -8.0187143,
+                -34.9999362
+              ],
+              [
+                -8.0188726,
+                -35.0000489
+              ],
+              [
+                -8.019026,
+                -35.0001387
+              ],
+              [
+                -8.0192066,
+                -35.0002534
+              ],
+              [
+                -8.0192697,
+                -35.0003023
+              ],
+              [
+                -8.0193195,
+                -35.0003486
+              ],
+              [
+                -8.0193587,
+                -35.0004083
+              ],
+              [
+                -8.0193906,
+                -35.0004673
+              ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1191,7 +2206,7 @@
         "nome": "SEDUH-CONV: Rua Santa Luisa",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Santa Luisa",
-        "status": "",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Santa Luisa",
@@ -1297,7 +2312,7 @@
         "nome": "SEDUH-CONV: Tv. Governador Valadares",
         "bairro": null,
         "label": "SEDUH-CONV: Tv. Governador Valadares",
-        "status": "",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "SEDUH-CONV: Tv. Governador Valadares",
@@ -1787,12 +2802,12 @@
       ]
     },
     "view": {
-      "lat": -8.018509150955097,
-      "lng": -34.99993119999998,
-      "zoom": 18.400000000000002
+      "lat": -8.00844074059208,
+      "lng": -34.98739129706371,
+      "zoom": 14.100000000000001
     },
-    "base": "ruas",
-    "savedAt": 1790606447404
+    "base": "sat",
+    "savedAt": 1790607785961
   },
   "2606804": {
     "id": 2606804,
@@ -3820,6 +4835,1025 @@
     },
     "base": "sat",
     "savedAt": 1790362907342
+  },
+  "2607752": {
+    "id": 2607752,
+    "nome": "Itapissuma",
+    "microrregiao": {
+      "id": 26016,
+      "nome": "Itamaracá",
+      "mesorregiao": {
+        "id": 2605,
+        "nome": "Metropolitana de Recife",
+        "UF": {
+          "id": 26,
+          "sigla": "PE",
+          "nome": "Pernambuco",
+          "regiao": {
+            "id": 2,
+            "sigla": "NE",
+            "nome": "Nordeste"
+          }
+        }
+      }
+    },
+    "itens": [
+      {
+        "nome": "SEDUH-CONV: Rua Coronel João Seixas",
+        "bairro": "Espinheiro",
+        "label": "SEDUH-CONV: Rua Coronel João Seixas — Espinheiro",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Coronel João Seixas",
+            "coords": [
+              [
+                -7.7720654,
+                -34.8914293
+              ],
+              [
+                -7.7720631,
+                -34.8917292
+              ],
+              [
+                -7.7721401,
+                -34.8922844
+              ],
+              [
+                -7.7722172,
+                -34.8923501
+              ],
+              [
+                -7.7723323,
+                -34.8924167
+              ],
+              [
+                -7.7726432,
+                -34.8925565
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Flavio Marques da Silva",
+        "bairro": "Espinheiro",
+        "label": "SEDUH-CONV: Rua Flavio Marques da Silva — Espinheiro",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Flavio Marques da Silva",
+            "coords": [
+              [
+                -7.7729111,
+                -34.8914031
+              ],
+              [
+                -7.7728652,
+                -34.8917206
+              ],
+              [
+                -7.7727666,
+                -34.8921953
+              ],
+              [
+                -7.7726432,
+                -34.8925565
+              ],
+              [
+                -7.7726011,
+                -34.8926723
+              ],
+              [
+                -7.7724343,
+                -34.8930035
+              ],
+              [
+                -7.7722451,
+                -34.8935933
+              ],
+              [
+                -7.7721904,
+                -34.8937173
+              ],
+              [
+                -7.7721469,
+                -34.893827
+              ],
+              [
+                -7.772021,
+                -34.8941038
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+            "on": true,
+            "coords": [
+              [
+                -7.776417518809668,
+                -34.894645330153224
+              ],
+              [
+                -7.776541444421398,
+                -34.89418985886404
+              ],
+              [
+                -7.77664058488446,
+                -34.89392958955591
+              ],
+              [
+                -7.77668024106307,
+                -34.89336400432866
+              ],
+              [
+                -7.776675284040983,
+                -34.892823444996424
+              ],
+              [
+                -7.776650498929463,
+                -34.89262323783635
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua da Alegria",
+        "bairro": "Verzia",
+        "label": "SEDUH-CONV: Rua da Alegria — Verzia",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua da Alegria",
+            "coords": [
+              [
+                -7.7752404,
+                -34.8970148
+              ],
+              [
+                -7.775252,
+                -34.8968794
+              ],
+              [
+                -7.7752525,
+                -34.8968017
+              ],
+              [
+                -7.7752501,
+                -34.8967617
+              ],
+              [
+                -7.7752635,
+                -34.8967085
+              ],
+              [
+                -7.775314,
+                -34.8965492
+              ],
+              [
+                -7.775356,
+                -34.8963668
+              ],
+              [
+                -7.7753738,
+                -34.896173
+              ],
+              [
+                -7.7753476,
+                -34.8957781
+              ],
+              [
+                -7.7753224,
+                -34.89549
+              ],
+              [
+                -7.7753065,
+                -34.8953971
+              ],
+              [
+                -7.775298,
+                -34.8953615
+              ],
+              [
+                -7.775271,
+                -34.8952277
+              ],
+              [
+                -7.7752634,
+                -34.8950826
+              ],
+              [
+                -7.7752408,
+                -34.8945234
+              ],
+              [
+                -7.7752362,
+                -34.8944201
+              ],
+              [
+                -7.7751538,
+                -34.893932
+              ],
+              [
+                -7.7751326,
+                -34.8937529
+              ],
+              [
+                -7.7751046,
+                -34.8935478
+              ],
+              [
+                -7.775088,
+                -34.8933862
+              ],
+              [
+                -7.7750783,
+                -34.8932367
+              ],
+              [
+                -7.7748813,
+                -34.893016
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua da União",
+        "bairro": "Veloz",
+        "label": "SEDUH-CONV: Rua da União — Veloz",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua da União",
+            "coords": [
+              [
+                -7.775879,
+                -34.8941534
+              ],
+              [
+                -7.7756088,
+                -34.8939697
+              ],
+              [
+                -7.7755247,
+                -34.893909
+              ],
+              [
+                -7.7751538,
+                -34.893932
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua do Limão",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua do Limão",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua do Limão",
+            "on": true,
+            "coords": [
+              [
+                -7.777239610959693,
+                -34.89225785976919
+              ],
+              [
+                -7.776570413335089,
+                -34.892012605998076
+              ],
+              [
+                -7.776352304249039,
+                -34.892012605998076
+              ],
+              [
+                -7.775702933344205,
+                -34.89169227454194
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Doutor José Bezerra",
+        "bairro": "Veloz",
+        "label": "SEDUH-CONV: Rua Doutor José Bezerra — Veloz",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Doutor José Bezerra",
+            "coords": [
+              [
+                -7.7772853,
+                -34.8925045
+              ],
+              [
+                -7.7769947,
+                -34.8925439
+              ],
+              [
+                -7.7769236,
+                -34.8925593
+              ],
+              [
+                -7.7766558,
+                -34.8926106
+              ],
+              [
+                -7.7761876,
+                -34.8926129
+              ],
+              [
+                -7.7760534,
+                -34.8925889
+              ],
+              [
+                -7.7759218,
+                -34.8925366
+              ],
+              [
+                -7.775671,
+                -34.8923888
+              ],
+              [
+                -7.7754212,
+                -34.8922304
+              ],
+              [
+                -7.7753413,
+                -34.8921963
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Doutor Manoel Borba",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Doutor Manoel Borba",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Doutor Manoel Borba",
+            "on": true,
+            "coords": [
+              [
+                -7.774686742340984,
+                -34.89316880234758
+              ],
+              [
+                -7.774538030945187,
+                -34.89331395253865
+              ],
+              [
+                -7.774414104741771,
+                -34.893504149340735
+              ],
+              [
+                -7.774121638756583,
+                -34.89396963098794
+              ],
+              [
+                -7.773977884214621,
+                -34.894184853685026
+              ],
+              [
+                -7.773769687894086,
+                -34.89452020067818
+              ],
+              [
+                -7.7736110620567604,
+                -34.89472040783825
+              ],
+              [
+                -7.773536706174879,
+                -34.894840532134324
+              ],
+              [
+                -7.7735763626468115,
+                -34.894880573566326
+              ],
+              [
+                -7.773635847347803,
+                -34.894840532134324
+              ],
+              [
+                -7.773764730837585,
+                -34.894710397480246
+              ],
+              [
+                -7.773918399562152,
+                -34.89447515406716
+              ],
+              [
+                -7.774062154124533,
+                -34.89425993137005
+              ],
+              [
+                -7.77457273027557,
+                -34.89348412862473
+              ],
+              [
+                -7.774741269839576,
+                -34.89320884377959
+              ],
+              [
+                -7.77481562550808,
+                -34.89306369358854
+              ],
+              [
+                -7.775033735392882,
+                -34.8927333517744
+              ],
+              [
+                -7.775321243704261,
+                -34.892232833874175
+              ],
+              [
+                -7.775757462835007,
+                -34.89162720721491
+              ],
+              [
+                -7.775797119097126,
+                -34.891376948264806
+              ],
+              [
+                -7.775866517546806,
+                -34.89122679289473
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua José Gonçalves",
+        "bairro": "Veloz",
+        "label": "SEDUH-CONV: Rua José Gonçalves — Veloz",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua José Gonçalves",
+            "coords": [
+              [
+                -7.7739524,
+                -34.891557
+              ],
+              [
+                -7.7733533,
+                -34.8914174
+              ],
+              [
+                -7.77316,
+                -34.8913966
+              ],
+              [
+                -7.7729111,
+                -34.8914031
+              ],
+              [
+                -7.7720654,
+                -34.8914293
+              ],
+              [
+                -7.7717794,
+                -34.8914017
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua José Leite",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua José Leite",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua José Leite",
+            "on": true,
+            "coords": [
+              [
+                -7.776951190470893,
+                -34.89529252052308
+              ],
+              [
+                -7.776813057614202,
+                -34.894967973232276
+              ],
+              [
+                -7.776701488735211,
+                -34.894890189170845
+              ],
+              [
+                -7.776417253599878,
+                -34.89471852779389
+              ],
+              [
+                -7.776388033154489,
+                -34.894616603851325
+              ],
+              [
+                -7.776244587302152,
+                -34.8944503068924
+              ],
+              [
+                -7.775899254493526,
+                -34.894144535064704
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Marechal Deodoro da Fonseca",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Marechal Deodoro da Fonseca",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Marechal Deodoro da Fonseca",
+            "on": true,
+            "coords": [
+              [
+                -7.776164711981933,
+                -34.89956034744714
+              ],
+              [
+                -7.7760999609851895,
+                -34.899350197575934
+              ],
+              [
+                -7.776012084616475,
+                -34.899060657753424
+              ],
+              [
+                -7.775609703114095,
+                -34.89834614819136
+              ],
+              [
+                -7.775346073644695,
+                -34.89778107853771
+              ],
+              [
+                -7.775253572037245,
+                -34.897337428809635
+              ],
+              [
+                -7.775239696794346,
+                -34.897071238972806
+              ],
+              [
+                -7.7753183231646075,
+                -34.896847079110195
+              ],
+              [
+                -7.775461700625336,
+                -34.89657154927908
+              ],
+              [
+                -7.776086085770317,
+                -34.8952312601006
+              ],
+              [
+                -7.7763867153235,
+                -34.89469421042977
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "boundaryGeo": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -34.8902,
+                  -7.8019
+                ],
+                [
+                  -34.8899,
+                  -7.7965
+                ],
+                [
+                  -34.8893,
+                  -7.7881
+                ],
+                [
+                  -34.8887,
+                  -7.7851
+                ],
+                [
+                  -34.887,
+                  -7.7792
+                ],
+                [
+                  -34.8858,
+                  -7.7761
+                ],
+                [
+                  -34.885,
+                  -7.7697
+                ],
+                [
+                  -34.8851,
+                  -7.7685
+                ],
+                [
+                  -34.8844,
+                  -7.765
+                ],
+                [
+                  -34.8834,
+                  -7.7619
+                ],
+                [
+                  -34.8817,
+                  -7.7577
+                ],
+                [
+                  -34.8796,
+                  -7.7517
+                ],
+                [
+                  -34.8758,
+                  -7.7422
+                ],
+                [
+                  -34.874,
+                  -7.7396
+                ],
+                [
+                  -34.8681,
+                  -7.7356
+                ],
+                [
+                  -34.8662,
+                  -7.7335
+                ],
+                [
+                  -34.8637,
+                  -7.7297
+                ],
+                [
+                  -34.8629,
+                  -7.7277
+                ],
+                [
+                  -34.8627,
+                  -7.7256
+                ],
+                [
+                  -34.863,
+                  -7.7231
+                ],
+                [
+                  -34.8639,
+                  -7.7201
+                ],
+                [
+                  -34.864,
+                  -7.7166
+                ],
+                [
+                  -34.8637,
+                  -7.7147
+                ],
+                [
+                  -34.8624,
+                  -7.7115
+                ],
+                [
+                  -34.8636,
+                  -7.7124
+                ],
+                [
+                  -34.8671,
+                  -7.7123
+                ],
+                [
+                  -34.8721,
+                  -7.7111
+                ],
+                [
+                  -34.8756,
+                  -7.7099
+                ],
+                [
+                  -34.8777,
+                  -7.7097
+                ],
+                [
+                  -34.8793,
+                  -7.7102
+                ],
+                [
+                  -34.8812,
+                  -7.7116
+                ],
+                [
+                  -34.8837,
+                  -7.7144
+                ],
+                [
+                  -34.8855,
+                  -7.7144
+                ],
+                [
+                  -34.8863,
+                  -7.7134
+                ],
+                [
+                  -34.888,
+                  -7.71
+                ],
+                [
+                  -34.8923,
+                  -7.7079
+                ],
+                [
+                  -34.8942,
+                  -7.7063
+                ],
+                [
+                  -34.8968,
+                  -7.7027
+                ],
+                [
+                  -34.897,
+                  -7.7007
+                ],
+                [
+                  -34.8961,
+                  -7.6985
+                ],
+                [
+                  -34.8914,
+                  -7.6957
+                ],
+                [
+                  -34.8903,
+                  -7.6936
+                ],
+                [
+                  -34.8911,
+                  -7.6924
+                ],
+                [
+                  -34.8928,
+                  -7.6916
+                ],
+                [
+                  -34.8948,
+                  -7.6913
+                ],
+                [
+                  -34.8956,
+                  -7.6903
+                ],
+                [
+                  -34.8948,
+                  -7.6875
+                ],
+                [
+                  -34.8967,
+                  -7.6859
+                ],
+                [
+                  -34.8965,
+                  -7.6836
+                ],
+                [
+                  -34.8985,
+                  -7.6824
+                ],
+                [
+                  -34.8995,
+                  -7.6838
+                ],
+                [
+                  -34.8997,
+                  -7.6853
+                ],
+                [
+                  -34.9026,
+                  -7.6838
+                ],
+                [
+                  -34.9034,
+                  -7.6842
+                ],
+                [
+                  -34.9048,
+                  -7.6833
+                ],
+                [
+                  -34.9059,
+                  -7.6834
+                ],
+                [
+                  -34.9081,
+                  -7.6844
+                ],
+                [
+                  -34.9104,
+                  -7.6868
+                ],
+                [
+                  -34.9137,
+                  -7.6871
+                ],
+                [
+                  -34.9163,
+                  -7.6868
+                ],
+                [
+                  -34.9171,
+                  -7.6874
+                ],
+                [
+                  -34.9171,
+                  -7.6902
+                ],
+                [
+                  -34.9195,
+                  -7.6909
+                ],
+                [
+                  -34.921,
+                  -7.6905
+                ],
+                [
+                  -34.9223,
+                  -7.6907
+                ],
+                [
+                  -34.9218,
+                  -7.6976
+                ],
+                [
+                  -34.9223,
+                  -7.7001
+                ],
+                [
+                  -34.9269,
+                  -7.707
+                ],
+                [
+                  -34.9282,
+                  -7.7085
+                ],
+                [
+                  -34.9404,
+                  -7.7195
+                ],
+                [
+                  -34.9422,
+                  -7.7224
+                ],
+                [
+                  -34.9423,
+                  -7.7242
+                ],
+                [
+                  -34.9416,
+                  -7.7306
+                ],
+                [
+                  -34.9415,
+                  -7.7362
+                ],
+                [
+                  -34.9432,
+                  -7.7396
+                ],
+                [
+                  -34.9432,
+                  -7.7411
+                ],
+                [
+                  -34.9424,
+                  -7.7425
+                ],
+                [
+                  -34.9394,
+                  -7.7438
+                ],
+                [
+                  -34.9385,
+                  -7.7446
+                ],
+                [
+                  -34.9362,
+                  -7.75
+                ],
+                [
+                  -34.9351,
+                  -7.7702
+                ],
+                [
+                  -34.9351,
+                  -7.7721
+                ],
+                [
+                  -34.9346,
+                  -7.7747
+                ],
+                [
+                  -34.9322,
+                  -7.7795
+                ],
+                [
+                  -34.9316,
+                  -7.7811
+                ],
+                [
+                  -34.9263,
+                  -7.8016
+                ],
+                [
+                  -34.9261,
+                  -7.8044
+                ],
+                [
+                  -34.9249,
+                  -7.8063
+                ],
+                [
+                  -34.923,
+                  -7.8081
+                ],
+                [
+                  -34.9095,
+                  -7.8051
+                ],
+                [
+                  -34.901,
+                  -7.8061
+                ],
+                [
+                  -34.9002,
+                  -7.806
+                ],
+                [
+                  -34.8993,
+                  -7.8035
+                ],
+                [
+                  -34.8987,
+                  -7.803
+                ],
+                [
+                  -34.8952,
+                  -7.8027
+                ],
+                [
+                  -34.8929,
+                  -7.8019
+                ],
+                [
+                  -34.8902,
+                  -7.8019
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "codarea": "2607752"
+          }
+        }
+      ]
+    },
+    "view": {
+      "lat": -7.770294334217983,
+      "lng": -34.89546475995747,
+      "zoom": 17.2
+    },
+    "base": "ruas",
+    "savedAt": 1790616260751
   },
   "2607901": {
     "id": 2607901,
@@ -6839,6 +8873,1091 @@
     },
     "base": "sat",
     "savedAt": 1789693199822
+  },
+  "2609402": {
+    "id": 2609402,
+    "nome": "Moreno",
+    "microrregiao": {
+      "id": 26017,
+      "nome": "Recife",
+      "mesorregiao": {
+        "id": 2605,
+        "nome": "Metropolitana de Recife",
+        "UF": {
+          "id": 26,
+          "sigla": "PE",
+          "nome": "Pernambuco",
+          "regiao": {
+            "id": 2,
+            "sigla": "NE",
+            "nome": "Nordeste"
+          }
+        }
+      }
+    },
+    "itens": [
+      {
+        "nome": "SEDUH-CONV: Rua Adalgisa Nascimento",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Adalgisa Nascimento",
+        "status": "Em licitação",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Adalgisa Nascimento",
+            "on": true,
+            "coords": [
+              [
+                -8.125026392885324,
+                -35.10593004674633
+              ],
+              [
+                -8.12506950963891,
+                -35.102278661693326
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua João Lino de Oliveira",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua João Lino de Oliveira",
+        "status": "Em licitação",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua João Lino de Oliveira",
+            "on": true,
+            "coords": [
+              [
+                -8.109525974656348,
+                -35.18739949763466
+              ],
+              [
+                -8.10866328373153,
+                -35.18422939845632
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Manoel Miudinho",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Manoel Miudinho",
+        "status": "Em licitação",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Manoel Miudinho",
+            "on": true,
+            "coords": [
+              [
+                -8.116428393229304,
+                -35.09312867331865
+              ],
+              [
+                -8.116127763885924,
+                -35.09306262958577
+              ],
+              [
+                -8.115918630296967,
+                -35.09312867331865
+              ],
+              [
+                -8.115552646254386,
+                -35.09282487214739
+              ],
+              [
+                -8.115042882210927,
+                -35.09282487214739
+              ],
+              [
+                -8.11476839361199,
+                -35.09303621209261
+              ],
+              [
+                -8.11467689737065,
+                -35.09326076078442
+              ],
+              [
+                -8.114572330212251,
+                -35.093564561955674
+              ],
+              [
+                -8.114350124910196,
+                -35.0937759019009
+              ],
+              [
+                -8.114114848574125,
+                -35.093828736887204
+              ],
+              [
+                -8.113822124956643,
+                -35.093926074656274
+              ],
+              [
+                -8.113597979835633,
+                -35.09402517214465
+              ],
+              [
+                -8.113471898150083,
+                -35.09421628872936
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Professor Jorge Raline",
+        "bairro": "Cambonge",
+        "label": "SEDUH-CONV: Rua Professor Jorge Raline — Cambonge",
+        "status": "Em licitação",
+        "ways": [
+          {
+            "name": "Rua Professor Jorge Raline",
+            "coords": [
+              [
+                -8.1150287,
+                -35.111548
+              ],
+              [
+                -8.1150211,
+                -35.1115698
+              ],
+              [
+                -8.1150213,
+                -35.111581
+              ],
+              [
+                -8.1150232,
+                -35.1115904
+              ],
+              [
+                -8.1150281,
+                -35.1115979
+              ],
+              [
+                -8.1150437,
+                -35.1116038
+              ],
+              [
+                -8.115209,
+                -35.1116288
+              ],
+              [
+                -8.1153165,
+                -35.1116536
+              ],
+              [
+                -8.115442,
+                -35.1116905
+              ],
+              [
+                -8.115523,
+                -35.1117106
+              ],
+              [
+                -8.1157427,
+                -35.1117548
+              ],
+              [
+                -8.115906,
+                -35.111787
+              ],
+              [
+                -8.1159903,
+                -35.1118092
+              ],
+              [
+                -8.1160706,
+                -35.1118353
+              ],
+              [
+                -8.1161961,
+                -35.1118789
+              ],
+              [
+                -8.116285,
+                -35.111901
+              ],
+              [
+                -8.1163567,
+                -35.1119131
+              ],
+              [
+                -8.116445,
+                -35.1119071
+              ],
+              [
+                -8.1165014,
+                -35.1119037
+              ],
+              [
+                -8.1165599,
+                -35.1119017
+              ],
+              [
+                -8.1166754,
+                -35.1119071
+              ],
+              [
+                -8.1167929,
+                -35.1119124
+              ],
+              [
+                -8.1168898,
+                -35.1119084
+              ],
+              [
+                -8.1169681,
+                -35.111903
+              ],
+              [
+                -8.1170365,
+                -35.1118822
+              ],
+              [
+                -8.1171679,
+                -35.1118373
+              ],
+              [
+                -8.1172589,
+                -35.1117904
+              ],
+              [
+                -8.1173319,
+                -35.1117622
+              ],
+              [
+                -8.1175875,
+                -35.1117334
+              ],
+              [
+                -8.1178397,
+                -35.1116938
+              ],
+              [
+                -8.1179154,
+                -35.1116817
+              ],
+              [
+                -8.1179918,
+                -35.1116811
+              ],
+              [
+                -8.1184538,
+                -35.111669
+              ],
+              [
+                -8.1187339,
+                -35.1116469
+              ],
+              [
+                -8.118785,
+                -35.1116469
+              ],
+              [
+                -8.1188408,
+                -35.1116516
+              ],
+              [
+                -8.1191023,
+                -35.1116864
+              ],
+              [
+                -8.1193141,
+                -35.1117381
+              ],
+              [
+                -8.1194037,
+                -35.1117649
+              ],
+              [
+                -8.1194814,
+                -35.1118031
+              ],
+              [
+                -8.1195564,
+                -35.1118501
+              ],
+              [
+                -8.1196839,
+                -35.111952
+              ],
+              [
+                -8.1198843,
+                -35.1122068
+              ],
+              [
+                -8.1199408,
+                -35.1122765
+              ],
+              [
+                -8.1200118,
+                -35.1124294
+              ]
+            ],
+            "on": true
+          }
+        ]
+      }
+    ],
+    "boundaryGeo": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -35.0645,
+                  -8.2228
+                ],
+                [
+                  -35.0634,
+                  -8.2211
+                ],
+                [
+                  -35.0631,
+                  -8.2196
+                ],
+                [
+                  -35.0647,
+                  -8.2144
+                ],
+                [
+                  -35.0675,
+                  -8.2096
+                ],
+                [
+                  -35.0668,
+                  -8.2075
+                ],
+                [
+                  -35.067,
+                  -8.2054
+                ],
+                [
+                  -35.0683,
+                  -8.2049
+                ],
+                [
+                  -35.068,
+                  -8.2029
+                ],
+                [
+                  -35.0667,
+                  -8.2026
+                ],
+                [
+                  -35.0659,
+                  -8.2007
+                ],
+                [
+                  -35.0672,
+                  -8.1986
+                ],
+                [
+                  -35.0746,
+                  -8.1893
+                ],
+                [
+                  -35.0874,
+                  -8.1739
+                ],
+                [
+                  -35.0971,
+                  -8.1616
+                ],
+                [
+                  -35.0875,
+                  -8.1432
+                ],
+                [
+                  -35.0754,
+                  -8.1202
+                ],
+                [
+                  -35.0637,
+                  -8.0984
+                ],
+                [
+                  -35.0582,
+                  -8.088
+                ],
+                [
+                  -35.0597,
+                  -8.087
+                ],
+                [
+                  -35.0611,
+                  -8.0879
+                ],
+                [
+                  -35.0635,
+                  -8.0876
+                ],
+                [
+                  -35.0656,
+                  -8.0883
+                ],
+                [
+                  -35.0665,
+                  -8.0862
+                ],
+                [
+                  -35.0691,
+                  -8.086
+                ],
+                [
+                  -35.0708,
+                  -8.0848
+                ],
+                [
+                  -35.073,
+                  -8.0858
+                ],
+                [
+                  -35.074,
+                  -8.0852
+                ],
+                [
+                  -35.0749,
+                  -8.0858
+                ],
+                [
+                  -35.0781,
+                  -8.0861
+                ],
+                [
+                  -35.0808,
+                  -8.0858
+                ],
+                [
+                  -35.0821,
+                  -8.0873
+                ],
+                [
+                  -35.0862,
+                  -8.0881
+                ],
+                [
+                  -35.0875,
+                  -8.088
+                ],
+                [
+                  -35.0879,
+                  -8.087
+                ],
+                [
+                  -35.0897,
+                  -8.0877
+                ],
+                [
+                  -35.0915,
+                  -8.0866
+                ],
+                [
+                  -35.0945,
+                  -8.0871
+                ],
+                [
+                  -35.0976,
+                  -8.0884
+                ],
+                [
+                  -35.0992,
+                  -8.0881
+                ],
+                [
+                  -35.1016,
+                  -8.0885
+                ],
+                [
+                  -35.1029,
+                  -8.0879
+                ],
+                [
+                  -35.103,
+                  -8.0866
+                ],
+                [
+                  -35.105,
+                  -8.0849
+                ],
+                [
+                  -35.1062,
+                  -8.0852
+                ],
+                [
+                  -35.1079,
+                  -8.0834
+                ],
+                [
+                  -35.1092,
+                  -8.081
+                ],
+                [
+                  -35.111,
+                  -8.0803
+                ],
+                [
+                  -35.1133,
+                  -8.0808
+                ],
+                [
+                  -35.1128,
+                  -8.0796
+                ],
+                [
+                  -35.1138,
+                  -8.0791
+                ],
+                [
+                  -35.1162,
+                  -8.0797
+                ],
+                [
+                  -35.1174,
+                  -8.0789
+                ],
+                [
+                  -35.1195,
+                  -8.0794
+                ],
+                [
+                  -35.1211,
+                  -8.0786
+                ],
+                [
+                  -35.1244,
+                  -8.0784
+                ],
+                [
+                  -35.126,
+                  -8.0753
+                ],
+                [
+                  -35.1273,
+                  -8.0763
+                ],
+                [
+                  -35.1284,
+                  -8.0759
+                ],
+                [
+                  -35.1291,
+                  -8.0785
+                ],
+                [
+                  -35.1288,
+                  -8.0814
+                ],
+                [
+                  -35.1326,
+                  -8.0823
+                ],
+                [
+                  -35.1319,
+                  -8.0837
+                ],
+                [
+                  -35.1324,
+                  -8.0845
+                ],
+                [
+                  -35.1349,
+                  -8.0846
+                ],
+                [
+                  -35.1345,
+                  -8.0867
+                ],
+                [
+                  -35.1367,
+                  -8.0882
+                ],
+                [
+                  -35.1372,
+                  -8.0874
+                ],
+                [
+                  -35.1387,
+                  -8.0885
+                ],
+                [
+                  -35.138,
+                  -8.0914
+                ],
+                [
+                  -35.1394,
+                  -8.0923
+                ],
+                [
+                  -35.1428,
+                  -8.0925
+                ],
+                [
+                  -35.1436,
+                  -8.092
+                ],
+                [
+                  -35.144,
+                  -8.0903
+                ],
+                [
+                  -35.1454,
+                  -8.0902
+                ],
+                [
+                  -35.1457,
+                  -8.0892
+                ],
+                [
+                  -35.147,
+                  -8.0883
+                ],
+                [
+                  -35.1482,
+                  -8.0899
+                ],
+                [
+                  -35.1503,
+                  -8.0909
+                ],
+                [
+                  -35.151,
+                  -8.0903
+                ],
+                [
+                  -35.1547,
+                  -8.0901
+                ],
+                [
+                  -35.1827,
+                  -8.0829
+                ],
+                [
+                  -35.1976,
+                  -8.0814
+                ],
+                [
+                  -35.1982,
+                  -8.0838
+                ],
+                [
+                  -35.2093,
+                  -8.1199
+                ],
+                [
+                  -35.2131,
+                  -8.122
+                ],
+                [
+                  -35.2152,
+                  -8.1235
+                ],
+                [
+                  -35.2179,
+                  -8.124
+                ],
+                [
+                  -35.2236,
+                  -8.1296
+                ],
+                [
+                  -35.2264,
+                  -8.1315
+                ],
+                [
+                  -35.2272,
+                  -8.1331
+                ],
+                [
+                  -35.2258,
+                  -8.1349
+                ],
+                [
+                  -35.2248,
+                  -8.1372
+                ],
+                [
+                  -35.2252,
+                  -8.1385
+                ],
+                [
+                  -35.2185,
+                  -8.1492
+                ],
+                [
+                  -35.2184,
+                  -8.1503
+                ],
+                [
+                  -35.2202,
+                  -8.152
+                ],
+                [
+                  -35.2233,
+                  -8.1528
+                ],
+                [
+                  -35.2246,
+                  -8.1546
+                ],
+                [
+                  -35.227,
+                  -8.1553
+                ],
+                [
+                  -35.2256,
+                  -8.1584
+                ],
+                [
+                  -35.2255,
+                  -8.1633
+                ],
+                [
+                  -35.223,
+                  -8.1653
+                ],
+                [
+                  -35.223,
+                  -8.1684
+                ],
+                [
+                  -35.2223,
+                  -8.1695
+                ],
+                [
+                  -35.2221,
+                  -8.1729
+                ],
+                [
+                  -35.2222,
+                  -8.1796
+                ],
+                [
+                  -35.2214,
+                  -8.1803
+                ],
+                [
+                  -35.2194,
+                  -8.1807
+                ],
+                [
+                  -35.2186,
+                  -8.1828
+                ],
+                [
+                  -35.2204,
+                  -8.1847
+                ],
+                [
+                  -35.2199,
+                  -8.1861
+                ],
+                [
+                  -35.215,
+                  -8.187
+                ],
+                [
+                  -35.2086,
+                  -8.1922
+                ],
+                [
+                  -35.1621,
+                  -8.2248
+                ],
+                [
+                  -35.1621,
+                  -8.2222
+                ],
+                [
+                  -35.1635,
+                  -8.2207
+                ],
+                [
+                  -35.1646,
+                  -8.2173
+                ],
+                [
+                  -35.1625,
+                  -8.2142
+                ],
+                [
+                  -35.1615,
+                  -8.2109
+                ],
+                [
+                  -35.1602,
+                  -8.2086
+                ],
+                [
+                  -35.1594,
+                  -8.2088
+                ],
+                [
+                  -35.1582,
+                  -8.2067
+                ],
+                [
+                  -35.1581,
+                  -8.2056
+                ],
+                [
+                  -35.1554,
+                  -8.2023
+                ],
+                [
+                  -35.1559,
+                  -8.1999
+                ],
+                [
+                  -35.1551,
+                  -8.1966
+                ],
+                [
+                  -35.1538,
+                  -8.1954
+                ],
+                [
+                  -35.151,
+                  -8.1897
+                ],
+                [
+                  -35.151,
+                  -8.1873
+                ],
+                [
+                  -35.1482,
+                  -8.1849
+                ],
+                [
+                  -35.1453,
+                  -8.1856
+                ],
+                [
+                  -35.1427,
+                  -8.1878
+                ],
+                [
+                  -35.1408,
+                  -8.1888
+                ],
+                [
+                  -35.138,
+                  -8.1873
+                ],
+                [
+                  -35.1361,
+                  -8.1859
+                ],
+                [
+                  -35.1337,
+                  -8.1859
+                ],
+                [
+                  -35.1342,
+                  -8.1869
+                ],
+                [
+                  -35.1326,
+                  -8.1883
+                ],
+                [
+                  -35.1308,
+                  -8.1884
+                ],
+                [
+                  -35.1289,
+                  -8.1874
+                ],
+                [
+                  -35.1276,
+                  -8.186
+                ],
+                [
+                  -35.128,
+                  -8.1852
+                ],
+                [
+                  -35.1267,
+                  -8.1842
+                ],
+                [
+                  -35.1246,
+                  -8.1853
+                ],
+                [
+                  -35.123,
+                  -8.1868
+                ],
+                [
+                  -35.1205,
+                  -8.1842
+                ],
+                [
+                  -35.1201,
+                  -8.1859
+                ],
+                [
+                  -35.1192,
+                  -8.1862
+                ],
+                [
+                  -35.1177,
+                  -8.189
+                ],
+                [
+                  -35.1161,
+                  -8.1902
+                ],
+                [
+                  -35.1151,
+                  -8.1916
+                ],
+                [
+                  -35.1139,
+                  -8.1906
+                ],
+                [
+                  -35.1095,
+                  -8.1899
+                ],
+                [
+                  -35.1092,
+                  -8.1917
+                ],
+                [
+                  -35.1077,
+                  -8.193
+                ],
+                [
+                  -35.1058,
+                  -8.193
+                ],
+                [
+                  -35.104,
+                  -8.1961
+                ],
+                [
+                  -35.1025,
+                  -8.1955
+                ],
+                [
+                  -35.1015,
+                  -8.1983
+                ],
+                [
+                  -35.1018,
+                  -8.199
+                ],
+                [
+                  -35.0993,
+                  -8.1997
+                ],
+                [
+                  -35.0983,
+                  -8.2011
+                ],
+                [
+                  -35.0962,
+                  -8.2031
+                ],
+                [
+                  -35.0944,
+                  -8.2034
+                ],
+                [
+                  -35.0911,
+                  -8.2071
+                ],
+                [
+                  -35.0886,
+                  -8.2083
+                ],
+                [
+                  -35.0874,
+                  -8.2096
+                ],
+                [
+                  -35.0853,
+                  -8.2102
+                ],
+                [
+                  -35.084,
+                  -8.2138
+                ],
+                [
+                  -35.0826,
+                  -8.2155
+                ],
+                [
+                  -35.0793,
+                  -8.2178
+                ],
+                [
+                  -35.078,
+                  -8.2192
+                ],
+                [
+                  -35.0773,
+                  -8.2189
+                ],
+                [
+                  -35.0766,
+                  -8.2171
+                ],
+                [
+                  -35.0745,
+                  -8.2175
+                ],
+                [
+                  -35.073,
+                  -8.2214
+                ],
+                [
+                  -35.0723,
+                  -8.222
+                ],
+                [
+                  -35.0708,
+                  -8.2209
+                ],
+                [
+                  -35.0684,
+                  -8.2214
+                ],
+                [
+                  -35.0666,
+                  -8.2205
+                ],
+                [
+                  -35.066,
+                  -8.2217
+                ],
+                [
+                  -35.0645,
+                  -8.2228
+                ]
+              ]
+            ]
+          },
+          "properties": {
+            "codarea": "2609402"
+          }
+        }
+      ]
+    },
+    "view": {
+      "lat": -8.186437858352672,
+      "lng": -35.05737304687501,
+      "zoom": 11
+    },
+    "base": "sat",
+    "savedAt": 1790618758478
   },
   "2609600": {
     "id": 2609600,
@@ -10186,12 +13305,12 @@
       ]
     },
     "view": {
-      "lat": -7.9833540101631115,
-      "lng": -34.878013882656866,
-      "zoom": 15.600000000000001
+      "lat": -7.9829534817667565,
+      "lng": -34.815841308761804,
+      "zoom": 12.200000000000001
     },
     "base": "sat",
-    "savedAt": 1790606718801
+    "savedAt": 1790618935022
   },
   "2610707": {
     "id": 2610707,
@@ -17930,11 +21049,11 @@
       ]
     },
     "view": {
-      "lat": -8.045647750729561,
-      "lng": -34.95540844965306,
-      "zoom": 15.4
+      "lat": -8.013681024459991,
+      "lng": -34.95968264394003,
+      "zoom": 18.900000000000002
     },
     "base": "sat",
-    "savedAt": 1790363301284
+    "savedAt": 1790609365024
   }
 }
