@@ -15,8 +15,8 @@
   #brand { display: grid; line-height: 1.1; white-space: nowrap; }
   #brand strong { font-size: 14px; font-weight: 700; }
   #brand span { font-size: 11px; color: #526157; margin-top: 3px; }
-  #municipio, #salvos { flex: 1; min-width: 0; height: 41px; padding: 0 12px; border: 1px solid #b8c5bc; border-radius: 9px; background: #fff; color: #17231e; font: inherit; font-size: 15px; outline-color: #32754d; }
-  #salvos { max-width: 185px; }
+  #salvos, #buscaRua { flex: 1; min-width: 0; height: 41px; padding: 0 12px; border: 1px solid #b8c5bc; border-radius: 9px; background: #fff; color: #17231e; font: inherit; font-size: 15px; outline-color: #32754d; }
+  #buscaRua:disabled { background: #edf1ee; color: #78837c; cursor: not-allowed; }
   #mapButtons { position: fixed; z-index: 1000; right: 16px; bottom: max(28px, env(safe-area-inset-bottom)); display: grid; gap: 8px; }
   #mapButtons button { width: 48px; height: 48px; border: 0; border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 3px 12px rgba(0,0,0,.22); color: #173324; font: 600 28px/1 system-ui; cursor: pointer; }
   #mapButtons button:last-child { font-size: 22px; }
@@ -24,7 +24,7 @@
   #notice[hidden] { opacity: 0; }
   .leaflet-control-attribution { font-size: 10px !important; background: rgba(255,255,255,.72) !important; }
   .dica-rua { padding: 2px 4px; font: 600 13px/1.35 system-ui, sans-serif; color: #17231e; }
-  @media (max-width: 600px) { #topbar { gap: 9px; padding: 9px; } #brand span { display: none; } #brand strong { font-size: 12px; } #municipio { font-size: 14px; } }
+  @media (max-width: 600px) { #topbar { gap: 9px; padding: 9px; } #brand span { display: none; } #brand strong { font-size: 12px; } }
   @media (max-width: 390px) { #brand { display: none; } #topbar { width: calc(100vw - 20px); } }
 </style>
 </head>
@@ -32,19 +32,17 @@
 <div id="map" aria-label="Mapa interativo de Pernambuco"></div>
 <div id="topbar">
   <div id="brand"><strong>Pernambuco</strong><span>Visão de satélite</span></div>
-  <input id="municipio" list="municipios" autocomplete="off" placeholder="Escolha um município" aria-label="Escolha um município">
-  <datalist id="municipios"></datalist>
   <select id="salvos" aria-label="Mapas salvos" hidden><option value="">Mapas salvos</option></select>
+  <input id="buscaRua" type="search" list="nomesRuas" autocomplete="off" placeholder="Busque uma rua" aria-label="Buscar rua no mapa selecionado" disabled>
+  <datalist id="nomesRuas"></datalist>
 </div>
 <div id="mapButtons" aria-label="Controles do mapa">
   <button id="mais" type="button" aria-label="Aumentar zoom">+</button>
   <button id="menos" type="button" aria-label="Diminuir zoom">−</button>
   <button id="inicio" type="button" aria-label="Ver Pernambuco inteiro">⌂</button>
 </div>
-<div id="notice" role="status">Carregando municípios…</div>
+<div id="notice" role="status">Carregando mapas salvos…</div>
 <script>
-  const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
-  const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
   // Mantido para compatibilidade com versões anteriores; os dados publicados são carregados do JSON.
   
   const MAPAS_PUBLICOS = {
@@ -14275,25 +14273,10 @@
   const map = L.map("map", { center: estado, zoom: zoomEstado, minZoom: 6, maxZoom: 19, zoomControl: false, zoomSnap: .1, zoomDelta: .5, attributionControl: true });
   L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "Imagens © Esri, Maxar" }).addTo(map);
   L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "" }).addTo(map);
-  const input = document.getElementById("municipio"), lista = document.getElementById("municipios"), aviso = document.getElementById("notice"), salvos = document.getElementById("salvos");
-  let municipios = [], limite = null, ruas = L.layerGroup().addTo(map), avisoTimer;
+  const aviso = document.getElementById("notice"), salvos = document.getElementById("salvos"), buscaRua = document.getElementById("buscaRua"), nomesRuas = document.getElementById("nomesRuas");
+  let limite = null, ruas = L.layerGroup().addTo(map), indiceRuas = [], linhasDestacadas = [], avisoTimer, destaqueTimer;
   function avisar(texto) { aviso.textContent = texto; aviso.hidden = false; clearTimeout(avisoTimer); avisoTimer = setTimeout(() => aviso.hidden = true, 2800); }
-  function nomeNormalizado(valor) { return valor.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
-  async function abrirMunicipio() {
-    const encontrado = municipios.find(m => nomeNormalizado(m.nome) === nomeNormalizado(input.value));
-    if (!encontrado) { if (input.value.trim()) avisar("Selecione um município da lista."); return; }
-    input.value = encontrado.nome;
-    avisar(`Abrindo ${encontrado.nome}…`);
-    try {
-      const resposta = await fetch(MALHA(encontrado.id));
-      if (!resposta.ok) throw new Error("Falha ao buscar o limite");
-      const geo = await resposta.json();
-      if (limite) map.removeLayer(limite);
-      limite = L.geoJSON(geo, { interactive: false, style: { color: "#f8fafc", weight: 2, fill: false, opacity: .9 } }).addTo(map);
-      map.fitBounds(limite.getBounds(), { padding: [42, 42], maxZoom: 13 });
-      avisar(encontrado.nome);
-    } catch { avisar("Não foi possível abrir este município agora."); }
-  }
+  function normalizar(texto) { return String(texto || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
   function corDaObra(item) { return ({ "Em licitação": "#eab308", "Aguardando contrato": "#f97316", "A iniciar": "#ec4899", "Em execução": "#3b82f6", "Concluída": "#22c55e" })[item.status] || "#94a3b8"; }
   function textoDaRua(item, way) {
     const nome = item.label || item.nome || way.name || "Rua destacada";
@@ -14309,10 +14292,39 @@
   }
   function desenharRuas(itens) {
     ruas.clearLayers();
+    indiceRuas = [];
     (itens || []).forEach(item => (item.ways || []).filter(w => w.on !== false).forEach(w => {
       const linha = L.polyline(w.coords, { color: corDaObra(item), weight: 5, opacity: .9 }).addTo(ruas);
       adicionarDica(linha, textoDaRua(item, w));
+      const nome = w.name || item.label || item.nome || "Rua destacada";
+      let entrada = indiceRuas.find(r => normalizar(r.nome) === normalizar(nome));
+      if (!entrada) { entrada = { nome, linhas: [] }; indiceRuas.push(entrada); }
+      entrada.linhas.push(linha);
     }));
+    indiceRuas.sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
+    nomesRuas.replaceChildren(...indiceRuas.map(entrada => { const opcao = document.createElement("option"); opcao.value = entrada.nome; return opcao; }));
+  }
+  function restaurarDestaque() {
+    clearTimeout(destaqueTimer);
+    linhasDestacadas.forEach(linha => linha.setStyle({ weight: 5, opacity: .9 }));
+    linhasDestacadas = [];
+  }
+  function localizarRua() {
+    const consulta = normalizar(buscaRua.value);
+    if (!consulta) return;
+    const encontrada = indiceRuas.find(r => normalizar(r.nome) === consulta)
+      || indiceRuas.find(r => normalizar(r.nome).startsWith(consulta))
+      || indiceRuas.find(r => normalizar(r.nome).includes(consulta));
+    if (!encontrada) { avisar("Rua não encontrada neste mapa."); return; }
+    buscaRua.value = encontrada.nome;
+    restaurarDestaque();
+    linhasDestacadas = encontrada.linhas;
+    linhasDestacadas.forEach(linha => linha.setStyle({ weight: 9, opacity: 1 }).bringToFront());
+    const grupo = L.featureGroup(linhasDestacadas);
+    map.fitBounds(grupo.getBounds(), { padding: [70, 70], maxZoom: 18 });
+    linhasDestacadas[0].openTooltip(linhasDestacadas[0].getBounds().getCenter());
+    destaqueTimer = setTimeout(restaurarDestaque, 3500);
+    avisar(encontrada.nome);
   }
   async function carregarMapasSalvos() {
     let mapas = {};
@@ -14327,9 +14339,12 @@
     salvos.hidden = false;
     listaMapas.forEach(m => { const opcao = document.createElement("option"); opcao.value = m.id; opcao.textContent = m.nome; salvos.appendChild(opcao); });
     salvos.addEventListener("change", () => {
-      const selecionado = mapas[salvos.value]; if (!selecionado) return;
-      input.value = selecionado.nome || "";
+      const selecionado = mapas[salvos.value];
+      if (!selecionado) { buscaRua.value = ""; buscaRua.disabled = true; nomesRuas.replaceChildren(); return; }
+      restaurarDestaque();
+      buscaRua.value = "";
       desenharRuas(selecionado.itens);
+      buscaRua.disabled = !indiceRuas.length;
       if (limite) map.removeLayer(limite);
       limite = selecionado.boundaryGeo ? L.geoJSON(selecionado.boundaryGeo, { interactive: false, style: { color: "#f8fafc", weight: 2, fill: false, opacity: .9 } }).addTo(map) : null;
       if (selecionado.view) map.setView([selecionado.view.lat, selecionado.view.lng], selecionado.view.zoom);
@@ -14337,16 +14352,12 @@
       avisar(selecionado.nome);
     });
   }
-  fetch(IBGE).then(r => r.json()).then(dados => {
-    municipios = dados;
-    lista.innerHTML = dados.map(m => `<option value="${m.nome}"></option>`).join("");
-    carregarMapasSalvos().then(() => avisar(salvos.hidden ? "Escolha um município e use o gesto de pinça para ampliar." : "Escolha um mapa salvo ou um município."));
-  }).catch(() => avisar("Não foi possível carregar os municípios."));
-  input.addEventListener("change", abrirMunicipio);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") abrirMunicipio(); });
+  carregarMapasSalvos().then(() => avisar(salvos.hidden ? "Nenhum mapa salvo disponível." : "Escolha um mapa salvo."));
+  buscaRua.addEventListener("change", localizarRua);
+  buscaRua.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); localizarRua(); } });
   document.getElementById("mais").onclick = () => map.zoomIn();
   document.getElementById("menos").onclick = () => map.zoomOut();
-  document.getElementById("inicio").onclick = () => { if (limite) { map.removeLayer(limite); limite = null; } ruas.clearLayers(); input.value = ""; salvos.value = ""; map.setView(estado, zoomEstado); avisar("Pernambuco"); };
+  document.getElementById("inicio").onclick = () => { if (limite) { map.removeLayer(limite); limite = null; } restaurarDestaque(); ruas.clearLayers(); indiceRuas = []; nomesRuas.replaceChildren(); salvos.value = ""; buscaRua.value = ""; buscaRua.disabled = true; map.setView(estado, zoomEstado); avisar("Pernambuco"); };
 </script>
 </body>
 </html>
