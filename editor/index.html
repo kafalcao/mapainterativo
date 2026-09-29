@@ -123,6 +123,14 @@
   fieldset label { display: flex; gap: 8px; align-items: baseline; color: #e2e8f0; font-size: 14px; margin: 4px 0; cursor: pointer; }
   fieldset label .b { color: #94a3b8; font-size: 12px; }
   .dlg-acoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+  .importar-acoes { display: flex; gap: 8px; margin-bottom: 10px; }
+  .importar-acoes button { padding: 5px 9px; font-size: 12px; }
+  .importar-lista { max-height: 46vh; overflow-y: auto; border: 1px solid #334155; border-radius: 8px; padding: 6px 10px; }
+  .importar-item { display: flex; align-items: flex-start; gap: 9px; padding: 8px 2px; margin: 0; color: #e2e8f0; cursor: pointer; }
+  .importar-item + .importar-item { border-top: 1px solid #334155; }
+  .importar-item input { margin-top: 3px; }
+  .importar-item span { display: block; }
+  .importar-item small { display: block; color: #94a3b8; margin-top: 2px; }
 
   .rua-item {
     border: 1px solid #334155; border-radius: 8px;
@@ -268,6 +276,22 @@
   </form>
 </dialog>
 
+<dialog id="dlgImportar">
+  <h3>Selecionar mapas para importar</h3>
+  <p class="sub" id="importarDescricao"></p>
+  <form id="formImportar">
+    <div class="importar-acoes">
+      <button id="btnMarcarTodos" type="button">Marcar todos</button>
+      <button id="btnDesmarcarTodos" type="button">Desmarcar todos</button>
+    </div>
+    <div id="listaImportacao" class="importar-lista"></div>
+    <div class="dlg-acoes">
+      <button id="btnCancelarImportacao" type="button">Cancelar</button>
+      <button id="btnConfirmarImportacao" type="submit" class="primary" disabled>Importar selecionados</button>
+    </div>
+  </form>
+</dialog>
+
 <script>
 const IBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/26/municipios?orderBy=nome";
 const MALHA = id => `https://servicodados.ibge.gov.br/api/v3/malhas/municipios/${id}?formato=application/vnd.geo+json&qualidade=maxima`;
@@ -290,13 +314,55 @@ const ESRI = {
   streets: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
 };
 
+// A Esri responde com HTTP 200 mesmo quando não há imagem no nível 19.
+// O corpo de 2.521 bytes é o mosaico cinza "Map data not yet available".
+const TAMANHO_TILE_ESRI_INDISPONIVEL = 2521;
+const tileEsriIndisponivel = blob => blob.size === TAMANHO_TILE_ESRI_INDISPONIVEL;
+
+async function buscarBitmap(url) {
+  const resposta = await fetch(url, { mode: "cors" });
+  if (!resposta.ok) throw new Error(`Falha ao carregar mosaico (${resposta.status})`);
+  const blob = await resposta.blob();
+  return { blob, bitmap: await createImageBitmap(blob) };
+}
+
+const TileLayerSatelite = L.TileLayer.extend({
+  createTile(coords, done) {
+    const canvas = document.createElement("canvas");
+    const tamanho = this.getTileSize();
+    canvas.width = tamanho.x;
+    canvas.height = tamanho.y;
+    const ctx = canvas.getContext("2d");
+    const url = this.getTileUrl(coords);
+
+    buscarBitmap(url).then(async ({ blob, bitmap }) => {
+      if (coords.z === 19 && tileEsriIndisponivel(blob)) {
+        const paiX = Math.floor(coords.x / 2);
+        const paiY = Math.floor(coords.y / 2);
+        const pai = await buscarBitmap(tileUrl(ESRI.imagery, 18, paiX, paiY));
+        const metade = pai.bitmap.width / 2;
+        const origemX = ((coords.x % 2) + 2) % 2 * metade;
+        const origemY = ((coords.y % 2) + 2) % 2 * metade;
+        ctx.drawImage(pai.bitmap, origemX, origemY, metade, metade, 0, 0, tamanho.x, tamanho.y);
+        pai.bitmap.close?.();
+      } else {
+        ctx.drawImage(bitmap, 0, 0, tamanho.x, tamanho.y);
+      }
+      bitmap.close?.();
+      done(null, canvas);
+    }).catch(erro => done(erro, canvas));
+
+    return canvas;
+  }
+});
+
 const map = L.map("map", {
   center: [-8.4, -37.9], zoom: 7, minZoom: 1, maxZoom: 19,
   zoomSnap: 0.1, zoomDelta: 0.25, wheelPxPerZoomLevel: 40
 });
 
 const camadaSatelite = L.layerGroup([
-  L.tileLayer(ESRI.imagery, { maxZoom: 19, attribution: "Tiles © Esri — Maxar, Earthstar Geographics" }),
+  new TileLayerSatelite(ESRI.imagery, { maxZoom: 19, attribution: "Tiles © Esri — Maxar, Earthstar Geographics" }),
   L.tileLayer(ESRI.refs, { maxZoom: 19 })
 ]);
 const camadaRuas = L.tileLayer(ESRI.streets, { maxZoom: 19, attribution: "Tiles © Esri — HERE, Garmin, OpenStreetMap contributors" });
@@ -341,6 +407,11 @@ document.getElementById("btnExportarColecao").addEventListener("click", () => {
   setStatus("Coleção exportada. Publique o arquivo mapas-publicos.json junto da visualização.");
 });
 const arquivoImportacao = document.getElementById("arquivoImportacao");
+const dlgImportar = document.getElementById("dlgImportar");
+const listaImportacao = document.getElementById("listaImportacao");
+const btnConfirmarImportacao = document.getElementById("btnConfirmarImportacao");
+let mapasParaImportar = null;
+let nomeArquivoImportacao = "";
 document.getElementById("btnImportarColecao").addEventListener("click", () => {
   persistir();
   arquivoImportacao.click();
@@ -369,15 +440,82 @@ arquivoImportacao.addEventListener("change", async () => {
 
     const quantidade = Object.keys(importados).length;
     if (!quantidade) throw new Error("nenhum mapa válido");
-    const mapas = { ...lerMapas(), ...importados };
-    if (!gravarMapas(mapas)) throw new Error("não foi possível salvar no navegador");
-    renderLista();
-    setStatus(`${quantidade} mapa(s) importado(s) de “${arquivo.name}”.`);
+    mapasParaImportar = importados;
+    nomeArquivoImportacao = arquivo.name;
+    abrirSelecaoImportacao();
   } catch (erro) {
     setStatus(`Não foi possível importar “${arquivo.name}”: ${erro.message}.`);
   } finally {
     arquivoImportacao.value = "";
   }
+});
+
+function abrirSelecaoImportacao() {
+  const mapasAtuais = lerMapas();
+  const mapasOrdenados = Object.values(mapasParaImportar).sort((a, b) =>
+    a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" })
+  );
+  document.getElementById("importarDescricao").textContent =
+    `${mapasOrdenados.length} mapa(s) encontrado(s) em “${nomeArquivoImportacao}”. ` +
+    "Marque somente os municípios que deseja atualizar.";
+  listaImportacao.replaceChildren();
+  for (const mapaSalvo of mapasOrdenados) {
+    const id = String(mapaSalvo.id);
+    const label = document.createElement("label");
+    label.className = "importar-item";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = id;
+    checkbox.name = "mapaImportado";
+    const texto = document.createElement("span");
+    texto.textContent = mapaSalvo.nome;
+    const detalhe = document.createElement("small");
+    detalhe.textContent = `${mapaSalvo.itens.length} rua(s)` +
+      (mapasAtuais[id] ? " · substituirá a versão atual" : " · novo mapa");
+    texto.appendChild(detalhe);
+    label.append(checkbox, texto);
+    listaImportacao.appendChild(label);
+  }
+  atualizarBotaoImportacao();
+  dlgImportar.showModal();
+}
+
+function atualizarBotaoImportacao() {
+  const quantidade = listaImportacao.querySelectorAll('input[name="mapaImportado"]:checked').length;
+  btnConfirmarImportacao.disabled = quantidade === 0;
+  btnConfirmarImportacao.textContent = quantidade
+    ? `Importar ${quantidade} selecionado(s)`
+    : "Importar selecionados";
+}
+
+listaImportacao.addEventListener("change", atualizarBotaoImportacao);
+document.getElementById("btnMarcarTodos").addEventListener("click", () => {
+  listaImportacao.querySelectorAll('input[name="mapaImportado"]').forEach(campo => { campo.checked = true; });
+  atualizarBotaoImportacao();
+});
+document.getElementById("btnDesmarcarTodos").addEventListener("click", () => {
+  listaImportacao.querySelectorAll('input[name="mapaImportado"]').forEach(campo => { campo.checked = false; });
+  atualizarBotaoImportacao();
+});
+document.getElementById("btnCancelarImportacao").addEventListener("click", () => dlgImportar.close());
+document.getElementById("formImportar").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const ids = [...listaImportacao.querySelectorAll('input[name="mapaImportado"]:checked')]
+    .map(campo => campo.value);
+  if (!ids.length) return;
+  const selecionados = Object.fromEntries(ids.map(id => [id, mapasParaImportar[id]]));
+  const mapas = { ...lerMapas(), ...selecionados };
+  if (!gravarMapas(mapas)) {
+    setStatus("Não foi possível salvar os mapas selecionados no navegador.");
+    return;
+  }
+  const arquivo = nomeArquivoImportacao;
+  mapasParaImportar = null;
+  nomeArquivoImportacao = "";
+  dlgImportar.close();
+  renderLista();
+  if (atual && ids.includes(String(atual.id))) await abrirMapaSalvo(String(atual.id));
+  setStatus(`${ids.length} mapa(s) importado(s) de “${arquivo}”. Os demais mapas foram preservados.`);
 });
 
 const STATUS_OBRA = {
@@ -1489,22 +1627,34 @@ async function gerarPng(incluirIdentificacao = true) {
     const ctx = big.getContext("2d");
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, big.width, big.height);
 
-    const carregarTile = async (url, dx, dy) => {
+    const carregarTile = async (tpl, nivel, tx, ty, dx, dy, usarFallback = false) => {
       try {
-        const r = await fetchComPrazo(url, 15000, { mode: "cors" });
+        const r = await fetchComPrazo(tileUrl(tpl, nivel, tx, ty), 15000, { mode: "cors" });
         if (!r.ok) return;
-        const bmp = await createImageBitmap(await r.blob());
-        ctx.drawImage(bmp, dx, dy);
+        const blob = await r.blob();
+        const bmp = await createImageBitmap(blob);
+        if (usarFallback && nivel === 19 && tileEsriIndisponivel(blob)) {
+          const paiX = Math.floor(tx / 2), paiY = Math.floor(ty / 2);
+          const pai = await buscarBitmap(tileUrl(ESRI.imagery, 18, paiX, paiY));
+          const metade = pai.bitmap.width / 2;
+          const origemX = ((tx % 2) + 2) % 2 * metade;
+          const origemY = ((ty % 2) + 2) % 2 * metade;
+          ctx.drawImage(pai.bitmap, origemX, origemY, metade, metade, dx, dy, TILE, TILE);
+          pai.bitmap.close?.();
+        } else {
+          ctx.drawImage(bmp, dx, dy);
+        }
+        bmp.close?.();
       } catch {}
     };
     const fundoTpl = baseAtual === "ruas" ? ESRI.streets : ESRI.imagery;
     for (let tx = x0; tx <= x1; tx++)
       for (let ty = y0; ty <= y1; ty++)
-        await carregarTile(tileUrl(fundoTpl, z, tx, ty), (tx - x0) * TILE, (ty - y0) * TILE);
+        await carregarTile(fundoTpl, z, tx, ty, (tx - x0) * TILE, (ty - y0) * TILE, baseAtual !== "ruas");
     if (baseAtual !== "ruas") // no satélite, sobrepõe os rótulos de lugares
       for (let tx = x0; tx <= x1; tx++)
         for (let ty = y0; ty <= y1; ty++)
-          await carregarTile(tileUrl(ESRI.refs, z, tx, ty), (tx - x0) * TILE, (ty - y0) * TILE);
+          await carregarTile(ESRI.refs, z, tx, ty, (tx - x0) * TILE, (ty - y0) * TILE);
 
     // recorta exatamente na área visível
     const [sex, sey] = projetar(b.getSouth(), b.getEast(), z);

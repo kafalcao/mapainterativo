@@ -14296,11 +14296,43 @@
     "base": "sat",
     "savedAt": 1789738485234
   }
-};
+  };
   
   const estado = [-8.35, -37.95], zoomEstado = 7;
+  const ESRI_IMAGENS = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+  const TAMANHO_TILE_ESRI_INDISPONIVEL = 2521;
+  const tileUrl = (tpl, z, x, y) => tpl.replace("{z}", z).replace("{x}", x).replace("{y}", y);
+  async function buscarBitmap(url) {
+    const resposta = await fetch(url, { mode: "cors" });
+    if (!resposta.ok) throw new Error(`Falha ao carregar mosaico (${resposta.status})`);
+    const blob = await resposta.blob();
+    return { blob, bitmap: await createImageBitmap(blob) };
+  }
+  const TileLayerSatelite = L.TileLayer.extend({
+    createTile(coords, done) {
+      const canvas = document.createElement("canvas"), tamanho = this.getTileSize();
+      canvas.width = tamanho.x; canvas.height = tamanho.y;
+      const ctx = canvas.getContext("2d");
+      buscarBitmap(this.getTileUrl(coords)).then(async ({ blob, bitmap }) => {
+        if (coords.z === 19 && blob.size === TAMANHO_TILE_ESRI_INDISPONIVEL) {
+          const paiX = Math.floor(coords.x / 2), paiY = Math.floor(coords.y / 2);
+          const pai = await buscarBitmap(tileUrl(ESRI_IMAGENS, 18, paiX, paiY));
+          const metade = pai.bitmap.width / 2;
+          const origemX = ((coords.x % 2) + 2) % 2 * metade;
+          const origemY = ((coords.y % 2) + 2) % 2 * metade;
+          ctx.drawImage(pai.bitmap, origemX, origemY, metade, metade, 0, 0, tamanho.x, tamanho.y);
+          pai.bitmap.close?.();
+        } else {
+          ctx.drawImage(bitmap, 0, 0, tamanho.x, tamanho.y);
+        }
+        bitmap.close?.();
+        done(null, canvas);
+      }).catch(erro => done(erro, canvas));
+      return canvas;
+    }
+  });
   const map = L.map("map", { center: estado, zoom: zoomEstado, minZoom: 6, maxZoom: 19, zoomControl: false, zoomSnap: .1, zoomDelta: .5, attributionControl: true });
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "Imagens © Esri, Maxar" }).addTo(map);
+  new TileLayerSatelite(ESRI_IMAGENS, { maxZoom: 19, attribution: "Imagens © Esri, Maxar" }).addTo(map);
   L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "" }).addTo(map);
   const aviso = document.getElementById("notice"), salvos = document.getElementById("salvos"), buscaRua = document.getElementById("buscaRua"), nomesRuas = document.getElementById("nomesRuas");
   let limite = null, ruas = L.layerGroup().addTo(map), indiceRuas = [], linhasDestacadas = [], avisoTimer, destaqueTimer;
