@@ -4052,6 +4052,32 @@
         ]
       },
       {
+        "nome": "Rua Cajazeiras",
+        "bairro": null,
+        "label": "Rua Cajazeiras",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Cajazeiras",
+            "coords": [
+              [
+                -7.8249243062230045,
+                -34.910231164819976
+              ],
+              [
+                -7.824558928210793,
+                -34.90907255234925
+              ],
+              [
+                -7.82430455092467,
+                -34.90861471355036
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "Rua Caxambu / Rua Três Corações",
         "bairro": null,
         "label": "Rua Caxambu / Rua Três Corações",
@@ -5877,12 +5903,12 @@
       ]
     },
     "view": {
-      "lat": -7.841019975892893,
-      "lng": -34.90226986792003,
-      "zoom": 16.8
+      "lat": -7.825222515417356,
+      "lng": -34.908038691134756,
+      "zoom": 16
     },
-    "base": "sat",
-    "savedAt": 1790796701597
+    "base": "ruas",
+    "savedAt": 1790800884450
   },
   "2607752": {
     "id": 2607752,
