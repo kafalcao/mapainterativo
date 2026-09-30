@@ -22,48 +22,176 @@
     },
     "itens": [
       {
-        "nome": "SEDUH-CONV: Avenida Brasil",
+        "nome": "SEDUH-CONV: 1ª Travessa da Avenida João Pessoa Guerra",
         "bairro": null,
-        "label": "SEDUH-CONV: Avenida Brasil",
+        "label": "SEDUH-CONV: 1ª Travessa da Avenida João Pessoa Guerra",
         "status": "Em execução",
         "ways": [
           {
-            "name": "SEDUH-CONV: Avenida Brasil",
-            "on": true,
+            "name": "SEDUH-CONV: 1ª Travessa da Avenida João Pessoa Guerra",
             "coords": [
               [
-                -7.78475893978967,
-                -35.088616037203884
+                -7.793522814863574,
+                -35.083886344683556
               ],
               [
-                -7.784843207533282,
-                -35.08829570574775
-              ],
-              [
-                -7.7849572168065375,
-                -35.08774513605751
-              ],
-              [
-                -7.785200106024402,
-                -35.086493841306954
-              ],
-              [
-                -7.78545290893835,
-                -35.08531762424145
-              ],
-              [
-                -7.785656142542942,
-                -35.0840963605649
-              ],
-              [
-                -7.785765194680387,
-                -35.08372597731874
-              ],
-              [
-                -7.7856957978689465,
-                -35.083180412807515
+                -7.793015212387339,
+                -35.083749526651005
               ]
-            ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: 1ª Travessa da Granja Santa Helena",
+        "bairro": null,
+        "label": "SEDUH-CONV: 1ª Travessa da Granja Santa Helena",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: 1ª Travessa da Granja Santa Helena",
+            "coords": [
+              [
+                -7.79732218756294,
+                -35.079483916612936
+              ],
+              [
+                -7.797122804941412,
+                -35.07930565088624
+              ],
+              [
+                -7.79679809589727,
+                -35.078931867910924
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: 2ª Travessa da Avenida João Pessoa Guerra",
+        "bairro": null,
+        "label": "SEDUH-CONV: 2ª Travessa da Avenida João Pessoa Guerra",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: 2ª Travessa da Avenida João Pessoa Guerra",
+            "coords": [
+              [
+                -7.7930550764784146,
+                -35.08444166493326
+              ],
+              [
+                -7.793156065492186,
+                -35.08425119277032
+              ],
+              [
+                -7.792964717866536,
+                -35.084159980748616
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: 2ª Travessa da Granja Santa Helena",
+        "bairro": null,
+        "label": "SEDUH-CONV: 2ª Travessa da Granja Santa Helena",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: 2ª Travessa da Granja Santa Helena",
+            "coords": [
+              [
+                -7.797210463191414,
+                -35.07964056356075
+              ],
+              [
+                -7.797483462873573,
+                -35.07939300780348
+              ],
+              [
+                -7.797927665365444,
+                -35.07899131355583
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: 3ª Travessa da Avenida João Pessoa Guerra",
+        "bairro": null,
+        "label": "SEDUH-CONV: 3ª Travessa da Avenida João Pessoa Guerra",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: 3ª Travessa da Avenida João Pessoa Guerra",
+            "coords": [
+              [
+                -7.79325971208623,
+                -35.08465091604184
+              ],
+              [
+                -7.7930391308424785,
+                -35.084457761172374
+              ],
+              [
+                -7.792627201702513,
+                -35.08483602279173
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: 3ª Travessa da Granja Santa Helena",
+        "bairro": null,
+        "label": "SEDUH-CONV: 3ª Travessa da Granja Santa Helena",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: 3ª Travessa da Granja Santa Helena",
+            "coords": [
+              [
+                -7.798219172994444,
+                -35.08035987651585
+              ],
+              [
+                -7.798455155212031,
+                -35.080149687665326
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Avenida Brasil",
+        "bairro": null,
+        "label": "SEDUH-CONV: Avenida Brasil",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Avenida Brasil",
+            "coords": [
+              [
+                -7.785532432474998,
+                -35.0848603487684
+              ],
+              [
+                -7.785657368039286,
+                -35.08413636494996
+              ],
+              [
+                -7.785736031153249,
+                -35.08373467070231
+              ]
+            ],
+            "on": true
           }
         ]
       },
@@ -71,29 +199,127 @@
         "nome": "SEDUH-CONV: Avenida Presidente Vargas",
         "bairro": null,
         "label": "SEDUH-CONV: Avenida Presidente Vargas",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Avenida Presidente Vargas",
-            "on": true,
             "coords": [
               [
-                -7.786755628109709,
-                -35.08507100623049
+                -7.790943776485862,
+                -35.084885693188
               ],
               [
-                -7.788269811167329,
-                -35.08501437909427
-              ],
-              [
-                -7.788984840153228,
-                -35.08498606552617
-              ],
-              [
-                -7.790975710758045,
-                -35.08487281125374
+                -7.789583155371881,
+                -35.08493525112268
               ]
-            ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua A",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua A",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua A",
+            "coords": [
+              [
+                -7.790261958296355,
+                -35.09595642365644
+              ],
+              [
+                -7.788548102755867,
+                -35.09840729594082
+              ],
+              [
+                -7.7884428657836455,
+                -35.098467998659935
+              ],
+              [
+                -7.7883902472875866,
+                -35.09853628921894
+              ],
+              [
+                -7.787405528499851,
+                -35.09723876859781
+              ],
+              [
+                -7.787195053954906,
+                -35.09685178876343
+              ],
+              [
+                -7.787157469203649,
+                -35.09647998460883
+              ],
+              [
+                -7.787999366824491,
+                -35.09467407871508
+              ],
+              [
+                -7.787292774292491,
+                -35.0962068223728
+              ],
+              [
+                -7.788518035052197,
+                -35.09694284284211
+              ],
+              [
+                -7.789036702637738,
+                -35.09603230205534
+              ],
+              [
+                -7.787751307879855,
+                -35.0952659302265
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Antônio Costa",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Antônio Costa",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Antônio Costa",
+            "coords": [
+              [
+                -7.786419520486387,
+                -35.093535698372214
+              ],
+              [
+                -7.7867214504229,
+                -35.093115911338415
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Antônio Luiz Barros",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Antônio Luiz Barros",
+        "status": "Concluída",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Antônio Luiz Barros",
+            "coords": [
+              [
+                -7.786772614258651,
+                -35.08356495534889
+              ],
+              [
+                -7.786544742656411,
+                -35.08259311961308
+              ]
+            ],
+            "on": true
           }
         ]
       },
@@ -101,11 +327,10 @@
         "nome": "SEDUH-CONV: Rua Bom Jesus",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Bom Jesus",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Bom Jesus",
-            "on": true,
             "coords": [
               [
                 -7.786343495200104,
@@ -115,29 +340,302 @@
                 -7.785121307209084,
                 -35.08484213223623
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
       {
-        "nome": "SEDUH-CONV: Rua Duque de Caxias",
+        "nome": "SEDUH-CONV: Rua C",
         "bairro": null,
-        "label": "SEDUH-CONV: Rua Duque de Caxias",
+        "label": "SEDUH-CONV: Rua C",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua C",
+            "coords": [
+              [
+                -7.766186716352802,
+                -35.04950140751285
+              ],
+              [
+                -7.765492338343958,
+                -35.045911997102394
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Campo Alegre",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Campo Alegre",
         "status": "Em execução",
         "ways": [
           {
-            "name": "SEDUH-CONV: Rua Duque de Caxias",
-            "on": true,
+            "name": "SEDUH-CONV: Rua Chã de Estevão",
             "coords": [
               [
-                -7.788182099982809,
-                -35.08502928376633
+                -7.785445472426034,
+                -35.09386902197609
               ],
               [
-                -7.78817285010621,
-                -35.08353488468231
+                -7.7844656205539735,
+                -35.09315020856204
               ]
-            ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Chã de Estevão",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Chã de Estevão",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Chã de Estevão",
+            "coords": [
+              [
+                -7.785792872753964,
+                -35.09320216894811
+              ],
+              [
+                -7.784676298108317,
+                -35.092575363651044
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Duque de Caxias (trecho final)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Duque de Caxias (trecho final)",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Duque de Caxias (trecho final)",
+            "coords": [
+              [
+                -7.7881284477294574,
+                -35.08411125354357
+              ],
+              [
+                -7.788117054189167,
+                -35.08361095940739
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Edvaldo João da Silva",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Edvaldo João da Silva",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Edvaldo João da Silva",
+            "coords": [
+              [
+                -7.784209158853504,
+                -35.09494457266376
+              ],
+              [
+                -7.784511090382611,
+                -35.09445002903492
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua G",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua G",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua G",
+            "coords": [
+              [
+                -7.800592048998771,
+                -35.07664316600059
+              ],
+              [
+                -7.800438240758486,
+                -35.07624638099605
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Granja Santa Helena I",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Granja Santa Helena I",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Granja Santa Helena I",
+            "coords": [
+              [
+                -7.799524014177653,
+                -35.08137812472502
+              ],
+              [
+                -7.798797560545931,
+                -35.08083630457703
+              ],
+              [
+                -7.798168274851621,
+                -35.0803458639258
+              ],
+              [
+                -7.797747208160009,
+                -35.07996285313154
+              ],
+              [
+                -7.797390920628393,
+                -35.07976667687107
+              ],
+              [
+                -7.797187327616961,
+                -35.079663917877475
+              ],
+              [
+                -7.796761632818403,
+                -35.079411691256865
+              ],
+              [
+                -7.796349818959895,
+                -35.07913611031953
+              ],
+              [
+                -7.795739038108816,
+                -35.078697049165115
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Granja Santa Helena II",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Granja Santa Helena II",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Granja Santa Helena II",
+            "coords": [
+              [
+                -7.799264738989045,
+                -35.08115731424085
+              ],
+              [
+                -7.799219166038391,
+                -35.0809445454703
+              ],
+              [
+                -7.798484301523514,
+                -35.08017397749042
+              ],
+              [
+                -7.79792033485758,
+                -35.07957592472992
+              ],
+              [
+                -7.797601323073522,
+                -35.079213642769254
+              ],
+              [
+                -7.797037355217374,
+                -35.078609839501446
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Hildebrando Carneiro",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Hildebrando Carneiro",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Hildebrando Carneiro",
+            "coords": [
+              [
+                -7.784249141343017,
+                -35.093581496610476
+              ],
+              [
+                -7.785263174576775,
+                -35.09419105038561
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Hiltanha Carneiro",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Hiltanha Carneiro",
+        "status": "Em execução",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Hiltanha Carneiro",
+            "coords": [
+              [
+                -7.784909972268221,
+                -35.094628088941334
+              ],
+              [
+                -7.7852403873400675,
+                -35.09421980292214
+              ],
+              [
+                -7.7854226851992365,
+                -35.09389202400533
+              ],
+              [
+                -7.785821461489643,
+                -35.0932249651571
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Isaura de Moraes",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua Isaura de Moraes",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua Isaura de Moraes",
+            "coords": [
+              [
+                -7.7848984739126506,
+                -35.094611043239645
+              ],
+              [
+                -7.784043950943657,
+                -35.09412800062542
+              ]
+            ],
+            "on": true
           }
         ]
       },
@@ -179,7 +677,7 @@
         "nome": "SEDUH-CONV: Rua Paratinga",
         "bairro": "Cento",
         "label": "SEDUH-CONV: Rua Paratinga — Cento",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "Rua Paratinga",
@@ -201,11 +699,10 @@
         "nome": "SEDUH-CONV: Rua Primeiro de Abril",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Primeiro de Abril",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Primeiro de Abril",
-            "on": true,
             "coords": [
               [
                 -7.786727302351399,
@@ -215,7 +712,8 @@
                 -7.785656609868216,
                 -35.084041303595875
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -227,21 +725,21 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua São José (Trecho 1)",
-            "on": true,
             "coords": [
               [
-                -7.798653668035248,
-                -35.07861568955751
+                -7.799014292799007,
+                -35.07903476917965
               ],
               [
-                -7.798078683235593,
-                -35.078020073256255
+                -7.798051562584618,
+                -35.077982426341485
               ],
               [
-                -7.797746579586072,
-                -35.07710913067786
+                -7.797772427374459,
+                -35.077148602781186
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -249,11 +747,10 @@
         "nome": "SEDUH-CONV: Rua São José (Trecho 2)",
         "bairro": null,
         "label": "SEDUH-CONV: Rua São José (Trecho 2)",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua São José (Trecho 2)",
-            "on": true,
             "coords": [
               [
                 -7.797885369203005,
@@ -263,7 +760,8 @@
                 -7.7974442163326465,
                 -35.07723926533191
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -271,48 +769,52 @@
         "nome": "SEDUH-CONV: Rua Trinta e Um de Março",
         "bairro": null,
         "label": "SEDUH-CONV: Rua Trinta e Um de Março",
-        "status": "Em execução",
+        "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Trinta e Um de Março",
-            "on": true,
             "coords": [
               [
-                -7.788166323334399,
-                -35.08444003254789
+                -7.78673510213218,
+                -35.0845112352521
               ],
               [
-                -7.786701686488373,
-                -35.08452630192221
+                -7.786497053605924,
+                -35.084581320755426
               ],
               [
-                -7.786494195854477,
-                -35.08456943660938
-              ],
-              [
-                -7.785597102813688,
-                -35.084477005136876
+                -7.785624207852707,
+                -35.0845112352521
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
       {
         "nome": "SEDUH-CONV: Travessa Bom Sucesso",
-        "bairro": "Quinze",
-        "label": "SEDUH-CONV: Travessa Bom Sucesso — Quinze",
-        "status": "Em execução",
+        "bairro": null,
+        "label": "SEDUH-CONV: Travessa Bom Sucesso",
+        "status": "A iniciar",
         "ways": [
           {
-            "name": "Travessa Bom Sucesso",
+            "name": "SEDUH-CONV: Travessa Bom Sucesso",
             "coords": [
               [
-                -7.796121,
-                -35.0969192
+                -7.790922735986848,
+                -35.08432639649684
               ],
               [
-                -7.7954648,
-                -35.0966084
+                -7.791161194914018,
+                -35.08427683856217
+              ],
+              [
+                -7.791364586244633,
+                -35.08427683856217
+              ],
+              [
+                -7.791560963987318,
+                -35.08429807767701
               ]
             ],
             "on": true
@@ -323,11 +825,10 @@
         "nome": "SEDUH-CONV: Tv. Avenida Nova",
         "bairro": null,
         "label": "SEDUH-CONV: Tv. Avenida Nova",
-        "status": "Em execução",
+        "status": "A iniciar",
         "ways": [
           {
             "name": "SEDUH-CONV: Tv. Avenida Nova",
-            "on": true,
             "coords": [
               [
                 -7.791381772083442,
@@ -345,7 +846,8 @@
                 -7.79066028660449,
                 -35.094313238075856
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       }
@@ -885,12 +1387,12 @@
       ]
     },
     "view": {
-      "lat": -7.788277450773265,
-      "lng": -35.087263989838895,
-      "zoom": 14.700000000000001
+      "lat": -7.788111191519082,
+      "lng": -35.08598743468514,
+      "zoom": 16.8
     },
-    "base": "ruas",
-    "savedAt": 1790614740905
+    "base": "sat",
+    "savedAt": 1790705175441
   },
   "2603454": {
     "id": 2603454,
@@ -972,7 +1474,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Belgrado",
-            "on": true,
             "coords": [
               [
                 -8.01308161393385,
@@ -998,7 +1499,8 @@
                 -8.014671723194327,
                 -34.999381536263016
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1148,7 +1650,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Casemiro de Abreu",
-            "on": true,
             "coords": [
               [
                 -8.010575088051805,
@@ -1158,7 +1659,8 @@
                 -8.008953435696965,
                 -34.964493341710444
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1192,7 +1694,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Coelho Neto",
-            "on": true,
             "coords": [
               [
                 -8.020548107729828,
@@ -1214,7 +1715,8 @@
                 -8.02122391762641,
                 -34.998751141637015
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1264,7 +1766,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua do Livramento",
-            "on": true,
             "coords": [
               [
                 -8.00089239120086,
@@ -1326,7 +1827,8 @@
                 -8.002121989774508,
                 -35.009823649862675
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1478,13 +1980,12 @@
       },
       {
         "nome": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
-        "bairro": "",
+        "bairro": null,
         "label": "SEDUH-CONV: Rua Elias Pereira (Rua Cinco)",
         "status": "Concluída",
         "ways": [
           {
             "name": "SEDUH-CON: Rua Elias Pereira (Rua Cinco)",
-            "on": true,
             "coords": [
               [
                 -8.006661877211803,
@@ -1506,7 +2007,8 @@
                 -8.005355652118352,
                 -34.97798770666123
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1868,7 +2370,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Nova Londrina",
-            "on": true,
             "coords": [
               [
                 -8.028850797269646,
@@ -1878,7 +2379,8 @@
                 -8.027496798636422,
                 -34.97807605609885
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -1942,7 +2444,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Nova Palmeira",
-            "on": true,
             "coords": [
               [
                 -8.01370031493641,
@@ -1964,7 +2465,8 @@
                 -8.014419786482375,
                 -35.004868805408485
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -2096,7 +2598,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Redentor",
-            "on": true,
             "coords": [
               [
                 -8.015177969665869,
@@ -2198,7 +2699,8 @@
                 -8.00743266703731,
                 -35.00240102721453
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -2210,7 +2712,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Santa Luisa",
-            "on": true,
             "coords": [
               [
                 -8.020676726164002,
@@ -2228,7 +2729,8 @@
                 -8.02211613610239,
                 -34.975352408709334
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -2282,7 +2784,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua São José da Laje",
-            "on": true,
             "coords": [
               [
                 -8.000803302003126,
@@ -2304,7 +2805,8 @@
                 -7.9985346576578875,
                 -35.01213563785533
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -2316,7 +2818,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Tv. Governador Valadares",
-            "on": true,
             "coords": [
               [
                 -8.014716153337817,
@@ -2346,7 +2847,8 @@
                 -8.014752749105112,
                 -35.00265666568434
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       }
@@ -2802,12 +3304,12 @@
       ]
     },
     "view": {
-      "lat": -8.00844074059208,
+      "lat": -8.008454531992532,
       "lng": -34.98739129706371,
       "zoom": 14.100000000000001
     },
     "base": "sat",
-    "savedAt": 1790607785961
+    "savedAt": 1790619049809
   },
   "2606804": {
     "id": 2606804,
@@ -3282,6 +3784,144 @@
         ]
       },
       {
+        "nome": "Quarta Travessa Bpo. Eliseu",
+        "bairro": null,
+        "label": "Quarta Travessa Bpo. Eliseu",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Quarta Travessa Bpo. Eliseu",
+            "coords": [
+              [
+                -7.841768689988033,
+                -34.904172811959256
+              ],
+              [
+                -7.841936077592779,
+                -34.90334371070604
+              ],
+              [
+                -7.8417580622013325,
+                -34.90418622783712
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Adelário Pantaleão",
+        "bairro": null,
+        "label": "Rua Adelário Pantaleão",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Adelário Pantaleão",
+            "coords": [
+              [
+                -7.806471406290175,
+                -34.917237982096346
+              ],
+              [
+                -7.805337946135422,
+                -34.91660531569308
+              ],
+              [
+                -7.80543477450992,
+                -34.91619695828735
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Alexandra Suzana",
+        "bairro": null,
+        "label": "Rua Alexandra Suzana",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Alexandra Suzana",
+            "coords": [
+              [
+                -7.843081298351808,
+                -34.903662935140964
+              ],
+              [
+                -7.842491465057612,
+                -34.90352072683542
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Areia Branca",
+        "bairro": null,
+        "label": "Rua Areia Branca",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Areia Branca",
+            "coords": [
+              [
+                -7.805792307267637,
+                -34.91685417729456
+              ],
+              [
+                -7.806020824331517,
+                -34.91649463176727
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Arizona",
+        "bairro": "Saramandaia",
+        "label": "Rua Arizona — Saramandaia",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Arizona",
+            "coords": [
+              [
+                -7.8412892,
+                -34.9070382
+              ],
+              [
+                -7.8416535,
+                -34.9056722
+              ],
+              [
+                -7.841828,
+                -34.9049118
+              ],
+              [
+                -7.8418885,
+                -34.9047182
+              ],
+              [
+                -7.842043,
+                -34.9042565
+              ],
+              [
+                -7.8420625,
+                -34.9041897
+              ],
+              [
+                -7.8422399,
+                -34.903403
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "Rua Belo Horizonte",
         "bairro": null,
         "label": "Rua Belo Horizonte",
@@ -3382,6 +4022,36 @@
         ]
       },
       {
+        "nome": "Rua Big Ben",
+        "bairro": null,
+        "label": "Rua Big Ben",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Big Ben",
+            "coords": [
+              [
+                -7.8656476204576915,
+                -34.91539212497505
+              ],
+              [
+                -7.865435076890899,
+                -34.91642514757208
+              ],
+              [
+                -7.865448360867042,
+                -34.91655393999976
+              ],
+              [
+                -7.865745921820483,
+                -34.91720326848934
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "Rua Caxambu / Rua Três Corações",
         "bairro": null,
         "label": "Rua Caxambu / Rua Três Corações",
@@ -3409,6 +4079,72 @@
               [
                 -7.803045407466207,
                 -34.93126630783082
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua da Harmonia",
+        "bairro": null,
+        "label": "Rua da Harmonia",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua da Harmonia",
+            "coords": [
+              [
+                -7.884306386836996,
+                -34.910395851164175
+              ],
+              [
+                -7.885058087331206,
+                -34.90991272409261
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua da Unidade",
+        "bairro": null,
+        "label": "Rua da Unidade",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua da Unidade",
+            "coords": [
+              [
+                -7.850519992204641,
+                -34.91052633855297
+              ],
+              [
+                -7.850318637491965,
+                -34.911006236726315
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Doutora Severina Gelda de Amorim",
+        "bairro": null,
+        "label": "Rua Doutora Severina Gelda de Amorim",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua doutora Severina Gelda de Amorim",
+            "coords": [
+              [
+                -7.853390845546305,
+                -34.91018620085073
+              ],
+              [
+                -7.853956758973552,
+                -34.91010302240786
               ]
             ],
             "on": true
@@ -3528,9 +4264,67 @@
         ]
       },
       {
-        "nome": "Rua Frei MiguelinhO",
+        "nome": "Rua Filipinas",
+        "bairro": "Campina da Feira",
+        "label": "Rua Filipinas — Campina da Feira",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Filipinas",
+            "coords": [
+              [
+                -7.8218779,
+                -34.9162847
+              ],
+              [
+                -7.8217925,
+                -34.9159656
+              ],
+              [
+                -7.8217779,
+                -34.9158141
+              ],
+              [
+                -7.8217859,
+                -34.9156907
+              ],
+              [
+                -7.8218111,
+                -34.9156183
+              ],
+              [
+                -7.8218789,
+                -34.9155593
+              ],
+              [
+                -7.8224117,
+                -34.9152951
+              ],
+              [
+                -7.8228023,
+                -34.9150953
+              ],
+              [
+                -7.8228993,
+                -34.915055
+              ],
+              [
+                -7.822987,
+                -34.9150108
+              ],
+              [
+                -7.8234254,
+                -34.9147104
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Frei Miguelinho",
         "bairro": null,
-        "label": "Rua Frei MiguelinhO",
+        "label": "Rua Frei Miguelinho",
         "status": "A iniciar",
         "ways": [
           {
@@ -3820,6 +4614,46 @@
         ]
       },
       {
+        "nome": "Rua Lagoa dos Gatos",
+        "bairro": null,
+        "label": "Rua Lagoa dos Gatos",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Lagoa dos Gatos",
+            "coords": [
+              [
+                -7.8644061,
+                -34.9134994
+              ],
+              [
+                -7.8652975,
+                -34.9139875
+              ],
+              [
+                -7.8661939,
+                -34.9144802
+              ]
+            ],
+            "on": true
+          },
+          {
+            "name": "Rua Lagoa dos Gatos",
+            "coords": [
+              [
+                -7.8661939,
+                -34.9144802
+              ],
+              [
+                -7.8666167,
+                -34.9147238
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
         "nome": "Rua Mirandopolis",
         "bairro": null,
         "label": "Rua Mirandopolis",
@@ -3871,6 +4705,104 @@
               [
                 -7.820664363808359,
                 -34.90204507132925
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Nova Olinda",
+        "bairro": null,
+        "label": "Rua Nova Olinda",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Nova Olinda",
+            "coords": [
+              [
+                -7.817317845041419,
+                -34.906857772484166
+              ],
+              [
+                -7.814727150393787,
+                -34.904746173115406
+              ],
+              [
+                -7.8137556357557685,
+                -34.903961330872136
+              ],
+              [
+                -7.812710098429378,
+                -34.903727746871155
+              ],
+              [
+                -7.811109403468596,
+                -34.903456789430024
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Piero Pasoline",
+        "bairro": null,
+        "label": "Rua Piero Pasoline",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Piero Pasoline",
+            "coords": [
+              [
+                -7.8507633722261,
+                -34.9112160157588
+              ],
+              [
+                -7.850300780697118,
+                -34.91101980519798
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Quenia",
+        "bairro": "Bela Vista",
+        "label": "Rua Quenia — Bela Vista",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Quenia",
+            "coords": [
+              [
+                -7.8225804,
+                -34.9197167
+              ],
+              [
+                -7.823505,
+                -34.919755
+              ],
+              [
+                -7.8250955,
+                -34.9197771
+              ],
+              [
+                -7.8263851,
+                -34.9198092
+              ],
+              [
+                -7.8270634,
+                -34.9198117
+              ],
+              [
+                -7.8277169,
+                -34.9198394
+              ],
+              [
+                -7.8280648,
+                -34.9198698
               ]
             ],
             "on": true
@@ -3947,6 +4879,122 @@
               [
                 -7.825764046362083,
                 -34.90295813615999
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua São Miguel de Itaipú",
+        "bairro": null,
+        "label": "Rua São Miguel de Itaipú",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua São Miguel de Itaipú",
+            "coords": [
+              [
+                -7.8161853926125815,
+                -34.91114171835788
+              ],
+              [
+                -7.816125893250696,
+                -34.910230447511886
+              ],
+              [
+                -7.81623497540768,
+                -34.90992001458632
+              ],
+              [
+                -7.816115976689545,
+                -34.91019039165052
+              ],
+              [
+                -7.816363890647335,
+                -34.90957953976476
+              ],
+              [
+                -7.816482889294748,
+                -34.909349218561914
+              ],
+              [
+                -7.816691136846042,
+                -34.90889859012159
+              ],
+              [
+                -7.816879551207731,
+                -34.90841791978524
+              ],
+              [
+                -7.817087798561143,
+                -34.907867151691505
+              ],
+              [
+                -7.81724646314162,
+                -34.907276327736426
+              ],
+              [
+                -7.817375378068845,
+                -34.906645447919956
+              ],
+              [
+                -7.817534042539936,
+                -34.90606463793019
+              ],
+              [
+                -7.817672873902718,
+                -34.90561400948987
+              ],
+              [
+                -7.817781955655326,
+                -34.90521345087625
+              ],
+              [
+                -7.8179108704170845,
+                -34.90489300398535
+              ],
+              [
+                -7.817900953898437,
+                -34.904852948124
+              ],
+              [
+                -7.818148866795807,
+                -34.90482290622797
+              ],
+              [
+                -7.818396779545941,
+                -34.90489300398535
+              ],
+              [
+                -7.818654608649829,
+                -34.90492304588138
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Treze de Julho",
+        "bairro": "Inhamã",
+        "label": "Rua Treze de Julho — Inhamã",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Treze de Julho",
+            "coords": [
+              [
+                -7.8818262,
+                -34.9037965
+              ],
+              [
+                -7.8825449,
+                -34.9030857
+              ],
+              [
+                -7.8831281,
+                -34.9024862
               ]
             ],
             "on": true
@@ -4829,12 +5877,12 @@
       ]
     },
     "view": {
-      "lat": -7.8107390386905635,
-      "lng": -34.894335009055084,
-      "zoom": 11.9
+      "lat": -7.841019975892893,
+      "lng": -34.90226986792003,
+      "zoom": 16.8
     },
     "base": "sat",
-    "savedAt": 1790362907342
+    "savedAt": 1790796701597
   },
   "2607752": {
     "id": 2607752,
@@ -4858,6 +5906,44 @@
       }
     },
     "itens": [
+      {
+        "nome": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
+            "coords": [
+              [
+                -7.776417518809668,
+                -34.894645330153224
+              ],
+              [
+                -7.776541444421398,
+                -34.89418985886404
+              ],
+              [
+                -7.77664058488446,
+                -34.89392958955591
+              ],
+              [
+                -7.77668024106307,
+                -34.89336400432866
+              ],
+              [
+                -7.776675284040983,
+                -34.892823444996424
+              ],
+              [
+                -7.776650498929463,
+                -34.89262323783635
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
       {
         "nome": "SEDUH-CONV: Rua Coronel João Seixas",
         "bairro": "Espinheiro",
@@ -4893,98 +5979,6 @@
               ]
             ],
             "on": true
-          }
-        ]
-      },
-      {
-        "nome": "SEDUH-CONV: Rua Flavio Marques da Silva",
-        "bairro": "Espinheiro",
-        "label": "SEDUH-CONV: Rua Flavio Marques da Silva — Espinheiro",
-        "status": "A iniciar",
-        "ways": [
-          {
-            "name": "Rua Flavio Marques da Silva",
-            "coords": [
-              [
-                -7.7729111,
-                -34.8914031
-              ],
-              [
-                -7.7728652,
-                -34.8917206
-              ],
-              [
-                -7.7727666,
-                -34.8921953
-              ],
-              [
-                -7.7726432,
-                -34.8925565
-              ],
-              [
-                -7.7726011,
-                -34.8926723
-              ],
-              [
-                -7.7724343,
-                -34.8930035
-              ],
-              [
-                -7.7722451,
-                -34.8935933
-              ],
-              [
-                -7.7721904,
-                -34.8937173
-              ],
-              [
-                -7.7721469,
-                -34.893827
-              ],
-              [
-                -7.772021,
-                -34.8941038
-              ]
-            ],
-            "on": true
-          }
-        ]
-      },
-      {
-        "nome": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
-        "bairro": null,
-        "label": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
-        "status": "A iniciar",
-        "ways": [
-          {
-            "name": "SEDUH-CONV: Rua \"J\" (Rua Jesuína Amaral de Paiva)",
-            "on": true,
-            "coords": [
-              [
-                -7.776417518809668,
-                -34.894645330153224
-              ],
-              [
-                -7.776541444421398,
-                -34.89418985886404
-              ],
-              [
-                -7.77664058488446,
-                -34.89392958955591
-              ],
-              [
-                -7.77668024106307,
-                -34.89336400432866
-              ],
-              [
-                -7.776675284040983,
-                -34.892823444996424
-              ],
-              [
-                -7.776650498929463,
-                -34.89262323783635
-              ]
-            ]
           }
         ]
       },
@@ -5121,6 +6115,52 @@
         ]
       },
       {
+        "nome": "SEDUH-CONV: Rua do Cravo (Rua Cravo Branco)",
+        "bairro": null,
+        "label": "SEDUH-CONV: Rua do Cravo (Rua Cravo Branco)",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "SEDUH-CONV: Rua do Cravo (Rua Cravo Branco)",
+            "on": true,
+            "coords": [
+              [
+                -7.7714833858073,
+                -34.898123942692784
+              ],
+              [
+                -7.771313303540104,
+                -34.89809090790512
+              ],
+              [
+                -7.770521765928608,
+                -34.89805126615987
+              ],
+              [
+                -7.770194683835239,
+                -34.898018231372184
+              ],
+              [
+                -7.770099829980512,
+                -34.8979719826694
+              ],
+              [
+                -7.77004749681013,
+                -34.89791582353032
+              ],
+              [
+                -7.770037684339958,
+                -34.897886092221405
+              ],
+              [
+                -7.770276454382448,
+                -34.89756895825953
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "SEDUH-CONV: Rua do Limão",
         "bairro": null,
         "label": "SEDUH-CONV: Rua do Limão",
@@ -5128,7 +6168,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua do Limão",
-            "on": true,
             "coords": [
               [
                 -7.777239610959693,
@@ -5146,7 +6185,8 @@
                 -7.775702933344205,
                 -34.89169227454194
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -5212,7 +6252,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Doutor Manoel Borba",
-            "on": true,
             "coords": [
               [
                 -7.774686742340984,
@@ -5298,7 +6337,62 @@
                 -7.775866517546806,
                 -34.89122679289473
               ]
-            ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "SEDUH-CONV: Rua Flavio Marques da Silva",
+        "bairro": "Espinheiro",
+        "label": "SEDUH-CONV: Rua Flavio Marques da Silva — Espinheiro",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Flavio Marques da Silva",
+            "coords": [
+              [
+                -7.7729111,
+                -34.8914031
+              ],
+              [
+                -7.7728652,
+                -34.8917206
+              ],
+              [
+                -7.7727666,
+                -34.8921953
+              ],
+              [
+                -7.7726432,
+                -34.8925565
+              ],
+              [
+                -7.7726011,
+                -34.8926723
+              ],
+              [
+                -7.7724343,
+                -34.8930035
+              ],
+              [
+                -7.7722451,
+                -34.8935933
+              ],
+              [
+                -7.7721904,
+                -34.8937173
+              ],
+              [
+                -7.7721469,
+                -34.893827
+              ],
+              [
+                -7.772021,
+                -34.8941038
+              ]
+            ],
+            "on": true
           }
         ]
       },
@@ -5348,7 +6442,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua José Leite",
-            "on": true,
             "coords": [
               [
                 -7.776951190470893,
@@ -5378,7 +6471,8 @@
                 -7.775899254493526,
                 -34.894144535064704
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       },
@@ -5390,7 +6484,6 @@
         "ways": [
           {
             "name": "SEDUH-CONV: Rua Marechal Deodoro da Fonseca",
-            "on": true,
             "coords": [
               [
                 -7.776164711981933,
@@ -5436,7 +6529,8 @@
                 -7.7763867153235,
                 -34.89469421042977
               ]
-            ]
+            ],
+            "on": true
           }
         ]
       }
@@ -5848,12 +6942,12 @@
       ]
     },
     "view": {
-      "lat": -7.770294334217983,
-      "lng": -34.89546475995747,
-      "zoom": 17.2
+      "lat": -7.770116059173203,
+      "lng": -34.89745407042976,
+      "zoom": 18.7
     },
     "base": "ruas",
-    "savedAt": 1790616260751
+    "savedAt": 1790788861511
   },
   "2607901": {
     "id": 2607901,
@@ -8867,12 +9961,12 @@
       ]
     },
     "view": {
-      "lat": -8.200819116898545,
-      "lng": -34.932088239895826,
-      "zoom": 18.900000000000002
+      "lat": -8.166511500231861,
+      "lng": -34.926089644432075,
+      "zoom": 18
     },
-    "base": "sat",
-    "savedAt": 1789693199822
+    "base": "ruas",
+    "savedAt": 1790621016611
   },
   "2609402": {
     "id": 2609402,
@@ -13305,12 +14399,12 @@
       ]
     },
     "view": {
-      "lat": -7.9829534817667565,
-      "lng": -34.815841308761804,
-      "zoom": 12.200000000000001
+      "lat": -7.9733605801491825,
+      "lng": -34.8264754890143,
+      "zoom": 15.5
     },
-    "base": "sat",
-    "savedAt": 1790618935022
+    "base": "ruas",
+    "savedAt": 1790708233397
   },
   "2610707": {
     "id": 2610707,
@@ -14087,9 +15181,9 @@
         ]
       },
       {
-        "nome": "Estrada do Catoli",
-        "bairro": null,
-        "label": "Estrada do Catoli",
+        "nome": "Estrada do Catolé",
+        "bairro": "",
+        "label": "Estrada do Catolé",
         "status": "Em execução",
         "ways": [
           {
@@ -14555,6 +15649,44 @@
         ]
       },
       {
+        "nome": "Rua Benoni de Sá",
+        "bairro": null,
+        "label": "Rua Benoni de Sá",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Benoni de Sá",
+            "on": true,
+            "coords": [
+              [
+                -7.902942682872186,
+                -34.83882496173612
+              ],
+              [
+                -7.902881673281898,
+                -34.83448684462702
+              ],
+              [
+                -7.902857269443302,
+                -34.831516713310855
+              ],
+              [
+                -7.9026864425325085,
+                -34.82966808386095
+              ],
+              [
+                -7.902637634830749,
+                -34.82756064628806
+              ],
+              [
+                -7.902527817480665,
+                -34.82514510380686
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Doutor Sebastião Amaral",
         "bairro": "Pau Amarelo",
         "label": "Rua Doutor Sebastião Amaral — Pau Amarelo",
@@ -14896,37 +16028,17 @@
         "ways": [
           {
             "name": "Rua Walfrido Carneiro da Silva",
+            "on": true,
             "coords": [
               [
-                -7.9030464,
-                -34.8411842
+                -7.90300369245339,
+                -34.84119120743199
               ],
               [
-                -7.9030115,
-                -34.8392504
-              ],
-              [
-                -7.9030147,
-                -34.839035
-              ],
-              [
-                -7.9029908,
-                -34.8379844
-              ],
-              [
-                -7.902973,
-                -34.8371999
-              ],
-              [
-                -7.9029558,
-                -34.8358896
-              ],
-              [
-                -7.9029106,
-                -34.8345915
+                -7.902942682872186,
+                -34.83902214887744
               ]
-            ],
-            "on": true
+            ]
           }
         ]
       }
@@ -15910,12 +17022,12 @@
       ]
     },
     "view": {
-      "lat": -7.902975658596109,
-      "lng": -34.83788945884895,
-      "zoom": 17.7
+      "lat": -7.921513194736032,
+      "lng": -34.83919593289925,
+      "zoom": 14.3
     },
-    "base": "sat",
-    "savedAt": 1789693099983
+    "base": "ruas",
+    "savedAt": 1790620582685
   },
   "2611606": {
     "id": 2611606,
@@ -16088,9 +17200,9 @@
         ]
       },
       {
-        "nome": "Luiz Augusto Rabelo",
-        "bairro": null,
-        "label": "Luiz Augusto Rabelo",
+        "nome": "Rua Luiz Augusto Rabelo",
+        "bairro": "",
+        "label": "Rua Luiz Augusto Rabelo",
         "status": "Em licitação",
         "ways": [
           {
@@ -16792,6 +17904,36 @@
         ]
       },
       {
+        "nome": "Rua dos Coqueiros",
+        "bairro": null,
+        "label": "Rua dos Coqueiros",
+        "status": "",
+        "ways": [
+          {
+            "name": "Rua dos Coqueiros",
+            "on": true,
+            "coords": [
+              [
+                -8.066976465694472,
+                -34.88687451359599
+              ],
+              [
+                -8.066795937910518,
+                -34.88704624214297
+              ],
+              [
+                -8.066710983631369,
+                -34.887271635860905
+              ],
+              [
+                -8.065765866071647,
+                -34.887582893852326
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Douradinha",
         "bairro": "Vasco da Gama",
         "label": "Rua Douradinha — Vasco da Gama",
@@ -16886,9 +18028,9 @@
         ]
       },
       {
-        "nome": "Rua Doutor Aluísio Marques",
+        "nome": "Rua Dr. Aluísio Marques",
         "bairro": "Várzea",
-        "label": "Rua Doutor Aluísio Marques — Várzea",
+        "label": "Rua Dr. Aluísio Marques — Várzea",
         "status": "Em execução",
         "ways": [
           {
@@ -16920,9 +18062,9 @@
         ]
       },
       {
-        "nome": "Rua Doutor Gonzaga Maranhão",
+        "nome": "Rua Dr. Gonzaga Maranhão",
         "bairro": "Ipsep",
-        "label": "Rua Doutor Gonzaga Maranhão — Ipsep",
+        "label": "Rua Dr. Gonzaga Maranhão — Ipsep",
         "status": "A iniciar",
         "ways": [
           {
@@ -16990,6 +18132,44 @@
               ]
             ],
             "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Dr. José Anastácio da Silva Guimarães",
+        "bairro": null,
+        "label": "Rua Dr. José Anastácio da Silva Guimarães",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Dr. José Anastácio da Silva Guimarães",
+            "on": true,
+            "coords": [
+              [
+                -8.039131013327143,
+                -34.92911286316369
+              ],
+              [
+                -8.038472256685543,
+                -34.929273140406984
+              ],
+              [
+                -8.037959889669214,
+                -34.929433417650266
+              ],
+              [
+                -8.037447522005893,
+                -34.92934711451927
+              ],
+              [
+                -8.035501738914636,
+                -34.92890326984553
+              ],
+              [
+                -8.033519348428753,
+                -34.9283854510595
+              ]
+            ]
           }
         ]
       },
@@ -17912,6 +19092,56 @@
         ]
       },
       {
+        "nome": "Rua Gonçalves Dias",
+        "bairro": null,
+        "label": "Rua Gonçalves Dias",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Gonçalves Dias",
+            "on": true,
+            "coords": [
+              [
+                -8.034450889891183,
+                -34.8774112784117
+              ],
+              [
+                -8.035117710052422,
+                -34.87719985577045
+              ],
+              [
+                -8.036281373984133,
+                -34.87677701048798
+              ],
+              [
+                -8.036595170428184,
+                -34.87667129916736
+              ],
+              [
+                -8.036712844032177,
+                -34.876895935723674
+              ],
+              [
+                -8.036791293082546,
+                -34.87716021402522
+              ],
+              [
+                -8.036686694345363,
+                -34.876922363553824
+              ],
+              [
+                -8.036686694345363,
+                -34.876922363553824
+              ],
+              [
+                -8.037994176622185,
+                -34.87665808525228
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Governador Leopoldo Neves",
         "bairro": "Várzea",
         "label": "Rua Governador Leopoldo Neves — Várzea",
@@ -17984,6 +19214,48 @@
               ]
             ],
             "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Interlândia",
+        "bairro": null,
+        "label": "Rua Interlândia",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Interlândia",
+            "on": true,
+            "coords": [
+              [
+                -8.077613358302369,
+                -34.90199849714796
+              ],
+              [
+                -8.076836593262836,
+                -34.89958278709298
+              ],
+              [
+                -8.076796759117931,
+                -34.899562656175846
+              ],
+              [
+                -8.076765460858494,
+                -34.89957128371176
+              ],
+              [
+                -8.076756924969132,
+                -34.899611545546
+              ],
+              [
+                -8.07676830615489,
+                -34.89964893153497
+              ],
+              [
+                -8.077536535452916,
+                -34.902018628065086
+              ]
+            ]
           }
         ]
       },
@@ -18136,6 +19408,40 @@
         ]
       },
       {
+        "nome": "Rua Jequitibá",
+        "bairro": null,
+        "label": "Rua Jequitibá",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Jequitibá",
+            "on": true,
+            "coords": [
+              [
+                -8.020032452126925,
+                -34.930201843678354
+              ],
+              [
+                -8.020101817115657,
+                -34.929866365466005
+              ],
+              [
+                -8.020200909936198,
+                -34.9298413297785
+              ],
+              [
+                -8.020676555138733,
+                -34.929696122791064
+              ],
+              [
+                -8.021053107196119,
+                -34.92957595149112
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Joana de Oliveira",
         "bairro": null,
         "label": "Rua Joana de Oliveira",
@@ -18280,6 +19586,28 @@
         ]
       },
       {
+        "nome": "Rua Lagoa Vermelha",
+        "bairro": null,
+        "label": "Rua Lagoa Vermelha",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Lagoa Vermelha",
+            "on": true,
+            "coords": [
+              [
+                -8.040651793118574,
+                -34.935907732072884
+              ],
+              [
+                -8.04314879845912,
+                -34.93139129404977
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Luzinete Pereira",
         "bairro": "Caxangá",
         "label": "Rua Luzinete Pereira — Caxangá",
@@ -18332,6 +19660,36 @@
         ]
       },
       {
+        "nome": "Rua Manoel Bernardes",
+        "bairro": null,
+        "label": "Rua Manoel Bernardes",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Manoel Bernardes",
+            "on": true,
+            "coords": [
+              [
+                -8.049227361601071,
+                -34.91136202088684
+              ],
+              [
+                -8.049385898725857,
+                -34.910500793237205
+              ],
+              [
+                -8.049400761578122,
+                -34.90998505807494
+              ],
+              [
+                -8.049247178745043,
+                -34.90941925153767
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Marielle Franco",
         "bairro": "Caxangá",
         "label": "Rua Marielle Franco — Caxangá",
@@ -18350,6 +19708,60 @@
               ]
             ],
             "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Massaranduba",
+        "bairro": null,
+        "label": "Rua Massaranduba",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Massaranduba",
+            "on": true,
+            "coords": [
+              [
+                -8.021687299346658,
+                -34.9312933996529
+              ],
+              [
+                -8.021186882185177,
+                -34.93139854954036
+              ],
+              [
+                -8.020868568814311,
+                -34.93140789988529
+              ],
+              [
+                -8.020620837124415,
+                -34.9313728499228
+              ],
+              [
+                -8.020457334126402,
+                -34.93130274999784
+              ],
+              [
+                -8.020274012505011,
+                -34.931082435947935
+              ],
+              [
+                -8.020214556826238,
+                -34.93096727178549
+              ],
+              [
+                -8.020051053664833,
+                -34.93035640101075
+              ],
+              [
+                -8.020001507239353,
+                -34.930146101235835
+              ],
+              [
+                -8.019917278302135,
+                -34.929950822873415
+              ]
+            ]
           }
         ]
       },
@@ -18608,6 +20020,28 @@
         ]
       },
       {
+        "nome": "Rua Pau D'Arco",
+        "bairro": null,
+        "label": "Rua Pau D'Arco",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Pau D'Arco",
+            "on": true,
+            "coords": [
+              [
+                -8.020101817115657,
+                -34.93046221482823
+              ],
+              [
+                -8.02120174607013,
+                -34.930096693790894
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Rua Pisca Futebol Clube",
         "bairro": null,
         "label": "Rua Pisca Futebol Clube",
@@ -18626,6 +20060,48 @@
               ]
             ],
             "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Rua Pr. Benoby Carvalho de Souza",
+        "bairro": null,
+        "label": "Rua Pr. Benoby Carvalho de Souza",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Rua Pr. Benoby Carvalho de Souza",
+            "on": true,
+            "coords": [
+              [
+                -8.017497543404128,
+                -34.90449267178918
+              ],
+              [
+                -8.017183732209961,
+                -34.905074084052586
+              ],
+              [
+                -8.016686863990769,
+                -34.90544407367475
+              ],
+              [
+                -8.016137693147774,
+                -34.90558942674062
+              ],
+              [
+                -8.015575446040538,
+                -34.90562906848584
+              ],
+              [
+                -8.015000122614897,
+                -34.90557621282553
+              ],
+              [
+                -8.01493048515741,
+                -34.905626652562795
+              ]
+            ]
           }
         ]
       },
@@ -19892,6 +21368,66 @@
         ]
       },
       {
+        "nome": "Travessa Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
+        "bairro": "",
+        "label": "Travessa Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Trv. Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
+            "coords": [
+              [
+                -8.042145059558067,
+                -34.95983988046647
+              ],
+              [
+                -8.041207951840972,
+                -34.95955020189286
+              ]
+            ],
+            "on": true
+          }
+        ]
+      },
+      {
+        "nome": "Travessa Massaranduba",
+        "bairro": "",
+        "label": "Travessa Massaranduba",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Tv. Massaranduba",
+            "on": true,
+            "coords": [
+              [
+                -8.01971909249864,
+                -34.928228367574135
+              ],
+              [
+                -8.019471360108449,
+                -34.9283134889116
+              ],
+              [
+                -8.019258310132175,
+                -34.92844868162404
+              ],
+              [
+                -8.019104715894048,
+                -34.92861892429896
+              ],
+              [
+                -8.018980849530694,
+                -34.92864395998646
+              ],
+              [
+                -8.01884211915897,
+                -34.92868401708645
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Travessa Prof Ramos da Costa",
         "bairro": null,
         "label": "Travessa Prof Ramos da Costa",
@@ -19914,6 +21450,36 @@
         ]
       },
       {
+        "nome": "Travessa Realeza",
+        "bairro": null,
+        "label": "Travessa Realeza",
+        "status": "A iniciar",
+        "ways": [
+          {
+            "name": "Travessa Realeza",
+            "on": true,
+            "coords": [
+              [
+                -8.076281380278372,
+                -34.90243996674973
+              ],
+              [
+                -8.076090745144452,
+                -34.90191081121388
+              ],
+              [
+                -8.075994004892793,
+                -34.90170950204265
+              ],
+              [
+                -8.075885883407658,
+                -34.90141041413108
+              ]
+            ]
+          }
+        ]
+      },
+      {
         "nome": "Travessa Rubens Gamboa",
         "bairro": null,
         "label": "Travessa Rubens Gamboa",
@@ -19929,28 +21495,6 @@
               [
                 -8.02382674338252,
                 -34.950110652242785
-              ]
-            ],
-            "on": true
-          }
-        ]
-      },
-      {
-        "nome": "Trv. Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
-        "bairro": null,
-        "label": "Trv. Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
-        "status": "A iniciar",
-        "ways": [
-          {
-            "name": "Trv. Des. Rodolfo Aureliano (R. Bezerra de Menezes)",
-            "coords": [
-              [
-                -8.042145059558067,
-                -34.95983988046647
-              ],
-              [
-                -8.041207951840972,
-                -34.95955020189286
               ]
             ],
             "on": true
@@ -21049,11 +22593,11 @@
       ]
     },
     "view": {
-      "lat": -8.013681024459991,
-      "lng": -34.95968264394003,
-      "zoom": 18.900000000000002
+      "lat": -8.04178101423451,
+      "lng": -34.93248507487544,
+      "zoom": 17.1
     },
-    "base": "sat",
-    "savedAt": 1790609365024
+    "base": "ruas",
+    "savedAt": 1790793589673
   }
 }
